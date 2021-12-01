@@ -15,19 +15,18 @@
 # under the License.
 
 # Project information
-site_name: WSO2 Open Banking UK Toolkit Documentation
-site_description: Documentation for WSO2 Open Banking UK Toolkit
+site_name: WSO2 Open Banking Berlin Toolkit Documentation
+site_description: Documentation for WSO2 Open Banking Berlin Toolkit
 site_author: WSO2
-site_url: https://uk.ob.docs.wso2.com/en/latest/
+site_url: https://berlin.ob.docs.wso2.com/en/latest/
 
 # Repository
-repo_name: wso2/docs-ob-toolkit-uk
-repo_url: https://github.com/wso2/docs-ob-toolkit-uk
-edit_uri: https://github.com/wso2/docs-ob-toolkit-uk/edit/main/en/docs/
+repo_name: wso2/docs-ob-toolkit-berlin
+repo_url: https://github.com/wso2/docs-ob-toolkit-berlin
+edit_uri: https://github.com/wso2/docs-ob-toolkit-berlin/edit/main/en/docs/
 
 # Copyright
-copyright: WSO2 Open Banking UK Toolkit - Documentation
-
+copyright: WSO2 Open Banking Berlin Toolkit - Documentation
 # Configuration
 theme: material
 theme:
