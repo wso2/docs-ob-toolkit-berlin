@@ -1,4 +1,4 @@
-This section guides you to set up and prepare your servers to run WSO2 Open Banking UK Toolkit.
+This section guides you to set up and prepare your servers to run WSO2 Open Banking Berlin Toolkit.
 
 ## Set up accelerators 
 Copy the extracted accelerator directories into the root directories of the respective base products. Use the table to 
@@ -58,13 +58,13 @@ locate the respective root directory of the base products:
 
 | File | Directory location to place the Toolkit |
 |---------|---------    |
-|`wso2ob-is-toolkit-uk-1.0.0`|`<IS_HOME>`|
-|`wso2ob-apim-toolkit-uk-1.0.0`|`<APIM_HOME>`|
+|`wso2ob-is-toolkit-berlin-1.0.0`|`<IS_HOME>`|
+|`wso2ob-apim-toolkit-berlin-1.0.0`|`<APIM_HOME>`|
 
 ### Configure database scripts for toolkits
 
 !!! note 
-    WSO2 Open Banking UK Toolkit is [compatible](../install-and-setup/prerequisites.md#compatibility) with the following DBMSs:
+    WSO2 Open Banking Berlin Toolkit is [compatible](../install-and-setup/prerequisites.md#compatibility) with the following DBMSs:
     
      - MySQL 8.0
      - Oracle 19c

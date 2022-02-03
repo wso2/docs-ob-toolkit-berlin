@@ -1,9 +1,9 @@
-This document provides step by step instructions to deploy, subscribe, and invoke the Account and Transaction API. 
+This document provides step by step instructions to deploy, subscribe, and invoke the NextGenPSD2XS2A API. 
 
 !!! tip
     When the TPP provides an Account Information Service as an online service, the TPP is known as an Account Information Services Provider (AISP).
 
-## Deploying Account and Transaction API
+## Deploying NextGenPSD2XS2A API
 
 1. Sign in to the [API Publisher Portal](https://localhost:9443/publisher) with the credentials for `mark@gold.com`. ![sign_in](../assets/img/get-started/quick-start-guide/sign-in.png)
 
@@ -11,7 +11,7 @@ This document provides step by step instructions to deploy, subscribe, and invok
 
 3. Select **OpenAPI File/Archive**. ![create-an-api](../assets/img/get-started/quick-start-guide/create-an-api.png)
 
-4. Click **Browse File to Upload** and select the relevant API from the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis` directory.
+4. Click **Browse File to Upload** and select the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/psd2-api_1.3.6_20200327.yaml` file.
 
 5. Click **Next**.
 
@@ -29,7 +29,7 @@ This document provides step by step instructions to deploy, subscribe, and invok
 
 12. Now, select the **Custom Policy** option.
 
-13. Upload the relevant insequence file from the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis` directory. ![accounts_insequence](../assets/img/get-started/quick-start-guide/accounts-insequence.png)
+13. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/dynamic-endpoint-insequence-1.3.6.xml` insequence file. ![accounts_insequence](../assets/img/get-started/quick-start-guide/accounts-insequence.png)
  
 14. Click **Select**. 
 
@@ -55,30 +55,27 @@ This document provides step by step instructions to deploy, subscribe, and invok
 
 ### Summarized information for configuring APIs
 
-Given below is a summary of configurations to follow when deploying the APIs in the toolkit.
+Given below is a summary of configurations to follow when deploying the API in the toolkit.
 
 | API | Swagger definition (yaml file) | Endpoint type| Message mediation (sequence file) |
 |-----|--------------------------------|--------------|---------------------------------- |
-| Account and Transaction API v3.1.6 | `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/openbanking.org.uk/Accounts/3.1.6/account-info-swagger-3.1.6.yaml` | Dynamic Endpoint | `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/openbanking.org.uk/Accounts/3.1.6/accounts-dynamic-endpoint-insequence-3.1.6.xml` |
-| Payment Initiation API v3.1.6 |`<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/openbanking.org.uk/Payments/3.1.6/payment-swagger-3.1.6.yaml` | Dynamic Endpoint | `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/openbanking.org.uk/Payments/3.1.6/payments-dynamic-endpoint-insequence-3.1.6.xml` |
-| Confirmation of Funds API v3.1.6 | `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/openbanking.org.uk/FundsConfirmation/3.1.6/funds-confirmation-swagger-3.1.6.yaml` | Dynamic Endpoint | `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/openbanking.org.uk/FundsConfirmation/3.1.6/funds-confirmation-dynamic-endpoint-insequence-3.1.6.xml` |
-| Dynamic Client Registration API v3.3.0 | `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/openbanking.org.uk/DynamicClientRegistration/3.3.0/dynamic-client-registration-swagger.yaml` | Dynamic Endpoint | `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/openbanking.org.uk/DynamicClientRegistration/3.3.0/dcr-dynamic-endpoint-insequence-3.3.0.xml` |
+| NextGenPSD2XS2A API v1.3.6 | `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/psd2-api_1.3.6_20200327.yaml` | Dynamic Endpoint | `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/dynamic-endpoint-insequence-1.3.6.xml` |
 
 ## Subscribing to Account and Transaction API
 
 1. The deployed API is now available in the Developer Portal at <https://localhost:9443/devportal>.
 
-2. Select the **AccountAndTransactionAPI V3.1** API.
+2. Select the **NextGenPSD2XS2A API v1.3.6** API.
  
 3. Locate **Subscriptions** from the left menu pane. 
 
     ![select_subscriptions](../assets/img/get-started/quick-start-guide/select-subscriptions.png)
     
-4. From the **Application** dropdown, select the application that you want to be subscribed to the Account and Transaction API V3.1. ![select_application](../assets/img/get-started/quick-start-guide/select-application.png)
+4. From the **Application** dropdown, select the application that you want to be subscribed to the NextGenPSD2XS2A API v1.3.6. ![select_application](../assets/img/get-started/quick-start-guide/select-application.png)
 
 5. Click **Subscribe**.
 
-## Invoking Account and Transaction API
+## Invoking NextGenPSD2XS2A API
 
 ### Generating application access token
 
@@ -363,7 +360,7 @@ In this section, you will be generating an access token using the authorization 
     }
     ```
    
-### Invoking Accounts and Transaction API
+### Invoking NextGenPSD2XS2A API 
 
 Once the PSU approves the account consent, the AISP is eligible to access the account details of the PSU.
 
