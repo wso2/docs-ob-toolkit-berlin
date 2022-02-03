@@ -1,7 +1,7 @@
 Once you have successfully prepared the environment for the deployment, you can configure the databases.
 
 !!! note 
-    WSO2 Open Banking UK Toolkit is [compatible](prerequisites.md#compatibility) with the following DBMSs:
+    WSO2 Open Banking Berlin Toolkit is [compatible](prerequisites.md#compatibility) with the following DBMSs:
     
      - MySQL 8.0
      - Oracle 19c
@@ -19,12 +19,7 @@ Once you have successfully prepared the environment for the deployment, you can 
     - `openbank_iskm_configdb` 
     - `openbank_openbankingdb`  
     
-2. If you are using the [Data Publishing](../learn/data-publishing.md) feature, create the following 
-    database as well:
-    
-    - `openbank_ob_reporting_statsdb`
-
-3. According to your DBMS, place the compatible JDBC drivers in the following directories:
+2. According to your DBMS, place the compatible JDBC drivers in the following directories:
  
     - `<APIM_HOME>/repository/components/lib`  
     - `<IS_HOME>/repository/components/lib` 
