@@ -1,15 +1,14 @@
-WSO2 Open Banking UK Toolkit is a purpose-built solution for regulatory compliance that supports PSD2. Instead of 
-building an open banking solution from scratch, you can use WSO2 Open Banking UK Toolkit to meet all open 
+WSO2 Open Banking Berlin Toolkit is a purpose-built solution for regulatory compliance that supports PSD2. Instead of 
+building an open banking solution from scratch, you can use WSO2 Open Banking Berlin Toolkit to meet all open 
 banking requirements with additional benefits beyond compliance. This toolkit runs on top of the following WSO2 products:
 
 - WSO2 Open Banking Accelerator 3.0
 - WSO2 Identity Server 5.11.0
 - WSO2 API Manager 4.0.0
-- WSO2 Streaming Integrator 4.0.0
 
 !!! note
-    The WSO2 Open Banking UK Toolkit is built by customizing the WSO2 Open Banking Accelerator and helps you 
-    comply with the Open Banking Standard. For more information on the accelerator, see 
+    The WSO2 Open Banking Berlin Toolkit is built by customizing the WSO2 Open Banking Accelerator and helps you 
+    comply with the NextGenPSD2 framework. For more information on the accelerator, see 
     the [WSO2 Open Banking Accelerator Documentation](https://ob.docs.wso2.com/).
 
 The toolkit mainly addresses the open banking requirements such as API consumer application onboarding, consent 
@@ -21,11 +20,11 @@ management, and access authorization among numerous other features to set up an 
 
 ## Product Matrix
 
-Given below is a product matrix for different versions of WSO2 Open Banking UK Toolkit:
+Given below is a product matrix for different versions of WSO2 Open Banking Berlin Toolkit:
 
-| Version | Mandatory Components | Additional Components |
-| --------| ---------------------| ----------------------|
-| 1.0.0 | wso2-obam-toolkit-uk-1.0.0 <br/> wso2-obiam-toolkit-uk-1.0.0 | wso2-obbi-toolkit-uk-1.0.0 |
+| Version | Mandatory Components | 
+| --------| ---------------------|  
+| 1.0.0 | wso2-obam-toolkit-berlin-1.0.0 <br/> wso2-obiam-toolkit-berlin-1.0.0 | 
 
 ## Prerequisites for a Deployment
 
@@ -106,7 +105,7 @@ Listed below are the prerequisites for a successful deployment:
 
 ## Compatibility 
 
-WSO2 Open Banking UK Toolkit 1.0.0 is supported on the following platforms:
+WSO2 Open Banking Berlin Toolkit 1.0.0 is supported on the following platforms:
 
 <table>
    <tbody>

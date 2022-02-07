@@ -1,7 +1,6 @@
-WSO2 Open Banking UK Toolkit contains the customizations done on top of WSO2  Open Banking Accelerator to comply with 
-the Open Banking UK specification. This toolkit has been developed as an extension of WSO2 Open Banking Accelerator. 
-The accelerators run on top of WSO2 Identity Server, WSO2 API Manager, WSO2 Streaming Integrator and these are referred 
-to as base products.
+WSO2 Open Banking Berlin Toolkit contains the customizations done on top of WSO2  Open Banking Accelerator to comply with 
+the Berlin Group's NextGenPSD2 Framework. This toolkit has been developed as an extension of WSO2 Open Banking Accelerator. 
+The accelerators run on top of WSO2 Identity Server and WSO2 API Manager, which are referred to as base products.
 
 This section guides you on how to set up the solution in a local environment. Follow the instructions to find how you 
 can quickly set up and try out a basic flow.
@@ -29,7 +28,6 @@ can quickly set up and try out a basic flow.
 1. Download and extract the following base products:
     1. [WSO2 Identity Server 5.11.0](https://wso2.com/identity-and-access-management/#)
     2. [WSO2 API Manager 4.0.0](https://wso2.com/api-manager/#)
-    3. [WSO2 Streaming Integrator 4.0.0](https://wso2.com/integration/streaming-integrator/#)
  
 2. To configure the Identity Server with the API Manager, download 
 [WSO2 IS Connector](https://apim.docs.wso2.com/en/4.0.0/assets/attachments/administer/wso2is-extensions-1.2.10.zip).
@@ -48,23 +46,21 @@ accelerators:
    
     - wso2-obiam-accelerator-3.0.0
     - wso2-obam-accelerator-3.0.0
-    - wso2-obbi-accelerator-3.0.0
             
-## Installing WSO2 Open Banking UK Toolkit
+## Installing WSO2 Open Banking Berlin Toolkit
 
 1. If you have an active WSO2 Open Banking subscription, contact us via 
-[WSO2 Online Support System](https://support.wso2.com/) to download Open Banking UK Toolkit 1.0.0.
+[WSO2 Online Support System](https://support.wso2.com/) to download Open Banking Berlin Toolkit 1.0.0.
        
     !!! note
         If you don't have a WSO2 Open Banking subscription, [contact us](https://wso2.com/solutions/financial/open-banking/#contact) 
         for more information.
               
-2. Extract the downloaded WSO2 Open Banking UK Toolkit zip files. WSO2 Open Banking UK Toolkit contains the following 
+2. Extract the downloaded WSO2 Open Banking Berlin Toolkit zip files. WSO2 Open Banking Berlin Toolkit contains the following 
 accelerators:
    
-    - wso2-obiam-toolkit-uk-1.0.0
-    - wso2-obam-toolkit-uk-1.0.0
-    - wso2-obbi-toolkit-uk-1.0.0
+    - wso2-obiam-toolkit-berlin-1.0.0
+    - wso2-obam-toolkit-berlin-1.0.0
 
 3. This document uses the following placeholders to refer to the following products:
         
@@ -74,8 +70,8 @@ accelerators:
     |WSO2 API Manager|`<APIM_HOME>`|
     |WSO2 Open Banking Identity Server Accelerator|`<OB_IS_ACCELERATOR_HOME>`|
     |WSO2 Open Banking API Manager Accelerator |`<OB_APIM_ACCELERATOR_HOME>`|
-    |WSO2 Open Banking Identity Server UK Toolkit|`<OB_IS_TOOLKIT_HOME>`|
-    |WSO2 Open Banking API Manager UK Toolkit|`<OB_APIM_TOOLKIT_HOME>`|
+    |WSO2 Open Banking Identity Server Berlin Toolkit|`<OB_IS_TOOLKIT_HOME>`|
+    |WSO2 Open Banking API Manager Berlin Toolkit|`<OB_APIM_TOOLKIT_HOME>`|
 
 ## Getting WSO2 Updates
 
@@ -85,7 +81,7 @@ scripts.
 
 1. Go to `<PRODUCT_HOME>/bin` and run the WSO2 Update tool:
 
-    - Repeat this step for the WSO2 Identity Server, API Manager, and Streaming Integrator products.
+    - Repeat this step for the WSO2 Identity Server and API Manager products.
     
         ```bash tab='On Linux'
         ./wso2update_linux 
@@ -101,7 +97,7 @@ scripts.
 
 2. Go to `<ACCELERATOR_HOME>/bin` and run the WSO2 Update tool:
 
-    - Repeat this step for the WSO2 Open Banking Identity Server, API Manager, and Business Intelligence accelerators.
+    - Repeat this step for the WSO2 Open Banking Identity Server and API Manager accelerators.
 
         ```bash tab='On Linux'
         ./wso2update_linux 
@@ -117,7 +113,7 @@ scripts.
       
 3. Go to `<TOOLKIT_HOME>/bin` and run the WSO2 Update tool:
 
-    - Repeat this step for the WSO2 Open Banking Identity Server, API Manager, and Business Intelligence toolkits.
+    - Repeat this step for the WSO2 Open Banking Identity Server and API Manager toolkits.
 
         ```bash tab='On Linux'
         ./wso2update_linux 
