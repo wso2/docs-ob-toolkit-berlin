@@ -15,11 +15,12 @@ template: templates/single-column.html
         beyond compliance.       
         </p>
         <p>
+        The toolkit runs on top of WSO2 Identity Server, WSO2 API Manager, and WSO2 Streaming Integrator. 
         Get a head start with our Quick Start Guide or dive straight into the documentation to understand what we offer.
         </p>
      </div>
-    <div class="md-main .md-content " style="float:right; width: 55%; align:right;  flex-shrink: 0;min-width: 40%; max-height: 100%; max-width:50%; margin-left:10px; margin-top:20px">
-        <iframe width="800" height="250" src="https://www.youtube.com/embed/xSxuYxfGs3I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <div class="md-main .md-content " style="float:left; width: 55%; align:left;  flex-shrink: 0;min-width: 40%; max-height: 100%; max-width:50%; margin-left:20px; margin-top:20px">
+        <image src="assets/img/home/accelerator-toolkit-model.png" frameborder="0"></image>
     </div>
     <div>
     	<div class="content">
@@ -54,11 +55,13 @@ template: templates/single-column.html
     				<i class="material-icons md-36">app_registration</i>
     			</div>
     			<div class="card-content">
-    				<p class="title">Dynamic Client Registration</p>
+    				<p class="title">Client Registration</p>
     				<p class="hint">A thorough verification before onboarding</p>
     			</div>
     		</div>
     		<!-- end card -->
+        </div>
+    	<div class="content">
     		<!-- card -->
     		<div class="card" onclick="location.href='learn/api-security';">
     			<div class="line"></div>
@@ -71,10 +74,8 @@ template: templates/single-column.html
     			</div>
     		</div>
     		<!-- end card -->
-    	</div>
-    	<div class="content">
     		<!-- card -->
-    		<div class="card" onclick="location.href='learn/data-publishing/';">
+    		<!-- <div class="card" onclick="location.href='learn/data-publishing/';">
     			<div class="line"></div>
     			<div class="card-icon">
     				<i class="material-icons md-36">analytics</i>
@@ -83,7 +84,7 @@ template: templates/single-column.html
     				<p class="title">Analytics and Data Publishing</p>
     				<p class="hint">Publish and summarize data for reporting</p>
     			</div>
-    		</div>
+    		</div> -->
     		<!-- end card -->
     		<!-- card -->
     		<div class="card" onclick="location.href='learn/integration/';">

@@ -21,7 +21,7 @@
 
 {% block styles %}
   {{ super() }}
-  <<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@alpha"/></pre></li>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@alpha"/></pre></li>
   <link rel="stylesheet" href="{{ 'assets/fonts/font-awesome.css' | url }}">
   <link rel="icon" href="{{ config.theme.favicon | url}}">
 {% endblock %}
@@ -34,13 +34,13 @@
     style="display:none;visibility:hidden"></iframe></noscript>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@docsearch/js@alpha"></script>
   <script type="text/javascript"> docsearch({
-    appId: N184S8JQLZ,
+    appId: 'N184S8JQLZ',
     apiKey: '8ca997eef080a082c92ba576d2b7eff2',
     indexName: 'berlin-ob-docs-wso2',
-    inputSelector: '.md-search__input',
-    debug: false, // Set debug to true if you want to inspect the dropdown
+    container: '.md-search__input',
+    debug: false // Set debug to true if you want to inspect the modal
     algoliaOptions: {"facetFilters":["language:en","version:1.0.0"]}
-    });
+  });
   </script>
 {% endblock %}
 
