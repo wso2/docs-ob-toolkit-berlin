@@ -2,7 +2,7 @@ This page explains how to onboard the TPP applications using the WSO2 API Manage
 
 ### Step 1: Sign up as a TPP
 
-1. Go to the Developer portal at <https://<APIM_HOST>:9443/devportal>.
+1. Go to the Developer portal at `<https://<APIM_HOST>:9443/devportal>`.
 
 2. Go to the **Applications** tab. ![applications_tab](../assets/img/get-started/quick-start-guide/tpp-onboarding/applications-tab.png)
 
@@ -18,7 +18,7 @@ This page explains how to onboard the TPP applications using the WSO2 API Manage
 
 ### Step 2: Sign in to the Developer Portal as the TPP
 
-1. Now, sign in to the [Developer portal](https://<APIM_HOST>:9443/devportal) as the TPP.
+1. Now, sign in to the Developer portal at `https://<APIM_HOST>:9443/devportal` as the TPP.
 
 2. Enter the username and the password you entered when signing up as a TPP.
 
@@ -28,7 +28,7 @@ This page explains how to onboard the TPP applications using the WSO2 API Manage
 
 1. In the Developer Portal, go to the **Applications** tab. ![applications_tab](../assets/img/get-started/quick-start-guide/tpp-onboarding/applications-tab.png)
 
-2. Click **ADD NEW APPLICATION**. ![applications_tab](../assets/img/get-started/quick-start-guide/tpp-onboarding/applications-tab.png)
+2. Click **ADD NEW APPLICATION**. ![applications_tab](../assets/img/get-started/quick-start-guide/tpp-onboarding/create-new-application.png)
 
 3. Enter the following application details. ![applications_details](../assets/img/get-started/quick-start-guide/tpp-onboarding/enter-application-details.png)
 
