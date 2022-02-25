@@ -52,15 +52,19 @@ The application created via the Developer Portal allows you to observe statistic
 The TPP user needs to create certificates to validate whether the TPP is registered in a governing entity.
 It is verified in this step. You can use the sample certificates attached below:
 
+!!! note
+    WSO2 Open Banking Berlin Toolkit provides Electronic Identification and Trust Services (eIDAS) validation services
+    for TPP validation.
+
 1. Download the root and issuer certificates found [here](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/252018873/OB+Root+and+Issuing+Certificates+for+Sandbox).
 
 2. Issue the given command and upload them to the client trust stores available in the following locations:
     - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
     - `<IS_HOME>/repository/resources/security/client-truststore.jks`
 
-   ```
-   keytool -import -alias <alias> -file <certificate_location> -storetype JKS -keystore <truststore_location> -storepass wso2carbon
-   ```
+     ```
+     keytool -import -alias <alias> -file <certificate_location> -storetype JKS -keystore <truststore_location> -storepass wso2carbon
+     ```
 
 3. Restart the Identity Server and API Manager.
 
@@ -72,24 +76,25 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
 
 2. From the application list, select your application, which has subscribed to the NextGenPSD2XS2A API.
 
-3. Scroll down and select either of the following types of keys:
+3. Select **Production Keys > OAuth2 Tokens** or **Sandbox Keys > OAuth2 Tokens** according to the type of key you require:
     - Production Keys: Generates access tokens in the production environment.
     - Sandbox Keys: Generates access tokens in the sandbox environment.
       ![generate_keys](../assets/img/get-started/quick-start-guide/tpp-onboarding/generate-keys.png)
 
-4. Click **Manage** at the bottom of the application.
+4. Provide the requested information as defined below:
 
-5. Provide the requested information as defined below:
-
-6. Click **GENERATE KEYS** to generate production or sandbox keys. It generates the consumer key and consumer secret.
-
-   | Field | Description |
+       | Field | Description |
        |-------|-------------|
-   | Grant Types | Determine the credentials that are used to generate the access token. <li> Code: Relates to the authorisation code grant type and is applicable when consuming the API as a user. </li> <li> Client Credentials: Relates to the client credentials grant type and is applicable when consuming the API as an application. </li> <li> Refresh Token: To renew an expired access token. </li> |
-   | Callback URL | The URL used by the TPP to receive the authorization code sent from the bank. The authorisation code can be used later to generate an OAuth2 access token. <br/> **This is a mandatory field for the authorization code grant type.** | 
-   | Regulatory Application | The type of application. If your application is compliant with the NextGenPSD2XS2A framework, it is a Regulatory application. |
-   | Organization Id | The Organization Identifier as provided in the certificate. For example. PSDUK-NCA-OrganizationID |
-   | Application Certificate | This is the content of the application certificate (.PEM) that you created in the step above.  <br/> For testing purposes, you may use this sample application certificate, if you have configured the OB certificates. <br/> **For Regulatory applications, it is mandatory to use an application certificate.** |
+       | Grant Types | Determine the credentials that are used to generate the access token. <ul> <li> Code: Relates to the authorisation code grant type and is applicable when consuming the API as a user. </li> <li> Client Credentials: Relates to the client credentials grant type and is applicable when consuming the API as an application. </li> <li> Refresh Token: To renew an expired access token. </li> </ul> |
+       | Callback URL | The URL used by the TPP to receive the authorization code sent from the bank. The authorisation code can be used later to generate an OAuth2 access token. <br/> **This is a mandatory field for the authorization code grant type.** |
+       | Regulatory Application | The type of application. If your application is compliant with the NextGenPSD2XS2A framework, it is a Regulatory application. |
+       | Organization Id | The Organization Identifier as provided in the application certificate. For example. PSDUK-NCA-OrganizationID |
+       | Application Certificate | This is the content of the application certificate (.PEM) that you created in the step above.  <br/> For testing purposes, you may use this sample application certificate, if you have configured the OB certificates. <br/> **For Regulatory applications, it is mandatory to use an application certificate.** |
+
+      ![enter_application_details](../assets/img/get-started/quick-start-guide/tpp-onboarding/enter-application-details-1.png)
+      ![enter_application_details](../assets/img/get-started/quick-start-guide/tpp-onboarding/enter-application-details-2.png)
+
+5. Click **GENERATE KEYS** to generate production or sandbox keys. It generates the consumer key and consumer secret.
 
 ### Step 7: Generate application access token
 
@@ -97,15 +102,15 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
 
 2. Select your application from the Application List.
 
-3. Scroll down to the bottom of the page and view the keys you generated. ![sandbox_keys](../assets/img/get-started/quick-start-guide/tpp-onboarding/sandbox-keys.png)
+3. View the keys you generated. ![production_keys](../assets/img/get-started/quick-start-guide/tpp-onboarding/production-keys.png)
 
 4. Note down the **Consumer Key** for your application.
 
 5. Generate the client assertion by signing the following JSON payload using supported algorithms.
 
-   !!! note
-   If you have configured the [OB certificates](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/252018873/OB+Root+and+Issuing+Certificates+for+Sandbox),
-   download the certificate and keys attached [here](../../assets/attachments/Certificates.zip), and use them for signing and transports layer security testing purposes.
+    !!! note
+        If you have configured the [OB certificates](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/252018873/OB+Root+and+Issuing+Certificates+for+Sandbox),
+        download the certificate and keys attached [here](../../assets/attachments/Certificates.zip), and use them for signing and transports layer security testing purposes.
 
 
 
@@ -123,7 +128,7 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
     "exp": <This is the epoch time of the token expiration date/time>,
     "iat": <This is the epoch time of the token issuance date/time>,
     "jti": "<This is an incremental unique value>",
-    "aud": "<This is the audience that the ID token is intended for. For example, https://<APIM_HOST>:8243/token"
+    "aud": "<This is the audience that the ID token is intended for. For example, https://<IS_HOST>:9446/oauth2/token>"
     }
      
     <signature: Use the private signature of the application certificate.>
@@ -134,7 +139,7 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
     ```
     
     ??? tip "The value of the `aud` claim should contain the same value as the `Identity Provider Entity ID`. Click here to see the Identity Provider Entity ID..."
-        a. Sign in to the Management Console of the Identity Server at `<https://<IS_HOST>t:9446/carbon>`.
+        a. Sign in to the Management Console of the Identity Server at `<https://<localhost>t:9446/carbon>`.
     
         b. In the **Main** menu, go to **Home > Identity > Identity Providers > Resident**.
     
