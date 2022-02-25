@@ -56,7 +56,8 @@ nav:
       - 'Get Started': get-started/quick-start-guide.md
       - 'Set up Toolkits': get-started/set-up-toolkits.md
       - 'Configure Users and Roles': get-started/configure-users-and-roles.md
-      - 'Dynamic Client Registration': get-started/dynamic-client-registation.md
+      - 'Deploy API': get-started/try-out-flow.md
+      - 'TPP Onboarding': get-started/tpp-onboarding.md
       - 'Tryout Flow': get-started/try-out-flow.md
       - 'Data Publishing': get-started/data-publishing-try-out.md
   - 'Install and Setup':
@@ -72,9 +73,9 @@ nav:
        - 'Consent Manager': learn/consent-manager.md
     - 'Consent Authorization': learn/consent-authorization-intro.md
     - 'Token Authentication': learn/token-authentication.md
-    - 'Dynamic Client Registration':
-       - 'Introduction': learn/dynamic-client-registration.md
-       - 'Configuration': learn/dynamic-client-registration-configuration.md
+    - 'TPP Onboarding':
+       - 'Introduction': learn/tpp-onboarding.md
+       - 'Configuration': learn/tpp-onboarding-configuration.md
     - 'Strong Customer Authentication':
        - 'Introduction': learn/strong-customer-authentication.md
        - 'App-to-App Redirection': learn/app-to-app-redirection.md
@@ -84,7 +85,7 @@ nav:
     - 'Data Publishing':
        - 'Introduction': learn/data-publishing.md
   - 'Try out':
-    - 'TPP Onboarding': try-out/dynamic-client-regsitration-flow.md
+    - 'TPP Onboarding': try-out/tpp-onboarding.md
     - 'Account and transaction flow': try-out/account-and-transaction-flow.md
     - 'Payment Initiation flow': try-out/payment-initiation-flow.md
     - 'Confirmation of Funds flow': try-out/confirmation-of-funds-flow.md
@@ -149,4 +150,3 @@ extra:
     - Install and Setup
     - Learn
     - Try out
-    - References
