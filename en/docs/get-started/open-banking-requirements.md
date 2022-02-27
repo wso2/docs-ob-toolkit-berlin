@@ -9,7 +9,7 @@ Banking addresses the open banking requirements in the solution:
 
 1. **TPP Onboarding** - TPP Onboarding is the process of verifying a TPP when they register 
 with a bank to provide services to customers. It is important since the TPP has access to the customer's 
-financial information via their applications. The solution provides dynamic client registration for TPPs.
+financial information via their applications. The solution provides an in-depth verification process during TPP onboarding.
  
 2. **Consent Management** - Consent management is the process of prompting, collecting, and managing bank customer’s 
 consent before a TPP collects or shares the customer's financial information. The Solution includes a 

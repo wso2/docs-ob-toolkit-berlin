@@ -16,25 +16,20 @@ Listed below are some benefits of the PSD2:
     - Enhanced payment security.
     - Ability to standardize the payment systems and impose limits on transaction fees to ensure lower costs for the consumers.
 
-- The Competition and Market Authority formed the **Open Banking Implementation Entity (OBIE)** in the UK. The Open Banking 
-Implementation Entity adopted the PSD2 and issued its first version of the open banking standard in 2017. It 
-specified how banks should allow an API consumer to access customer information and request payments with the customer’s consent.
-OBIE drives competition and innovation in consumer banking and their responsibilities include the following:
+- The **Berlin Group** has been established as a pure technical standardisation body to define open and common standards 
+of interoperable communications between banks and TPPs. The Berlin Group consists of several major players in the payment 
+industry across the EU. Based on the PSD2 and European Banking Authority - Regulatory Technical Standards (RTS) 
+requirements, the Berlin Group has worked on a detailed Access to Account (XS2A) Framework named NextGenPSD2 with data 
+models and associated messaging.
 
-    - Design the specifications for the APIs that banks and building societies use to securely provide Open Banking.
-    - Support regulated third party providers and banks and building societies to use the Open Banking standards.
-    - Create security and messaging standards.
-    - Manage the Open Banking Directory which allows regulated participants like banks, building societies and TPPs to enrol in Open Banking.
-    - Produce guidelines for participants in the Open Banking ecosystem.
-    - Provide a process for managing disputes and complaints
-
-## Open banking standards
-Alongside regulations introduced in different regions, there are specifications to describe the implementation 
-guidelines for the open banking requirements. The Open Banking Implementation Entity in the UK issued the [Open Banking 
-Standard](https://standards.openbanking.org.uk/).
+## NextGenPSD2
+Alongside the regulations introduced in different regions, there are specifications to describe the implementation 
+guidelines for the open banking requirements. [NextGenPSD2](https://www.berlin-group.org/nextgenpsd2-downloads) was 
+developed by the Berlin Group to define the interfaces that a TPP will use, as well as their technical features and 
+security concerns. For more details
 
 !!! note
-     WSO2 Open Banking UK Toolkit is compliant with the Open Banking Standard UK. 
+     WSO2 Open Banking Berlin Toolkit is compliant with the Berlin Group's NextGenPSD2. 
 
 ## Other regulations and standards
 

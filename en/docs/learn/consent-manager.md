@@ -49,11 +49,11 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
 
 4. Download the `scp-swagger.yaml` file available <a href="../../assets/attachments/scp-swagger.yaml" download> here </a>.
 
-4. Click **Browse File to Upload** and use the `scp-swagger.yaml` file.
+5. Click **Browse File to Upload** and use the `scp-swagger.yaml` file.
 
-5. Click **Next**. 
+6. Click **Next**. 
 
-6. Set the value for **Endpoint** as follows:
+7. Set the value for **Endpoint** as follows:
 
     ``` 
     https://<IS_HOST>:9446/api/openbanking/consent
@@ -61,33 +61,35 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
    
     - Replace the placeholder with the hostname of Identity Server. 
     
-7. Click **Create**. 
-    
-8. Go to **Develop > API Configurations > Runtime** using the left menu pane.   
+8. Click **Create**. 
 
-    ![select_runtime](../assets/img/get-started/quick-start-guide/select-runtime.png)
-    
-9. Click the edit button under **Request > Message Mediation**.
+9. Go to **Portal Configurations > Subscriptions > Select Business Plan as 'Unlimited'** using the left menu pane.
 
-    ![message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
+10. Go to **Develop > API Configurations > Runtime** using the left menu pane.   
+
+     ![select_runtime](../assets/img/get-started/quick-start-guide/select-runtime.png)
+    
+11. Click the edit button under **Request > Message Mediation**.
+
+     ![message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
    
-10. Now, select the **Custom Policy** option. 
+12. Now, select the **Custom Policy** option. 
 
-11. Download the `scp-insequence.xml` file available <a href="../../assets/attachments/scp-insequence.xml" download> here </a> and use it as the Mediation Policy. 
+13. Download the `scp-insequence.xml` file available <a href="../../assets/attachments/scp-insequence.xml" download> here </a> and use it as the Mediation Policy. 
 
-11. Upload the `scp-insequence.xml` file and click **SELECT**.
+14. Upload the `scp-insequence.xml` file and click **SELECT**.
 
-12. Scroll down and click **SAVE**. 
+15. Scroll down and click **SAVE**. 
 
-13. Go to **Overview** using the left menu pane.
+16. Go to **Overview** using the left menu pane.
  
-14. Click **Deploy**. 
+17. Click **Deploy**. 
 
-15. Set the API Gateways configurations and deploy the API.
+18. Set the API Gateways configurations and deploy the API.
 
-16. Go back to **Overview**.
+19. Go back to **Overview**.
 
-17. Click **Publish**.
+20. Click **Publish**.
 
 ## Subscribing to Self-Care Portal API
 
