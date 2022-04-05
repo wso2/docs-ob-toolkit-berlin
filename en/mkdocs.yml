@@ -86,7 +86,7 @@ nav:
        - 'Introduction': learn/data-publishing.md
   - 'Try out':
     - 'TPP Onboarding': try-out/tpp-onboarding.md
-    - 'Account and transaction flow': try-out/account-and-transaction-flow.md
+    - 'Account Information Service Flow': try-out/account-information-service-flow.md
     - 'Payment Initiation flow': try-out/payment-initiation-flow.md
     - 'Confirmation of Funds flow': try-out/confirmation-of-funds-flow.md
     - 'Consent Manager': try-out/consent-manager.md
