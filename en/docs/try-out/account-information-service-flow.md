@@ -1,82 +1,8 @@
-This document provides step by step instructions to deploy, subscribe, and invoke the Account Information Service (AIS). 
+This page provides instructions to use the NextGenPsd2XS2AFramework API to provide the Account Information 
+Service (AIS).
 
-!!! tip
-    When the TPP provides an Account Information Service as an online service, the TPP is known as an Account 
-    Information Services Provider (AISP).
-
-## Deploying PSD2 API
-
-1. Sign in to the API Publisher Portal at `https://<APIM_HOST>:9443/publisher` with the creator/publisher privileges.
- 
-    ![sign_in](../assets/img/get-started/quick-start-guide/sign-in.png)
-
-2. In the homepage, go to **REST API** and select **Import Open API**. ![let's_get_started](../assets/img/get-started/quick-start-guide/lets-get-started.png)
-
-3. Select **OpenAPI File/Archive**. ![create-an-api](../assets/img/get-started/quick-start-guide/create-an-api.png)
-
-4. Click **Browse File to Upload** and select the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/psd2-api_1.3.6_20200327.yaml` file.
-
-5. Click **Next**.
-
-6. Set the context to `/xs2a` and leave the endpoint empty. ![set-context](../assets/img/try-out/account-flow/set-context.png)
-
-7. Click **Create** to create the API. ![create-accounts](../assets/img/get-started/quick-start-guide/create-accounts.png)
-
-8. After the API is successfully created, go to **Portal Configurations** using the left menu panel. ![portal-configurations](../assets/img/get-started/quick-start-guide/portal-configurations.png)
-
-9. Select **Subscriptions** from the left menu pane and set the business plan to **Unlimited: Allows unlimited requests**. ![business-plan](../assets/img/get-started/quick-start-guide/business-plan.png)
-
-10. Click **Save**.
-
-11. Select **Runtime** from the left menu pane.
-
-12. Toggle the **Schema Validation** button to enable Schema Validation. ![schema-validation](../assets/img/get-started/quick-start-guide/schema-validation.png)
-
-13. Click the **Edit** button under **Request > Message Mediation**. ![edit_message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
-
-14. Select the **Custom Policy** option.
-
-15. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/dynamic-endpoint-insequence-1.3.6.xml` insequence file. ![uplaoad_insequence](../assets/img/try-out/account-flow/upload-insequence.png)
- 
-16. Click **Select**. 
-
-17. Scroll down and click **SAVE**.
-
-18. Use the left menu panel and go to **API Configurations > Endpoints**. 
-
-    ![select_endpoints](../assets/img/get-started/quick-start-guide/select-endpoints.png)
-
-19. Add a **Dynamic Endpoint**. ![add_dynamic_endpoint](../assets/img/get-started/quick-start-guide/add_dynamic_endpoint.png)
-
-20. Go to **Deployments** using the left menu pane. 
-
-    ![select_deployments](../assets/img/get-started/quick-start-guide/select-deployments.png)
-    
-21. Select the API Gateway type, in this scenario, it is **Default**. ![api_gateway](../assets/img/get-started/quick-start-guide/dcr-api-gateway.png)
-
-22. Click **Deploy**.
-
-23. Go to **Overview** using the left menu pane. 
-
-    ![select_overview](../assets/img/get-started/quick-start-guide/select-overview.png)
-
-24. Click **Publish**. ![publish_api](../assets/img/get-started/quick-start-guide/publish-api.png)
-
-## Subscribing to PSD2 API
-
-1. The deployed API is now available in the Developer Portal at `https://<APIM_HOST>:9443/devportal`.
-
-2. Select the **NextGenPsd2XS2AFramework v1** API.
- 
-3. Locate **Subscriptions** from the left menu pane. 
-
-    ![select_subscriptions](../assets/img/get-started/quick-start-guide/select-subscriptions.png)
-    
-4. From the **Application** dropdown, select the application that you want to be subscribed to the NextGenPsd2XS2AFramework v1 API. ![subscribe_to_api](../assets/img/try-out/account-flow/subscribe-to-api.png)
-
-5. Click **Subscribe**.
-
-## Invoking PSD2 API
+!!! tip "Before you begin:"
+    Deploy the [NextGenPsd2XS2AFramework API](deploy-nextgenpsd2-api.md). 
 
 ### Generating application access token
 
@@ -84,9 +10,27 @@ Once you register the application, generate an application access token.
 
 1. Generate the client assertion by signing the following JSON payload using supported algorithms. 
 
-    !!! note
-        If you have configured the [OB certificates](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/252018873/OB+Root+and+Issuing+Certificates+for+Sandbox), 
-        download the certificate and keys attached [here](../../assets/attachments/Certificates.zip), and use them for signing and transports layer security testing purposes.
+    ??? note "Use the sample certificates for signing and transports layer security testing purposes. Click here to see how it is done..."
+        1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
+            - The client trust stores for the Identity Server and API Manager are located in the following locations:
+               - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
+               - `<IS_HOME>/repository/resources/security/client-truststore.jks`
+        2. Use the following commands to add the certificate to the client trust store:
+               ```shell
+               keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
+               ```
+        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
+            - Add `SHA1withRSA` as a supported signature algorithm:
+               ```
+               supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
+               ```
+            - Update the following tag according to the sample:
+               ```
+               [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+               issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OpenBanking Pre-Production Issuing CA, OU=OpenBanking, O=WSO2 (UK) LIMITED, L=COL, ST=WP, C=LK"
+               ```
+        4. Restart the servers.
+        5. Download the certificate and keys attached [here](../../assets/attachments/certificates.zip) and use them for testing purposes.
     
     ``` tab='Format'
     
@@ -95,7 +39,6 @@ Once you register the application, generate an application access token.
     "kid": "<The thumbprint of the certificate.>",
     "typ": "JWT"
     }
-     
     {
     "iss": "<This is the issuer of the token. For example, client ID of your application>",
     "sub": "<This is the subject identifier of the issuer. For example, client ID of your application>",
@@ -104,8 +47,9 @@ Once you register the application, generate an application access token.
     "jti": "<This is an incremental unique value>",
     "aud": "<This is the audience that the ID token is intended for. For example, https://<IS_HOST>:9446/oauth2/token>"
     }
-     
-    <signature: For DCR, the client assertion is signed by the private key of the signing certificate. For other scenarios, use the private signature of the application certificate.>
+   
+    <signature: The client assertion must be signed using the private key of the application certificate.>
+
     ```
     
     ``` tab='Sample'
@@ -136,7 +80,7 @@ This is where the AISP generates a request to get the consent of the PSU to acce
 It defines the permissions, accounts and the nature of the consent. There are 3 main permission types for account 
 consents.
 
- - Accounts:permission to access the accounts information
+ - Accounts: permission to access the accounts information
  - Balances: permission to access the accounts and its balance information
  - Transactions: permission to access the accounts and its transaction information
 
@@ -228,7 +172,7 @@ using the following configuration in the `<IS_HOME>/repository/conf/deployment.t
     supported_acc_ref_types = ["iban", "bban", "maskedPan"]
     ```
   
-- These sample account references will be used as examples to explain concepts. For example, account references:
+- These sample account references will be used as examples to explain concepts.  
 
     ``` 
     { "iban": "DE98765432109876543210" },
@@ -273,7 +217,8 @@ The type of consent is determined by the “access” attribute in the request b
 
 - This consent is used by AISP to explicitly request access to specified accounts/sub-accounts. 
 - The **access** attribute can have one or multiple permission sub-attributes (accounts, balances and transactions). 
-The attribute values can be non-empty arrays of account references specifying the accounts/sub-accounts that the AISP 
+
+The attribute values must be non-empty arrays of account references specifying the accounts/sub-accounts that the AISP 
 requires access to for those permissions.
 
 ```json
@@ -766,30 +711,48 @@ In this section, you will be generating an access token using the authorization 
 
 1. Generate the client assertion by signing the following JSON payload using supported algorithms. 
 
-    !!! note
-        If you have configured the [OB certificates](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/252018873/OB+Root+and+Issuing+Certificates+for+Sandbox), 
-        download the certificate and keys attached [here](../../assets/attachments/Certificates.zip), and use them for signing and transport layer security testing purposes.
+    ??? note "Use the sample certificates for signing and transports layer security testing purposes. Click here to see how it is done..."
+        1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
+           - The client trust stores for the Identity Server and API Manager are located in the following locations:
+              - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
+              - `<IS_HOME>/repository/resources/security/client-truststore.jks`
+        2. Use the following commands to add the certificate to the client trust store:
+           ```shell
+           keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
+           ```
+        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
+            - Add `SHA1withRSA` as a supported signature algorithm:
+              ```
+              supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
+              ```
+            - Update the following tag according to the sample:
+              ```
+              [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+              issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OpenBanking Pre-Production Issuing CA, OU=OpenBanking, O=WSO2 (UK) LIMITED, L=COL, ST=WP, C=LK"
+              ```
+        4. Restart the servers.
+        5. Download the certificate and keys attached [here](../../assets/attachments/certificates.zip) and use them for testing purposes.
+
 
     ``` tab="Format"
-    Format:
-    {
-    "alg": "<The algorithm used for signing.>",
-    "kid": "<The thumbprint of the certificate.>",
-    "typ": "JWT"
-    }
+      {
+      "alg": "<The algorithm used for signing.>",
+      "kid": "<The thumbprint of the certificate.>",
+      "typ": "JWT"
+      }
      
-    {
-    "iss": "<This is the issuer of the token. For example, client ID of your application>",
-    "sub": "<This is the subject identifier of the issuer. For example, client ID of your application>",
-    "exp": <This is the epoch time of the token expiration date/time>,
-    "iat": <This is the epoch time of the token issuance date/time>,
-    "jti": "<This is an incremental unique value>",
-    "aud": "<This is the audience that the ID token is intended for. For example, https://<IS_HOST>:9446/oauth2/token>"
-    }
-     
-    <signature: For DCR, the client assertion is signed by the private key of the signing certificate. Otherwise, the private signature of the application certificate is used.>
+      {
+      "iss": "<This is the issuer of the token. For example, client ID of your application>",
+      "sub": "<This is the subject identifier of the issuer. For example, client ID of your application>",
+      "exp": <This is the epoch time of the token expiration date/time>,
+      "iat": <This is the epoch time of the token issuance date/time>,
+      "jti": "<This is an incremental unique value>",
+      "aud": "<This is the audience that the ID token is intended for. For example, https://<IS_HOST>:9446/oauth2/token>"
+      }
+   
+      <signature: The client assertion must be signed using the private key of the application certificate.>
     ```
-    
+
     ``` tab="Sample"
     eyJraWQiOiJXX1RjblFWY0hBeTIwcTh6Q01jZEJ5cm9vdHciLCJhbGciOiJQUzI1NiJ9.eyJzdWIiOiJQU0RHQi1PQi1Vbmtub3duMDAxNTgwMDAwMUhRUXJaQUFYIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTQ0Ni9vYXV0aDIvdG9rZW4iLCJpc3MiOiJQU0RHQi1PQi1Vbmtub3duMDAxNTgwMDAwMUhRUXJaQUFYIiwiZXhwIjoxODI3NjY5MzMyLCJpYXQiOjE4Mjc2NTkzMzIsImp0aSI6IjE0MzIyNDM2MzQzNDM1NDQ1In0.qUq9q_Qa5eiVW5C6QzMvB1sX9Ttwz0Db8c2wmRXyrUWDpeoaolUYT_Diu1o33R4U4MME3nBMCdl0wQ1AVnuzjgV6s3TLcyxlphcoGXYVwOLsQBfbLKTzGiz10UORb3WQc9BwxhZVPDWyFXGlqUNwjPbaUslWoal9KMsbnXlBFKQd8GWjhS-kXHn66kAHwH-7DLZ_Z7D01oW2aFon5sWBZfKD_t9NeQJ9gdPs45ermSM45FixlKXkPPXiIq-_w5Hw1Zw_lEW6fVpWCS6IRz5pBtpHO8s_KESjxuPb1dzrV31AZC7BplWeaRRC5UslObbejw35P5v9CQqJR5Uc7_mX0Q
     ```
@@ -815,7 +778,7 @@ In this section, you will be generating an access token using the authorization 
        }
       ```
    
-### Invoking Account Information Services
+### Invoking Account Information Service
 
 Once the PSU approves the account consent, the AISP is eligible to access the account details of the PSU based on the 
 provided permissions.
@@ -843,54 +806,55 @@ provided permissions.
 2. The above request retrieves all the account information for all the accounts related to the consent of this PSU. 
 Given below is a sample response:
     
-```json
-{
-   "accounts":[
-      {
-         "resourceId":"3dc3d5b3-7023-4848-9853-f5400a64e80f",
-         "iban":"DE2310010010123456789",
-         "currency":"EUR",
-         "product":"Wso3123",
-         "cashAccountType":"CurrentAccount",
-         "name":"Main Account",
-         "_links":{
-            "balances":{
-               "href":"/accounts/3dc3d5b3-7023-4848-9853-f5400a64e80f/balances"
-            },
-            "transactions":{
-               "href":"/accounts/3dc3d5b3-7023-4848-9853-f5400a64e80f/transactions"
-            }
-         }
-      },
-      {
-         "resourceId":"3dc3d5b3-7023-4848-9853-f5400a64e81g",
-         "iban":"DE2310010010123456788",
-         "currency":"USD",
-         "product":"Fremdwährungskonto",
-         "cashAccountType":"CurrentAccount",
-         "name":"US Dollar Account",
-         "_links":{
-            "balances":{
-               "href":"/accounts/3dc3d5b3-7023-4848-9853-f5400a64e81g/balances"
-            }
-         }
-      }
-   ]
-}
-```
-   
-!!! note 
-    Listed below are the AIS endpoints you can invoke:
+    ```json
+    {
+       "accounts":[
+          {
+             "resourceId":"3dc3d5b3-7023-4848-9853-f5400a64e80f",
+             "iban":"DE2310010010123456789",
+             "currency":"EUR",
+             "product":"Wso3123",
+             "cashAccountType":"CurrentAccount",
+             "name":"Main Account",
+             "_links":{
+                "balances":{
+                   "href":"/accounts/3dc3d5b3-7023-4848-9853-f5400a64e80f/balances"
+                },
+                "transactions":{
+                   "href":"/accounts/3dc3d5b3-7023-4848-9853-f5400a64e80f/transactions"
+                }
+             }
+          },
+          {
+             "resourceId":"3dc3d5b3-7023-4848-9853-f5400a64e81g",
+             "iban":"DE2310010010123456788",
+             "currency":"USD",
+             "product":"Fremdwährungskonto",
+             "cashAccountType":"CurrentAccount",
+             "name":"US Dollar Account",
+             "_links":{
+                "balances":{
+                   "href":"/accounts/3dc3d5b3-7023-4848-9853-f5400a64e81g/balances"
+                }
+             }
+          }
+       ]
+    }
+    ```
 
-    - `/accounts`: Read all account information
-    - `/accounts/{account-id}`: Read specific account information
-    - `/accounts/{account-id}/balances`: Read balance information of a specific account
-    - `/accounts/{account-id}/transactions`: Read transaction information of a specific account
-    - `/accounts/{account-id}/transactions/{transactionId}`: Read specific transaction information of a specific account
-    - `/card-accounts`: Read all card account information
-    - `/card-accounts/{account-id}`: Read specific card account information
-    - `/card-accounts/{account-id}/balances`: Read balance information of a specific card account
-    - `/card-accounts/{account-id}/transactions` Read transaction information of a specific card account
-    - `/accounts?withBalance`: Read all account information with the booking balance information
-    - `/accounts/{account-id}?withBalance`: Read specific account information with the booking balance information
-    - `/accounts/{account-id}/transactions?withBalance`: Read transaction information of the specific account with the booking balance information
+### Account Information Service endpoints
+
+Listed below are the Account Information Service (AIS) endpoints you can invoke:
+
+- `/accounts`: Read all account information
+- `/accounts/{account-id}`: Read specific account information
+- `/accounts/{account-id}/balances`: Read balance information of a specific account
+- `/accounts/{account-id}/transactions`: Read transaction information of a specific account
+- `/accounts/{account-id}/transactions/{transactionId}`: Read specific transaction information of a specific account
+- `/card-accounts`: Read all card account information
+- `/card-accounts/{account-id}`: Read specific card account information
+- `/card-accounts/{account-id}/balances`: Read balance information of a specific card account
+- `/card-accounts/{account-id}/transactions` Read transaction information of a specific card account
+- `/accounts?withBalance`: Read all account information with the booking balance information
+- `/accounts/{account-id}?withBalance`: Read specific account information with the booking balance information
+- `/accounts/{account-id}/transactions?withBalance`: Read transaction information of the specific account with the booking balance information
