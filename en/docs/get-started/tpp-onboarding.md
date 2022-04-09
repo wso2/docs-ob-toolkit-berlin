@@ -89,7 +89,7 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
        | Callback URL | The URL used by the TPP to receive the authorization code sent from the bank. The authorisation code can be used later to generate an OAuth2 access token. <br/> **This is a mandatory field for the authorization code grant type.** |
        | Regulatory Application | The type of application. If your application is compliant with the NextGenPSD2XS2A framework, it is a Regulatory application. |
        | Organization Id | The Organization Identifier as provided in the application certificate. For example. PSDUK-NCA-OrganizationID |
-       | Application Certificate | This is the content of the application certificate (.PEM) that you created in the step above.  <br/> For testing purposes, you may use this sample application certificate, if you have configured the OB certificates. <br/> **For Regulatory applications, it is mandatory to use an application certificate.** |
+       | Application Certificate | This is the content of the application certificate (.PEM) that you created in the step above.  <br/> For testing purposes, you may use this sample application certificate. <br/> **For Regulatory applications, it is mandatory to use an application certificate.** |
 
       ![enter_application_details](../assets/img/get-started/quick-start-guide/tpp-onboarding/enter-application-details-1.png)
       ![enter_application_details](../assets/img/get-started/quick-start-guide/tpp-onboarding/enter-application-details-2.png)
@@ -108,11 +108,27 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
 
 5. Generate the client assertion by signing the following JSON payload using supported algorithms.
 
-    !!! note
-        If you have configured the [OB certificates](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/252018873/OB+Root+and+Issuing+Certificates+for+Sandbox),
-        download the certificate and keys attached [here](../../assets/attachments/Certificates.zip), and use them for signing and transports layer security testing purposes.
-
-
+    ??? note "Use the sample certificates for signing and transports layer security testing purposes. Click here to see how it is done..."
+        1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
+           - The client trust stores for the Identity Server and API Manager are located in the following locations:
+               - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
+               - `<IS_HOME>/repository/resources/security/client-truststore.jks`
+        2. Use the following commands to add the certificate to the client trust store:
+           ```shell
+           keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
+           ```
+        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
+              - Add `SHA1withRSA` as a supported signature algorithm:
+               ```
+               supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
+               ```
+              - Update the following tag according to the sample:
+               ```
+               [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+               issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OpenBanking Pre-Production Issuing CA, OU=OpenBanking, O=WSO2 (UK) LIMITED, L=COL, ST=WP, C=LK"
+               ```
+        4. Restart the servers.
+        5. Download the certificate and keys attached [here](../../assets/attachments/certificates.zip) and use them for testing purposes.
 
     ``` tab='Format'
     
