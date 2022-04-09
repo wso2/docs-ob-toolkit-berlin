@@ -56,10 +56,9 @@ nav:
       - 'Get Started': get-started/quick-start-guide.md
       - 'Set up Toolkits': get-started/set-up-toolkits.md
       - 'Configure Users and Roles': get-started/configure-users-and-roles.md
-      - 'Deploy API': get-started/try-out-flow.md
+      - 'Deploy API': get-started/deploy-api.md
       - 'TPP Onboarding': get-started/tpp-onboarding.md
       - 'Tryout Flow': get-started/try-out-flow.md
-      - 'Data Publishing': get-started/data-publishing-try-out.md
   - 'Install and Setup':
     - 'Prerequisites': install-and-setup/prerequisites.md
     - 'Setting up servers': install-and-setup/setting-up-servers.md
@@ -82,9 +81,8 @@ nav:
     - 'API Security':
        - 'Introduction': learn/api-security.md
        - 'Configuration': learn/api-security-configuration.md
-    - 'Data Publishing':
-       - 'Introduction': learn/data-publishing.md
   - 'Try out':
+    - 'Deploy NextGenPsd2 API': try-out/deploy-nextgenpsd2-api.md
     - 'TPP Onboarding': try-out/tpp-onboarding.md
     - 'Account Information Service Flow': try-out/account-information-service-flow.md
     - 'Payment Initiation flow': try-out/payment-initiation-flow.md
