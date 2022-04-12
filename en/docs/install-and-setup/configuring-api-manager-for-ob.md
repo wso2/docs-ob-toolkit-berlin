@@ -75,16 +75,6 @@ database server, and the JDBC driver.
     consent.validation.endpoint="https://<IS_HOST>:9446/api/openbanking/consent/validate"
     ```
    
-7. Add the following gateway executor configurations for the Consent flow:
-
-    ``` toml
-    [[open_banking.gateway.openbanking_gateway_executors.type]]
-    name = "Consent"
-    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-    name = "com.wso2.openbanking.accelerator.gateway.executor.impl.selfcare.portal.UserPermissionValidationExecutor"
-    priority = 1
-    ```
-   
 8. Configure the endpoints to retrieve sharable and payable accounts. This is required when displaying the accounts on 
 the consent page.
 
