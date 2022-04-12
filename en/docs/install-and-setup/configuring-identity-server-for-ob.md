@@ -138,39 +138,14 @@ the consent page.
     ```
 
 
-13. Configure the code challenge method used in the solution using the following tag:
+12. Configure the code challenge method used in the solution using the following tag:
 
     ``` toml
     [open_banking_berlin.consent]
     supported_challenge_methods = ["S256"]
     ```
-    
-14. To generate the self link in the consent JSON response, configure the URLs of the exposed APIs as follows:
-   
-    ``` toml
-    [open_banking_uk.consent]
-    account_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/aisp/"
-    payment_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/pisp/"
-    cof_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/cbpii/"
-    ```
-
-15. In the consent re-authentication step of the Accounts flow, during authorisation, the PSU is allowed to change the 
-selected account. To enable this feature and update the account bound to the consent, set the following property to true:
-
-    ``` toml
-    [open_banking_uk.consent]
-    acc_update_by_psu_enabled = true
-    ```
-
-16. Enable Request-URI validation that validates `AccountID` in the request against the `AccountID` in consent during 
-account retrieval. By default, this is disabled and the configuration is set to `false`.
-
-    ``` toml
-    [open_banking_uk.consent]
-    Validate_acc_id_on_retrieval_enabled = true
-    ```
-    
-17. To enable idempotency support for the Payments API:
+ 
+13. To enable idempotency support for the Payments API:
 
     - Configure the allowed time duration for the Idempotency key in hours 
     - Replay and enable payment submission idempotency validation
