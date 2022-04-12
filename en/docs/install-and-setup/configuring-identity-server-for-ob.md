@@ -1,4 +1,4 @@
-WSO2 Open Banking UK Toolkit contains TOML-based configurations. All the server-level configurations of the Identity 
+WSO2 Open Banking Berlin Toolkit contains TOML-based configurations. All the server-level configurations of the Identity 
 Server instance can be applied using a single configuration file, which is the `deployment.toml` file. 
 
 ## Configuring deployment.toml
@@ -64,7 +64,7 @@ database server, and the JDBC driver.
     driver = "com.mysql.jdbc.Driver"
     ```
 
-5. 	Configure the authentication endpoints with the hostname of the Identity Server.
+5. Configure the authentication endpoints with the hostname of the Identity Server.
 
     ``` toml
     [authentication.endpoints]	
@@ -123,12 +123,29 @@ database server, and the JDBC driver.
 the consent page.
 
     ``` toml
-    [open_banking_uk.consent]
-    payable_account_retrieval_endpoint = "http://<APIM_HOST>:9763/api/openbanking/uk/backend/services/bankaccounts/bankaccountservice/payable-accounts"
-    sharable_account_retrieval_endpoint = "http://<APIM_HOST>:9763/api/openbanking/uk/backend/services/bankaccounts/bankaccountservice/sharable-accounts"
+    [open_banking_berlin.consent]
+    payable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/v130/accounts/payable"
+    shareable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/v130/accounts/shareable" 
     ```
 
-11. To generate the self link in the consent JSON response, configure the URLs of the exposed APIs as follows:
+11. An account reference is used to address specific accounts. It is a combination of an account identifier and optionally
+    a currency. The WSO2 Open Banking Berlin toolkit supports IBAN, BBAN and Masked PAN account identifier types. You 
+    can configure them using the following tag:
+
+    ``` toml
+    [open_banking_berlin.consent]
+    supported_acc_ref_types = ["iban", "bban", "maskedPan"]
+    ```
+
+
+13. Configure the code challenge method used in the solution using the following tag:
+
+    ``` toml
+    [open_banking_berlin.consent]
+    supported_challenge_methods = ["S256"]
+    ```
+    
+14. To generate the self link in the consent JSON response, configure the URLs of the exposed APIs as follows:
    
     ``` toml
     [open_banking_uk.consent]
@@ -137,7 +154,7 @@ the consent page.
     cof_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/cbpii/"
     ```
 
-12. In the consent re-authentication step of the Accounts flow, during authorisation, the PSU is allowed to change the 
+15. In the consent re-authentication step of the Accounts flow, during authorisation, the PSU is allowed to change the 
 selected account. To enable this feature and update the account bound to the consent, set the following property to true:
 
     ``` toml
@@ -145,7 +162,7 @@ selected account. To enable this feature and update the account bound to the con
     acc_update_by_psu_enabled = true
     ```
 
-13. Enable Request-URI validation that validates `AccountID` in the request against the `AccountID` in consent during 
+16. Enable Request-URI validation that validates `AccountID` in the request against the `AccountID` in consent during 
 account retrieval. By default, this is disabled and the configuration is set to `false`.
 
     ``` toml
@@ -153,7 +170,7 @@ account retrieval. By default, this is disabled and the configuration is set to 
     Validate_acc_id_on_retrieval_enabled = true
     ```
     
-14. To enable idempotency support for the Payments API:
+17. To enable idempotency support for the Payments API:
 
     - Configure the allowed time duration for the Idempotency key in hours 
     - Replay and enable payment submission idempotency validation
@@ -165,19 +182,6 @@ account retrieval. By default, this is disabled and the configuration is set to 
     [open_banking_uk.consent.idempotency.submission]
     Enabled = true
     ```
-
-15. If you want to use the [Data publishing](../learn/data-publishing.md) feature:
-
-    - Enable the feature and configure the `server_url` and `auth_url` properties with the hostname of WSO2 Streaming 
-    Integrator.
-
-    ``` toml
-    [open_banking.data_publishing]	
-    enable = true	
-    username="$ref{super_admin.username}@carbon.super"	
-    password="$ref{super_admin.password}"	
-    server_url = "{tcp://<SI_HOST>:7612}"	
-    ```   
 
 ## Starting servers
 

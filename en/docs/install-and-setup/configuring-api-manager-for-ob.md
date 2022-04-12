@@ -1,4 +1,4 @@
-WSO2 Open Banking UK Toolkit contains TOML-based configurations. All the server-level configurations of the 
+WSO2 Open Banking Berlin Toolkit contains TOML-based configurations. All the server-level configurations of the 
 API Manager instance can be applied using a single configuration file, which is the `deployment.toml` file. 
 
 ## Configuring deployment.toml
@@ -67,19 +67,12 @@ database server, and the JDBC driver.
     [apim.key_manager.configuration]
     ServerURL = "https://<IS_HOST>:9446${carbon.context}services/"
     ```
-   
-    ``` toml
-    [open_banking.dcr]
-    #jwks_endpoint_name = ""
-    #app_name_claim = " "
-    token_endpoint = https://<APIM_HOST>:9443/oauth2/token
-    ```
 
-6. Add the following and configure the hostname of the Identity Server.  
+6. Update the hostname of the Identity Server in the following configuration:
 
     ``` toml
-    [open_banking.gateway.consent.validation]
-    endpoint = "https://<IS_HOST>:9446/api/openbanking/consent/validate"
+    [open_banking.gateway]
+    consent.validation.endpoint="https://<IS_HOST>:9446/api/openbanking/consent/validate"
     ```
    
 7. Add the following gateway executor configurations for the Consent flow:
@@ -124,26 +117,11 @@ account retrieval. By default, this is disabled and the configuration is set to 
     - Replay and enable payment submission idempotency validation
 
     ``` toml
-    [open_banking_uk.consent.idempotency]
-    allowed_time = 24
-    
-    [open_banking_uk.consent.idempotency.submission]
-    Enabled = true
+    [open_banking_berlin.consent.idempotency]
+    allowed_time=1
+    submission.enable=false
     ```
-    
-12. If you want to use the [Data publishing](../learn/data-publishing.md) feature:
-   
-    - Enable the feature and configure the `server_url` property with the hostname of WSO2 Streaming 
-    Integrator.
 
-    ``` toml
-    [open_banking.data_publishing]	
-    enable = true	
-    username="$ref{super_admin.username}@carbon.super"	
-    password="$ref{super_admin.password}"	
-    server_url = "{tcp://<SI_HOST>:7612}"	
-    ```  
-   
 ## Starting servers
 
 1. Go to the `<APIM_HOME>/bin` directory using a terminal.
