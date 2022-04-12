@@ -75,7 +75,7 @@ database server, and the JDBC driver.
     consent.validation.endpoint="https://<IS_HOST>:9446/api/openbanking/consent/validate"
     ```
    
-8. Configure the endpoints to retrieve sharable and payable accounts. This is required when displaying the accounts on 
+7. Configure the endpoints to retrieve sharable and payable accounts. This is required when displaying the accounts on 
 the consent page.
 
     ``` toml
@@ -84,7 +84,7 @@ the consent page.
     sharable_account_retrieval_endpoint = "http://<APIM_HOST>:9763/api/openbanking/uk/backend/services/bankaccounts/bankaccountservice/sharable-accounts"
     ```
    
-9. To generate the self link in the consent JSON response, configure the URLs of the exposed APIs as follows:
+8. To generate the self link in the consent JSON response, configure the URLs of the exposed APIs as follows:
 
     ``` toml
     [open_banking_uk.consent]
@@ -93,7 +93,7 @@ the consent page.
     cof_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/cbpii/"    
     ```
     
-10. Enable Request-URI validation that validates `AccountID` in the request against the `AccountID` in consent during 
+9. Enable Request-URI validation that validates `AccountID` in the request against the `AccountID` in consent during 
 account retrieval. By default, this is disabled and the configuration is set to `false`.
 
     ``` toml
@@ -101,7 +101,7 @@ account retrieval. By default, this is disabled and the configuration is set to 
     Validate_acc_id_on_retrieval_enabled = true
     ```
     
-11. To enable idempotency support for the Payments API:
+10. To enable idempotency support for the Payments API:
 
     - Configure the allowed time duration for the Idempotency key in hours
     - Replay and enable payment submission idempotency validation
@@ -111,6 +111,41 @@ account retrieval. By default, this is disabled and the configuration is set to 
     allowed_time=1
     submission.enable=false
     ```
+    
+11. `FrequencyPerDay` is a header parameter sent in the API invocation request to indicate the requested maximum 
+    frequency for access without PSU involvement per day.  This enables throttling requests according to frequency per 
+    day value provided in accounts initiation request.
+
+    ``` toml
+    [open_banking_berlin.consent.freq_per_day]
+    enable = true
+    ```
+    
+12. Configure the supported signature algorithms and digest algorithms using the following configurations. They are 
+    used in `SignatureValidationExecutor` to perform signature verification and digest validation. You can configure any 
+    number of algorithms by separating them using a comma. By default, the following values are configured:
+
+    ``` toml
+    [open_banking_berlin.gateway.signature_verification]
+    supported_hash_algorithms = ["SHA-256", "SHA-512"]
+    supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
+    ```
+    
+13. By default, the following regex is used to validate the Organization Id:
+
+    ```
+    ^PSD[A-Z]{2}-[A-Z]{2,8}-[a-zA-Z0-9]*$
+    ```
+    
+    You can override the above and use your own regex when validating the Organization Id of the TPP application. 
+    Configure the required regex:
+
+    ```
+    [open_banking.berlin.keymanager.org_id_validation]
+    regex=”<CUSTOM_REGEX>”
+    ```
+    
+    For more information, see [Customize Consumer Key Validation](../learn/tpp-onboarding-configuration.md)
 
 ## Starting servers
 
