@@ -74,34 +74,8 @@ database server, and the JDBC driver.
     [open_banking.gateway]
     consent.validation.endpoint="https://<IS_HOST>:9446/api/openbanking/consent/validate"
     ```
-   
-7. Configure the endpoints to retrieve sharable and payable accounts. This is required when displaying the accounts on 
-the consent page.
 
-    ``` toml
-    [open_banking_uk.consent]
-    payable_account_retrieval_endpoint = "http://<APIM_HOST>:9763/api/openbanking/uk/backend/services/bankaccounts/bankaccountservice/payable-accounts"
-    sharable_account_retrieval_endpoint = "http://<APIM_HOST>:9763/api/openbanking/uk/backend/services/bankaccounts/bankaccountservice/sharable-accounts"
-    ```
-   
-8. To generate the self link in the consent JSON response, configure the URLs of the exposed APIs as follows:
-
-    ``` toml
-    [open_banking_uk.consent]
-    account_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/aisp/"
-    payment_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/pisp/"
-    cof_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/cbpii/"    
-    ```
-    
-9. Enable Request-URI validation that validates `AccountID` in the request against the `AccountID` in consent during 
-account retrieval. By default, this is disabled and the configuration is set to `false`.
-
-    ``` toml
-    [open_banking_uk.consent]
-    Validate_acc_id_on_retrieval_enabled = true
-    ```
-    
-10. To enable idempotency support for the Payments API:
+8. To enable idempotency support for the Payments API:
 
     - Configure the allowed time duration for the Idempotency key in hours
     - Replay and enable payment submission idempotency validation
@@ -112,7 +86,7 @@ account retrieval. By default, this is disabled and the configuration is set to 
     submission.enable=false
     ```
     
-11. `FrequencyPerDay` is a header parameter sent in the API invocation request to indicate the requested maximum 
+9. `FrequencyPerDay` is a header parameter sent in the API invocation request to indicate the requested maximum 
     frequency for access without PSU involvement per day.  This enables throttling requests according to frequency per 
     day value provided in accounts initiation request.
 
@@ -121,7 +95,7 @@ account retrieval. By default, this is disabled and the configuration is set to 
     enable = true
     ```
     
-12. Configure the supported signature algorithms and digest algorithms using the following configurations. They are 
+10. Configure the supported signature algorithms and digest algorithms using the following configurations. They are 
     used in `SignatureValidationExecutor` to perform signature verification and digest validation. You can configure any 
     number of algorithms by separating them using a comma. By default, the following values are configured:
 
@@ -131,7 +105,7 @@ account retrieval. By default, this is disabled and the configuration is set to 
     supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
     ```
     
-13. By default, the following regex is used to validate the Organization Id:
+11. By default, the following regex is used to validate the Organization Id:
 
     ```
     ^PSD[A-Z]{2}-[A-Z]{2,8}-[a-zA-Z0-9]*$

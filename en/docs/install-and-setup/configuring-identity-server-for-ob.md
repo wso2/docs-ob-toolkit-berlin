@@ -78,17 +78,13 @@ database server, and the JDBC driver.
     oidc_consent_page = "${carbon.protocol}://<IS_HOST>:${carbon.management.port}/ob/authenticationendpoint/oauth2_consent.do"
     ```
    
-6. Configure the following endpoints for the `token_revocation` event listener:
- 
-    - Configure `TokenEndpointAlias` with the hostname of the Identity Server.
-    - Configure `notification_endpoint` with the hostname of the API Manager.  
+6. Configure the Notification Endpoint for the `token_revocation` event listener with the hostname of the API Manager.  
 
     ``` toml
     [[event_listener]]	
     id = "token_revocation"	
     ...
     [event_listener.properties]
-    TokenEndpointAlias= "https://<IS_HOST>:9446/oauth2/token"	
     notification_endpoint = "https://<APIM_HOST>:9443/internal/data/v1/notify"	
     ```
 
@@ -125,7 +121,7 @@ the consent page.
     ``` toml
     [open_banking_berlin.consent]
     payable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/v130/accounts/payable"
-    shareable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/v130/accounts/shareable" 
+    shareable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/v130/accounts/shareable"
     ```
 
 11. An account reference is used to address specific accounts. It is a combination of an account identifier and optionally
@@ -145,17 +141,23 @@ the consent page.
     supported_challenge_methods = ["S256"]
     ```
  
-13. To enable idempotency support for the Payments API:
+13. Enable Request-URI validation that validates `AccountID` in the request against the `AccountID` in consent during
+    account retrieval. By default, this is disabled and the configuration is set to `false`.
+
+    ``` toml
+    [open_banking_berlin.consent.accounts]
+    single_acc_no_retrieval_validation.enable = false
+    ```
+
+14. To enable idempotency support for the Payments API:
 
     - Configure the allowed time duration for the Idempotency key in hours 
     - Replay and enable payment submission idempotency validation
 
     ``` toml
-    [open_banking_uk.consent.idempotency]
-    allowed_time = 24
-    
-    [open_banking_uk.consent.idempotency.submission]
-    Enabled = true
+    [open_banking_berlin.consent.idempotency]
+    allowed_time=1
+    submission.enable=false
     ```
 
 ## Starting servers
