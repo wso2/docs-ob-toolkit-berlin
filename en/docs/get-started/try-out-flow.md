@@ -298,10 +298,12 @@ the response.
 4. The TPP generates the authorisation URL using the well-known URL.
 5. PSU goes through the authorisation flow with that authorisation URL.
 
-    !!! note "In Multi-level SCA scenario"
-         In a multi-level SCA scenario the steps 2 to 5 must be repeated n number of times for n number of PSUs. The consent 
-         becomes `valid` only after all the PSUs approve it.
-
+    !!! note "Multiple SCA of more than one PSU (Multi-authorization)"
+         - For some accounts, more than one PSU has to give its consent before accessing this account. In this case, Strong
+           Customer Authentication (SCA) has to be executed by more than one PSU.
+         - In a multi-authorization scenario, the steps 2 to 5 must be repeated _n_ number of times for _n_ number of PSUs.
+           The consent becomes `valid` only after all the PSUs approve it.
+   
 #### Authorisation URL
 
 Regardless of the authorisation flow, once the well-known configuration of the Identity Server is obtained, the TPP must 

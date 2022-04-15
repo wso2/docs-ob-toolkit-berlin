@@ -1,4 +1,4 @@
-WSO2 Open Banking UK Toolkit contains TOML-based configurations. All the server-level configurations of the 
+WSO2 Open Banking Berlin Toolkit contains TOML-based configurations. All the server-level configurations of the 
 API Manager instance can be applied using a single configuration file, which is the `deployment.toml` file. 
 
 ## Configuring deployment.toml
@@ -67,83 +67,60 @@ database server, and the JDBC driver.
     [apim.key_manager.configuration]
     ServerURL = "https://<IS_HOST>:9446${carbon.context}services/"
     ```
-   
-    ``` toml
-    [open_banking.dcr]
-    #jwks_endpoint_name = ""
-    #app_name_claim = " "
-    token_endpoint = https://<APIM_HOST>:9443/oauth2/token
-    ```
 
-6. Add the following and configure the hostname of the Identity Server.  
+6. Update the hostname of the Identity Server in the following configuration:
 
     ``` toml
-    [open_banking.gateway.consent.validation]
-    endpoint = "https://<IS_HOST>:9446/api/openbanking/consent/validate"
+    [open_banking.gateway]
+    consent.validation.endpoint="https://<IS_HOST>:9446/api/openbanking/consent/validate"
     ```
-   
-7. Add the following gateway executor configurations for the Consent flow:
 
-    ``` toml
-    [[open_banking.gateway.openbanking_gateway_executors.type]]
-    name = "Consent"
-    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-    name = "com.wso2.openbanking.accelerator.gateway.executor.impl.selfcare.portal.UserPermissionValidationExecutor"
-    priority = 1
-    ```
-   
-8. Configure the endpoints to retrieve sharable and payable accounts. This is required when displaying the accounts on 
-the consent page.
-
-    ``` toml
-    [open_banking_uk.consent]
-    payable_account_retrieval_endpoint = "http://<APIM_HOST>:9763/api/openbanking/uk/backend/services/bankaccounts/bankaccountservice/payable-accounts"
-    sharable_account_retrieval_endpoint = "http://<APIM_HOST>:9763/api/openbanking/uk/backend/services/bankaccounts/bankaccountservice/sharable-accounts"
-    ```
-   
-9. To generate the self link in the consent JSON response, configure the URLs of the exposed APIs as follows:
-
-    ``` toml
-    [open_banking_uk.consent]
-    account_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/aisp/"
-    payment_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/pisp/"
-    cof_consent_self_link = "https://<APIM_HOST>:8243/open-banking/{version}/cbpii/"    
-    ```
-    
-10. Enable Request-URI validation that validates `AccountID` in the request against the `AccountID` in consent during 
-account retrieval. By default, this is disabled and the configuration is set to `false`.
-
-    ``` toml
-    [open_banking_uk.consent]
-    Validate_acc_id_on_retrieval_enabled = true
-    ```
-    
-11. To enable idempotency support for the Payments API:
+8. To enable idempotency support for the Payments API:
 
     - Configure the allowed time duration for the Idempotency key in hours
     - Replay and enable payment submission idempotency validation
 
     ``` toml
-    [open_banking_uk.consent.idempotency]
-    allowed_time = 24
-    
-    [open_banking_uk.consent.idempotency.submission]
-    Enabled = true
+    [open_banking_berlin.consent.idempotency]
+    allowed_time=1
+    submission.enable=false
     ```
     
-12. If you want to use the [Data publishing](../learn/data-publishing.md) feature:
-   
-    - Enable the feature and configure the `server_url` property with the hostname of WSO2 Streaming 
-    Integrator.
+9. `FrequencyPerDay` is a header parameter sent in the API invocation request to indicate the requested maximum 
+    frequency for access without PSU involvement per day.  This enables throttling requests according to frequency per 
+    day value provided in accounts initiation request.
 
     ``` toml
-    [open_banking.data_publishing]	
-    enable = true	
-    username="$ref{super_admin.username}@carbon.super"	
-    password="$ref{super_admin.password}"	
-    server_url = "{tcp://<SI_HOST>:7612}"	
-    ```  
-   
+    [open_banking_berlin.consent.freq_per_day]
+    enable = true
+    ```
+    
+10. Configure the supported signature algorithms and digest algorithms using the following configurations. They are 
+    used in `SignatureValidationExecutor` to perform signature verification and digest validation. You can configure any 
+    number of algorithms by separating them using a comma. By default, the following values are configured:
+
+    ``` toml
+    [open_banking_berlin.gateway.signature_verification]
+    supported_hash_algorithms = ["SHA-256", "SHA-512"]
+    supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
+    ```
+    
+11. By default, the following regex is used to validate the Organization Id:
+
+    ```
+    ^PSD[A-Z]{2}-[A-Z]{2,8}-[a-zA-Z0-9]*$
+    ```
+    
+    You can override the above and use your own regex when validating the Organization Id of the TPP application. 
+    Configure the required regex:
+
+    ```
+    [open_banking.berlin.keymanager.org_id_validation]
+    regex=”<CUSTOM_REGEX>”
+    ```
+    
+    For more information, see [Customize Consumer Key Validation](../learn/tpp-onboarding-configuration.md)
+
 ## Starting servers
 
 1. Go to the `<APIM_HOME>/bin` directory using a terminal.
