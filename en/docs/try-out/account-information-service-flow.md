@@ -1,8 +1,8 @@
-This page provides instructions to use the NextGenPsd2XS2AFramework API to provide the Account Information 
+This page provides instructions to use the NextGenPSD2XS2AFramework API to provide the Account Information 
 Service (AIS).
 
 !!! tip "Before you begin:"
-    Deploy the [NextGenPsd2XS2AFramework API](deploy-nextgenpsd2-api.md). 
+    Deploy the [NextGenPSD2XS2AFramework API](deploy-nextgenpsd2-api.md). 
 
 ### Generating application access token
 
@@ -688,7 +688,7 @@ browser to prompt the invocation of the authorize API:
         | response_type | The recommended response type is `code`. |
         | redirect_uri | The TPP's URI that the OAuth2 server redirects the PSU's user agent after the authorisation. |
         | state | TPPs set a dynamic value to prevent XSRF attacks.|
-        | code_challenge_method | Code verifier transformation method. NextGenPsd2XS2AFramework specification recommends `S256`.
+        | code_challenge_method | Code verifier transformation method. NextGenPSD2XS2AFramework specification recommends `S256`.
         | client_id | As provided in the eIDAS certificate, the organization_Identifier must contain the following information in it: <ul> <li> `PSD` as 3 character legal person identity type reference </li><li> 2 character ISO 3166 country code representing the NCA country </li><li> hyphen-minus `-` </li><li> 2-8 character NCA identifier (A-Z uppercase only, no separator - hyphen-minus "-" </li><li> PSP identifier (authorisation number as specified by NCA) </li> </ul> |
         | code_challenge | This is used to avoid code injection attacks using the PKCE challenge in the cryptographic RFC 7636. For more information, see [RFC 7636](https://tools.ietf.org/html/rfc7636). |
 

@@ -82,7 +82,7 @@ nav:
        - 'Introduction': learn/api-security.md
        - 'Configuration': learn/api-security-configuration.md
   - 'Try out':
-    - 'Deploy NextGenPsd2 API': try-out/deploy-nextgenpsd2-api.md
+    - 'Deploy NextGenPSD2XS2A API': try-out/deploy-nextgenpsd2-api.md
     - 'TPP Onboarding': try-out/tpp-onboarding.md
     - 'Account Information Service Flow': try-out/account-information-service-flow.md
     - 'Payment Initiation Service Flow': try-out/payment-initiation-service-flow.md

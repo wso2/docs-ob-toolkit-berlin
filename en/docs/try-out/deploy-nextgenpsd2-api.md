@@ -1,6 +1,6 @@
 This page provides instructions to deploy the NextGenPsd2XS2AFramework API. WSO2 Open Banking Berlin Toolkit 
 provides the Account Information Service (AIS), Payment Initiation Service (PIS), and Confirmation on the Availability 
-of Funds Service (FCS) via the NextGenPsd2XS2AFramework API. 
+of Funds Service (FCS) via the NextGenPSD2XS2AFramework API. 
 
 1. Sign in to the API Publisher Portal at `https://<APIM_HOST>:9443/publisher` with the creator/publisher privileges.
 
