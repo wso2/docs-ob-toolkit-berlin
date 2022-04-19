@@ -40,12 +40,12 @@ The application created via the Developer Portal allows you to observe statistic
 
 1. Go to the **APIs** tab in the Developer portal. ![click_apis](../assets/img/get-started/quick-start-guide/tpp-onboarding/click-apis.png)
 
-2. Select the **NextGenPSD2XS2A** API. ![select_api](../assets/img/get-started/quick-start-guide/tpp-onboarding/select-api.png)
+2. Select the **NextGenPSD2XS2AFramework** API. ![select_api](../assets/img/get-started/quick-start-guide/tpp-onboarding/select-api.png)
 
 3. Go to **Subscriptions** at the bottom of the API and select **SUBSCRIBE**.
 
 4. Select **your application** from the drop-down list then set the **Throttling Policy** and click **SUBSCRIBE**.
-   Once subscribed, the application can access all the supported services of the NextGenPSD2XS2A API resources.
+   Once subscribed, the application can access all the supported services of the NextGenPSD2XS2AFramework API resources.
 
 ### Step 5: Create and upload certificates
 
@@ -74,7 +74,7 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
 
 1. Go to the **Applications** tab in the Developer Portal.
 
-2. From the application list, select your application, which has subscribed to the NextGenPSD2XS2A API.
+2. From the application list, select your application, which has subscribed to the NextGenPSD2XS2AFramework API.
 
 3. Select **Production Keys > OAuth2 Tokens** or **Sandbox Keys > OAuth2 Tokens** according to the type of key you require:
     - Production Keys: Generates access tokens in the production environment.
@@ -87,7 +87,7 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
        |-------|-------------|
        | Grant Types | Determine the credentials that are used to generate the access token. <ul> <li> Code: Relates to the authorisation code grant type and is applicable when consuming the API as a user. **It is mandatory to select the code grant type for regulatory applications.**</li> <li> Client Credentials: Relates to the client credentials grant type and is applicable when consuming the API as an application. </li> <li> Refresh Token: To renew an expired access token. </li> </ul> |
        | Callback URL | The URL used by the TPP to receive the authorization code sent from the bank. The authorisation code can be used later to generate an OAuth2 access token. <br/> **This is a mandatory field for the authorization code grant type.** |
-       | Regulatory Application | The type of application. If your application is compliant with the NextGenPSD2XS2A framework, it is a Regulatory application. |
+       | Regulatory Application | The type of application. If your application is compliant with the NextGenPSD2XS2AFramework framework, it is a Regulatory application. |
        | Organization Id | The Organization Identifier as provided in the application certificate. For example. PSDUK-NCA-OrganizationID |
        | Application Certificate | This is the content of the application certificate (.PEM) that you created in the step above.  <br/> For testing purposes, you may use this sample application certificate. <br/> **For Regulatory applications, it is mandatory to use an application certificate.** |
 
@@ -180,4 +180,4 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
     }
     ```
 
-Use this generated application access token to invoke the NextGenPSD2XS2A API.
+Use this generated application access token to invoke the NextGenPSD2XS2AFramework API.

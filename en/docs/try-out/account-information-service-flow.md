@@ -1,8 +1,8 @@
-This page provides instructions to use the NextGenPsd2XS2AFramework API to provide the Account Information 
+This page provides instructions to use the NextGenPSD2XS2AFramework API to provide the Account Information 
 Service (AIS).
 
 !!! tip "Before you begin:"
-    Deploy the [NextGenPsd2XS2AFramework API](deploy-nextgenpsd2-api.md). 
+    Deploy the [NextGenPSD2XS2AFramework API](deploy-nextgenpsd2-api.md). 
 
 ### Generating application access token
 
@@ -189,18 +189,17 @@ using the following configuration in the `<IS_HOME>/repository/conf/deployment.t
 combined with a currency.
 - Given below are sample multi-currency account references:
 
-  - Main account reference
-    ```
-    { "iban": "DE12345678901234567890" }
-    ```
+    - Main account reference
+      ```
+      { "iban": "DE12345678901234567890" }
+      ```
  
-  - Sub-account references
-
-    ``` 
-    { "iban": "DE12345678901234567890", "currency": "USD" },
-    { "iban": "DE12345678901234567890", "currency": "EUR" },
-    { "iban": "DE12345678901234567890", "currency": "GBP" }
-    ```
+    - Sub-account references
+      ``` 
+      { "iban": "DE12345678901234567890", "currency": "USD" },
+      { "iban": "DE12345678901234567890", "currency": "EUR" },
+      { "iban": "DE12345678901234567890", "currency": "GBP" }
+      ```
     
 ####Multi-currency account specifics for account consents
 
@@ -266,16 +265,19 @@ permissions by the TPP.
 during the authorisation process in the consent page. 
 - The access attribute can have one or multiple permission sub-attributes (accounts, balances and transactions) with 
 the values left as empty arrays.
-- In the sample below, the TPP is requesting:
-    - Accounts permission on the accounts/sub-accounts selected by the PSU during authorisation.
-    - Transactions permission on the accounts/sub-accounts selected by the PSU during authorisation.
 
     ```json
     "access": {
         "accounts": [ ]
         "transactions": [ ]
     }
-    ```
+    ``` 
+    
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        - In the sample below, the TPP is requesting:
+            - Accounts permission on the accounts/sub-accounts selected by the PSU during authorisation.
+            - Transactions permission on the accounts/sub-accounts selected by the PSU during authorisation.
+
 
 **Account list of available accounts consent**
 
@@ -283,18 +285,18 @@ the values left as empty arrays.
 without the balance permission. 
 - This consent type does not require the TPP to explicitly mention the permissions as sub-attributes of the access 
 attribute.
-- In the sample below, the TPP is requesting:
-    - Accounts permission for all the accounts/sub-accounts of the PSU
+- Given below are sample payloads:
 
      ```json
      "access": {
          "availableAccounts": “allAccounts”
      }
      ```
-  
-- In the sample below, the TPP is requesting:
-    - Accounts permission for all the accounts/sub-accounts of the PSU
-    - Balances permission for all the accounts/sub-accounts of the PSU
+
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        In the sample below, the TPP is requesting:
+
+           - Accounts permission for all the accounts/sub-accounts of the PSU
 
      ```json
      "access": {
@@ -302,21 +304,29 @@ attribute.
      }
      ```
 
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        In the sample below, the TPP is requesting:
+
+           - Accounts permission for all the accounts/sub-accounts of the PSU
+           - Balances permission for all the accounts/sub-accounts of the PSU
+
 **Global consent**
 
 - This consent is used by TPPs to request access to all the accounts/sub-accounts of the PSU for all the permissions 
 (accounts, balances and transactions). 
 - This consent type does not require the TPP to explicitly mention the permissions as sub-attributes of the access attribute.
-- In the sample below, the TPP is requesting:
-    - Accounts permission for all the accounts/sub-accounts of the PSU 
-    - Balances permission for all the accounts/sub-accounts of the PSU 
-    - Transactions permission for all the accounts/sub-accounts of the PSU
     
     ```json
     "access": {
         "allPsd2”: “allAccounts”
     }
     ```
+
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        - In the sample below, the TPP is requesting:
+            - Accounts permission for all the accounts/sub-accounts of the PSU
+            - Balances permission for all the accounts/sub-accounts of the PSU
+            - Transactions permission for all the accounts/sub-accounts of the PSU
 
 **Recurring consents and frequency-per-day**
 
@@ -341,8 +351,7 @@ The TPP can only re-invoke that particular endpoint once the throttled out time 
         enable = true
         ```
 
-- Given below is a sample payload, when the TPP is requesting for a recurring consent that allows invoking the account 
-details only 4 times a day. The TPP can re-invoke the endpoint after the throttle out period has elapsed.
+- Given below is a sample payload:
 
     ```json
     {
@@ -355,6 +364,10 @@ details only 4 times a day. The TPP can re-invoke the endpoint after the throttl
        "combinedServiceIndicator":false
     }
     ```
+
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        When the TPP is requesting for a recurring consent that allows invoking the account
+        details only 4 times a day. The TPP can re-invoke the endpoint after the throttle out period has elapsed.
 
 ### Other consent related requests
 
@@ -510,11 +523,13 @@ https://<APIM_HOST>:8243/xs2a/v1/consents/368f7413-fb0a-47a7-96b2-dd24d22d80ee \
 
 The AISP application redirects the PSU to authenticate and approve/deny the provided consent. This can be achieved in 
 2 ways:
-    1. Implicit flow
-    2. Explicit flow
+
+  1. Implicit flow 
+  2. Explicit flow
 
 The TPP decides the approach using `TPP-Explicit-Authorisation-Preferred`, which is an optional boolean header. 
-This header is sent during the consent initiation request. If the header is not present, Implicit approach is followed.
+This header is sent during the consent initiation request.  If `TPP-Explicit-Authorisation-Preferred` is set to `false`
+or the header is not present, Implicit approach is followed.
 
 #### Implicit authorisation flow
 
@@ -647,7 +662,7 @@ the response.
 5. PSU goes through the authorisation flow with that authorisation URL.
 
     !!! note "Multiple SCA of more than one PSU (Multi-authorization)"
-         - For some accounts, more than one PSU has to give its consent before accessing this account. In this case, Strong
+         - For some accounts, more than one PSU has to give their consent before accessing this account. In this case, Strong
            Customer Authentication (SCA) has to be executed by more than one PSU.
          - In a multi-authorization scenario, the steps 2 to 5 must be repeated _n_ number of times for _n_ number of PSUs. 
            The consent becomes `valid` only after all the PSUs approve it.
@@ -673,7 +688,7 @@ browser to prompt the invocation of the authorize API:
         | response_type | The recommended response type is `code`. |
         | redirect_uri | The TPP's URI that the OAuth2 server redirects the PSU's user agent after the authorisation. |
         | state | TPPs set a dynamic value to prevent XSRF attacks.|
-        | code_challenge_method | Code verifier transformation method. NextGenPSD2 specification recommends `S256`.
+        | code_challenge_method | Code verifier transformation method. NextGenPSD2XS2AFramework specification recommends `S256`.
         | client_id | As provided in the eIDAS certificate, the organization_Identifier must contain the following information in it: <ul> <li> `PSD` as 3 character legal person identity type reference </li><li> 2 character ISO 3166 country code representing the NCA country </li><li> hyphen-minus `-` </li><li> 2-8 character NCA identifier (A-Z uppercase only, no separator - hyphen-minus "-" </li><li> PSP identifier (authorisation number as specified by NCA) </li> </ul> |
         | code_challenge | This is used to avoid code injection attacks using the PKCE challenge in the cryptographic RFC 7636. For more information, see [RFC 7636](https://tools.ietf.org/html/rfc7636). |
 
