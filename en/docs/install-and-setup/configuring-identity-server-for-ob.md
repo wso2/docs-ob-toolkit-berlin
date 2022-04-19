@@ -149,16 +149,49 @@ the consent page.
     single_acc_no_retrieval_validation.enable = false
     ```
 
-14. To enable idempotency support for the Payments API:
+14. Configure the following tags regarding Account consents:
 
-    - Configure the allowed time duration for the Idempotency key in hours 
-    - Replay and enable payment submission idempotency validation
+    - `single_acc_no_retrieval_validation.enable`: If enabled, the request permission validation is performed against 
+       the account ID by the bank back end. If disabled, request validation happens against the consent ID by WSO2 Open 
+       Banking Berlin Toolkit.
+    - `freq_per_day`: Configure minimum frequency per day for recurring consents. For more details, see 
+        [Types of consents](../try-out/account-information-service-flow.md#types-of-consents)
+    - `valid_until_date_cap.enable`: To enable the feature that provides the accounts consents a fixed amount of days 
+       after which the consents will expire.
+    - `valid_until_date_cap.value`: To define the number of days all account consent will be valid until. This is only 
+       applicable if `valid_until_date_cap.enable` is set `true`.
+    - `multiple_recurring_consent.enable `: To enable multiple recurring consents.
 
     ``` toml
-    [open_banking_berlin.consent.idempotency]
-    allowed_time=1
-    submission.enable=false
+    [open_banking_berlin.consent.accounts]
+    single_acc_no_retrieval_validation.enable = true
+    freq_per_day.value = 4
+    valid_until_date_cap.enable = false
+    valid_until_date_cap.value = 0
+    multiple_recurring_consent.enable = false
     ```
+
+
+16. Configure the following tags regarding Payment consents:
+
+    - `auth_cancellation.enable`: To enable authorisation for payment cancellation, set this flag to true.
+    - `bulk_payments.max_future_payment_days`: To define the maximum number of payment execution days allowed by the
+      ASPSP. The bulk payments request payload contains the `requested execution date`, which is an optional element and
+      the configuration checks whether the mentioned `requested execution date` is within the allowed period.
+
+    ``` toml
+    [open_banking_berlin.consent.payments]
+    auth_cancellation.enable = true
+    bulk_payments.max_future_payment_days = "10"
+    ```
+
+17. Configure the Well Known endpoint of the Identity Server by replacing the `<APIM_HOST>` placeholder with the hostname
+    of the API Manager.
+
+     ``` toml
+     [open_banking_berlin.consent.sca]
+     oauth_metadata_endpoint = "https://<APIM_HOST>:8243/.well-known/openid-configuration"
+     ```
 
 ## Starting servers
 
