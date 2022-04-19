@@ -189,18 +189,17 @@ using the following configuration in the `<IS_HOME>/repository/conf/deployment.t
 combined with a currency.
 - Given below are sample multi-currency account references:
 
-  - Main account reference
-    ```
-    { "iban": "DE12345678901234567890" }
-    ```
+    - Main account reference
+      ```
+      { "iban": "DE12345678901234567890" }
+      ```
  
-  - Sub-account references
-
-    ``` 
-    { "iban": "DE12345678901234567890", "currency": "USD" },
-    { "iban": "DE12345678901234567890", "currency": "EUR" },
-    { "iban": "DE12345678901234567890", "currency": "GBP" }
-    ```
+    - Sub-account references
+      ``` 
+      { "iban": "DE12345678901234567890", "currency": "USD" },
+      { "iban": "DE12345678901234567890", "currency": "EUR" },
+      { "iban": "DE12345678901234567890", "currency": "GBP" }
+      ```
     
 ####Multi-currency account specifics for account consents
 
@@ -266,16 +265,19 @@ permissions by the TPP.
 during the authorisation process in the consent page. 
 - The access attribute can have one or multiple permission sub-attributes (accounts, balances and transactions) with 
 the values left as empty arrays.
-- In the sample below, the TPP is requesting:
-    - Accounts permission on the accounts/sub-accounts selected by the PSU during authorisation.
-    - Transactions permission on the accounts/sub-accounts selected by the PSU during authorisation.
 
     ```json
     "access": {
         "accounts": [ ]
         "transactions": [ ]
     }
-    ```
+    ``` 
+    
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        - In the sample below, the TPP is requesting:
+            - Accounts permission on the accounts/sub-accounts selected by the PSU during authorisation.
+            - Transactions permission on the accounts/sub-accounts selected by the PSU during authorisation.
+
 
 **Account list of available accounts consent**
 
@@ -283,18 +285,18 @@ the values left as empty arrays.
 without the balance permission. 
 - This consent type does not require the TPP to explicitly mention the permissions as sub-attributes of the access 
 attribute.
-- In the sample below, the TPP is requesting:
-    - Accounts permission for all the accounts/sub-accounts of the PSU
+- Given below are sample payloads:
 
      ```json
      "access": {
          "availableAccounts": “allAccounts”
      }
      ```
-  
-- In the sample below, the TPP is requesting:
-    - Accounts permission for all the accounts/sub-accounts of the PSU
-    - Balances permission for all the accounts/sub-accounts of the PSU
+
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        In the sample below, the TPP is requesting:
+
+           - Accounts permission for all the accounts/sub-accounts of the PSU
 
      ```json
      "access": {
@@ -302,21 +304,29 @@ attribute.
      }
      ```
 
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        In the sample below, the TPP is requesting:
+
+           - Accounts permission for all the accounts/sub-accounts of the PSU
+           - Balances permission for all the accounts/sub-accounts of the PSU
+
 **Global consent**
 
 - This consent is used by TPPs to request access to all the accounts/sub-accounts of the PSU for all the permissions 
 (accounts, balances and transactions). 
 - This consent type does not require the TPP to explicitly mention the permissions as sub-attributes of the access attribute.
-- In the sample below, the TPP is requesting:
-    - Accounts permission for all the accounts/sub-accounts of the PSU 
-    - Balances permission for all the accounts/sub-accounts of the PSU 
-    - Transactions permission for all the accounts/sub-accounts of the PSU
     
     ```json
     "access": {
         "allPsd2”: “allAccounts”
     }
     ```
+
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        - In the sample below, the TPP is requesting:
+            - Accounts permission for all the accounts/sub-accounts of the PSU
+            - Balances permission for all the accounts/sub-accounts of the PSU
+            - Transactions permission for all the accounts/sub-accounts of the PSU
 
 **Recurring consents and frequency-per-day**
 
@@ -341,8 +351,7 @@ The TPP can only re-invoke that particular endpoint once the throttled out time 
         enable = true
         ```
 
-- Given below is a sample payload, when the TPP is requesting for a recurring consent that allows invoking the account 
-details only 4 times a day. The TPP can re-invoke the endpoint after the throttle out period has elapsed.
+- Given below is a sample payload:
 
     ```json
     {
@@ -355,6 +364,10 @@ details only 4 times a day. The TPP can re-invoke the endpoint after the throttl
        "combinedServiceIndicator":false
     }
     ```
+
+    ??? tip "Click here to see an explanation of the above sample request payload"
+        When the TPP is requesting for a recurring consent that allows invoking the account
+        details only 4 times a day. The TPP can re-invoke the endpoint after the throttle out period has elapsed.
 
 ### Other consent related requests
 
