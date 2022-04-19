@@ -510,11 +510,13 @@ https://<APIM_HOST>:8243/xs2a/v1/consents/368f7413-fb0a-47a7-96b2-dd24d22d80ee \
 
 The AISP application redirects the PSU to authenticate and approve/deny the provided consent. This can be achieved in 
 2 ways:
-    1. Implicit flow
-    2. Explicit flow
+
+  1. Implicit flow 
+  2. Explicit flow
 
 The TPP decides the approach using `TPP-Explicit-Authorisation-Preferred`, which is an optional boolean header. 
-This header is sent during the consent initiation request. If the header is not present, Implicit approach is followed.
+This header is sent during the consent initiation request.  If `TPP-Explicit-Authorisation-Preferred` is set to `false`
+or the header is not present, Implicit approach is followed.
 
 #### Implicit authorisation flow
 
@@ -647,7 +649,7 @@ the response.
 5. PSU goes through the authorisation flow with that authorisation URL.
 
     !!! note "Multiple SCA of more than one PSU (Multi-authorization)"
-         - For some accounts, more than one PSU has to give its consent before accessing this account. In this case, Strong
+         - For some accounts, more than one PSU has to give their consent before accessing this account. In this case, Strong
            Customer Authentication (SCA) has to be executed by more than one PSU.
          - In a multi-authorization scenario, the steps 2 to 5 must be repeated _n_ number of times for _n_ number of PSUs. 
            The consent becomes `valid` only after all the PSUs approve it.
@@ -673,7 +675,7 @@ browser to prompt the invocation of the authorize API:
         | response_type | The recommended response type is `code`. |
         | redirect_uri | The TPP's URI that the OAuth2 server redirects the PSU's user agent after the authorisation. |
         | state | TPPs set a dynamic value to prevent XSRF attacks.|
-        | code_challenge_method | Code verifier transformation method. NextGenPSD2 specification recommends `S256`.
+        | code_challenge_method | Code verifier transformation method. NextGenPsd2XS2AFramework specification recommends `S256`.
         | client_id | As provided in the eIDAS certificate, the organization_Identifier must contain the following information in it: <ul> <li> `PSD` as 3 character legal person identity type reference </li><li> 2 character ISO 3166 country code representing the NCA country </li><li> hyphen-minus `-` </li><li> 2-8 character NCA identifier (A-Z uppercase only, no separator - hyphen-minus "-" </li><li> PSP identifier (authorisation number as specified by NCA) </li> </ul> |
         | code_challenge | This is used to avoid code injection attacks using the PKCE challenge in the cryptographic RFC 7636. For more information, see [RFC 7636](https://tools.ietf.org/html/rfc7636). |
 
