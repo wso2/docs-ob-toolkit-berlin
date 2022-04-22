@@ -151,9 +151,10 @@ the consent page.
 
 14. Configure the following tags regarding Account consents:
 
-    - `single_acc_no_retrieval_validation.enable`: If enabled, the request permission validation is performed against 
-       the account ID by the bank back end. If disabled, request validation happens against the consent ID by WSO2 Open 
-       Banking Berlin Toolkit.
+    - `single_acc_no_retrieval_validation.enable`: If enabled, the permission validation will be performed against the 
+       account ID by WSO2 Open Banking Berlin Toolkit. If disabled, the permission validation happens against the 
+       consent ID by WSO2 Open Banking Berlin Toolkit. Also, when disabled, the account ID validation should be 
+       performed by the bank backend.
     - `freq_per_day`: Configure minimum frequency per day for recurring consents. For more details, see 
         [Types of consents](../try-out/account-information-service-flow.md#types-of-consents)
     - `valid_until_date_cap.enable`: To enable the feature that provides the accounts consents a fixed amount of days 
