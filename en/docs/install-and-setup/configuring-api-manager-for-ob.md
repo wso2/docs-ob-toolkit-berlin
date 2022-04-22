@@ -75,20 +75,9 @@ database server, and the JDBC driver.
     consent.validation.endpoint="https://<IS_HOST>:9446/api/openbanking/consent/validate"
     ```
 
-8. To enable idempotency support for the Payments API:
-
-    - Configure the allowed time duration for the Idempotency key in hours
-    - Replay and enable payment submission idempotency validation
-
-    ``` toml
-    [open_banking_berlin.consent.idempotency]
-    allowed_time=1
-    submission.enable=false
-    ```
-    
-9. `FrequencyPerDay` is a header parameter sent in the API invocation request to indicate the requested maximum 
-    frequency for access without PSU involvement per day.  This enables throttling requests according to frequency per 
-    day value provided in accounts initiation request.
+7. `FrequencyPerDay` is a header parameter sent in the API invocation request to indicate the requested maximum 
+     frequency for access without PSU involvement per day.  This enables throttling requests according to frequency per 
+     day value provided in accounts initiation request.
 
     ``` toml
     [open_banking_berlin.consent.freq_per_day]
