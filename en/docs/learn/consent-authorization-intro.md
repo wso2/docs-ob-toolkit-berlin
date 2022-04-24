@@ -1,84 +1,27 @@
-During the consent authorization process, the banks redirect customers to provide consent for TPPs to access 
-their banking information. The process is as follows:
+The PKCE Consent Authorization flow is as follows:
 
-1. TPP requests to access the banking information of a customer.
-2. Bank validates the TPP’s request.
-3. The bank redirects the requested information (containing the information the TPP application wants to access)
-to the customer.
-4. The bank authenticates the customer. See below for the default login page of the consent page:
- 
-    ![login-consent-page](../assets/img/learn/consent-manager/login-of-consent-page.png)
-    
-5. A list of bank accounts and the information that the TPP wishes to access are displayed.
-    ![select accounts](../assets/img/learn/consent-manager/consent-page-select-accounts.png)  
-    
-6. The customer can view the information before consenting or denying it. For example,
-    ![grant consent](../assets/img/learn/consent-manager/consent-page-confirm.png) 
- 
-##Consent Authorization in WSO2 Open Banking 
+1. The client sends the authorization request along with the `code_challenge` and the `code_challenge_method` to the
+   authorization server.
+2. The Authorisation Server makes note of the `code_challenge` and the `code_challenge_method` and issues an auth code.
+3. The client sends an access token request along with the `code_verifier`.
+4. The Authorization Server validates the code_verifier with the already received `code_challenge` and the
+   `code_challenge_method`. Then issues an access token if the validation is successful.
 
-Following components perform the consent authorization:
+The following components perform the consent authorization with PKCE.
 
 ###Authorization endpoint
 Before the TPP application accesses the customer's banking information, the TPP sends an authorization 
-request to get the customer's consent for it. The authorization request contains a request object. This request object is 
-a self-contained JWT, which helps banks to validate the TPP.
+request to get the customer's consent for it. The authorization request contains the following elements:
 
-The method of sending the authorization request can vary as follows:
-
-- **Send the authorization details in the authorization URL**
-
-The TPPs share the request object containing the authorization details to the authorization server and obtain the 
-authorization URL.
-
-- **Send the authorization details as a reference in the authorization URL**
-
-The TPPs push authorization details directly to the authorization server and obtain a reference. This method is also 
-known as **Pushed Authorization**. The reference is notated by the claim; `request_uri`. Thereby, it prevents:
-                                                                                         
-- Intruders from intercepting the authorization information sent in the request_object
-- Authorization request calls becoming bulky with the authorization details signed in the JWT
-
-and protects the confidentiality and integrity of the authorization details when passing through a TPP application.
-
-###Pushed Authorization web application
-The TPPs obtain `request_uri` which is a reference to the authentication and authorization details sent in the 
-pushed authorization request.
-
-- **Pushed Authorization - /par endpoint**
-
-Upon successful invocation of the `/par` endpoint, TPPs will receive a `request_uri` value with an expiration time. Therefore, the reference is only valid until the expiration time for the subsequent authorization invocation.
-
-Given below is a successful response:
-
-```
-{
-    "request_uri": "urn:ietf:params:oauth:request_uri:bwc4JK-ESC0w8acc191e-Y1LTC2",
-    "expires_in": 60
-}
-```
-
-This same `request_uri` value is used in the subsequent authorization request as well.
-
-??? tip "Click here to see configurations related to the Pushed Authorization web application..."
-    1. Open the `<IS_HOME>/repository/conf/deployment.toml` file. 
-    2. Add the following configurations that allow you to change the format and the expiration time of the `request_uri` reference:
-    
-    ```
-    [open_banking.push_authorisation]
-    expiry_time=60
-    request_uri_sub_string="substring"
-    ```
-
-    !!! note
-        You can change the format of the request_uri using the `request_uri_sub_string` tag.
-        
-        ```
-        {
-            "request_uri": "urn:<substring>:bwc4JK-ESC0w8acc191e-Y1LTC2",
-            "expires_in": 60
-        }
-        ```
+| Parameter | Mandatory/Optional | Description |
+| --------- | ------------------ | ----------- |
+| Scope | Mandatory | The consent Id of the initiated consent. The consent Id should be prefixed according to the flow: <ul> <li> For accounts: `ais:<consent_id>` <br/> Example: `ais:b5278cdc-1769-4832-87b0-0ac0e945a00d` </li> <li> For payments: `pis:<consent_id>` </li> <li> For funds confirmations: `piis:<consent_id>` </li> </ul> |
+| Response_type | Mandatory | Use `code`, as this is `authorization_code` flow. |
+| Redirect_uri | Mandatory | The URI to which the application is redirected after consent approval/denial. |
+| State | Mandatory | A dynamic value set by the TPP to prevent XSRF attacks. |
+| code_challenge | Mandatory | The Berlin specification mandates PKCE for authorization requests. Therefore, a `code_challenge` is used and optionally a `code_challenge_method` is used. <br/>  <br/> [PKCE - RFC 7636](https://datatracker.ietf.org/doc/html/rfc7636) is an extension to the Authorization Code flow to prevent **authorization code interception attacks** and to be able to securely perform the OAuth exchange from public clients. With PKCE, the authorization server requires proof of possession to check that the authorization code belongs to the client when the client requests an access token. <br/> <br/> The `code_challenge` is generated by transforming a code verifier (a random code which meets a certain requirement, needed when obtaining the access token in PCKE flow). It is recommended not to use the same code verifier/code challenge pair in two flows. |
+| code_challenge_method | Optional | Used to let the authorization server know the method of transforming the code verifier to code challenge. If not used, the authorization server assumes that the code challenge and the code verifier are the same. WSO2 Open Banking Berlin Toolkit lets you configure the supported code challenge methods. |
+| Client_id | Mandatory | The client Id of the TPP application. |
 
 ###Authorization web application 
 The TPPs obtain an authorization URL that redirects the customer to a web interface hosted by the bank. In this 
