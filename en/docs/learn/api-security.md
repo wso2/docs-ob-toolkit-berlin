@@ -8,7 +8,7 @@ provided in the Financial API (FAPI) group, which is based on OAuth 2.0 and Open
 
 ###MTLS enforcement
 
-Authentication is a  crucial requirement in open banking to verify the authenticity of an TPP before sharing the 
+Authentication is a  crucial requirement in open banking to verify the authenticity of a TPP before sharing the 
 customer’s banking information. When a TPP invokes APIs, their private credentials can be shared in the requests, 
 and it leads to credential leakages and data thefts. Therefore, Mutual Transport Layer Security (MTLS) is introduced as 
 an authentication protocol where the TPPs do not need to send their private credentials.
@@ -64,7 +64,7 @@ This validation allows banks to validate TPPs from the NCAs. This is done by
 validating the transport layer certificate a TPP has obtained. 
 
 ###Role validation 
-According to the [Open Banking Standard - UK](https://www.openbanking.org.uk/about-us/glossary/), TPPs have roles 
+According to the NextGenPSD2 specification, TPPs have roles 
 for the services they provide. The TPP’s role is defined in their transport certificate (QWAC certificate 
 that they obtain from an NCA), which WSO2 Open Banking checks in the API and Dynamic Client Registration flows. 
 If the role exists in the transport certificate, WSO2 Open Banking allows the TPP to invoke the API.
@@ -78,7 +78,7 @@ Following are the roles that a TPP can have:
  |Card-Based Payment Instrument Issuer|Issues card-based payment instruments that can be used to initiate a payment transaction from a payment account held with another payment service provider.|
 
 !!!tip
-    An TPP can have one or more roles. For an example, if a TPP provides an application to view account 
+    An TPP can have one or more roles. For example, if a TPP provides an application to view account 
     information as well as to initiate payments, the roles of the TPP are **Account Information Service Provider** 
     and **Payment Initiation Services Provider**.
      
@@ -103,5 +103,46 @@ QSealC seals application data and sensitive information to ensure that the origi
 Banking allows using QSealC as the signing certificates in application layer security to ensure protecting the 
 data or messages from potential attackers during or after the communication.
 
+####Signature Validation
 
+The NextGenPSD2 standard recommends signing request messages at the application layer. For this, The
+eIDAS signature of the TPP has to be based on a QSealC. For Signature Validation, the signature certificate should be 
+sent as an HTTP header.
 
+By default, the **SignatureValidationExecutor** executor performs Signature Validation in WSO2 Open Banking. It also
+validates the signing certificate for expiration, revocation, and presence. This executor is configured in
+the `<APIM_HOME>/repository/conf/deployment.toml` file as follows:
+
+   ``` toml
+   [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
+   name = "com.wso2.openbanking.berlin.gateway.executors.SignatureValidationExecutor"
+   priority = 5
+   ```
+
+To be eligible for Signature Validation, a request should contain the following headers:
+
+| Attribute | Type | Conditional | Description |
+| --------- | ---- | ------------------ | ----------- |
+| Digest | String | Conditional | A hash of the message body. The Digest is available only if the Signature element is available in the header of the request. |
+| Signature | String | Conditional | The TPP's signature on the request at the application level. |
+| TPPSignatureCertificate | String | Conditional | The certificate used for signing the request, in base64 encoding. Must be contained if a signature is available.|
+
+The instructions on how to generate the Signature and Digest are mentioned in the NextGenPSD2 specification.
+
+To configure the supported Signature and Digest hash algorithms:
+
+  1. Open the `<APIM_HOME>/repository/conf/deployment.toml` file.
+  2. The default algorithms are configured as given below. If you do not configure algorithms, the default values are used:
+
+       ``` toml
+       [open_banking_berlin.gateway.signature_verification]
+       supported_hash_algorithms = ["SHA-256", "SHA-512"]
+       supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
+       ```
+     
+#### Digest Validation 
+
+- Digest Validation will happen only if the Signature header is present.
+- The Digest header contains a hash of the message body. 
+- If the message does not contain a body, the header must contain the hash of an empty byte list. 
+- The NextGenPSD2 standard specifies the `SHA-256` and `SHA-512` hash algorithms.
