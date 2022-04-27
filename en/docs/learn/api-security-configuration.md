@@ -49,11 +49,11 @@ enable the following configurations:
     ```
 
 3. If external TPP validation is enabled, implement a TPP validation service and configure it using its Fully Qualified 
-Name (FQN):
+Name (FQN). Given below is a sample value, you need to implement your own service.
 
     ``` toml
     [open_banking.gateway.tpp_management.tpp_validation]
-    Implementation_path = “”
+    Implementation_path = “com.wso2.openbanking.berlin.gateway.service.TPPValidationService”
     ```
 
 4. If a TPP validation is not configured, a TPP role validation will be performed. For this to happen, enable the 
