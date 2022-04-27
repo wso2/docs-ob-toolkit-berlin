@@ -33,49 +33,58 @@ priority = 2
 
 ###Configuring external TPP validation
 
-!!!note
-    By default, WSO2 Open Banking supports a sample API flow to get account information and to initiate a 
-    payment. Therefore, the following configuration exists in `<APIM_HOME>/repository/conf/deployment.toml` by default:
-    ```toml
+!!! note
+    You need to enable either TPP validation **or** role validation as explained in this section. Otherwise, any kind of 
+    TPP validation or role validation will not happen.  
+
+1. Open the `<APIM_HOME>/repository/conf/deployment.toml` file.
+
+2. External TPP validation is enforced at the API level. Apply the `APITPPValidationExecutor` executor to compare 
+the roles in the transport certificate against the roles in the request scope. If the bank needs TPP validation enabled, 
+enable the following configurations:
+
+    ``` toml
     [open_banking.gateway.tpp_management.tpp_validation]
-    enabled = false
-    implementation_path = ""
-    cache_expiry = 3600
+    enabled = true 
+    ```
+
+3. If external TPP validation is enabled, implement a TPP validation service and configure it using its Fully Qualified 
+Name (FQN):
+
+    ``` toml
+    [open_banking.gateway.tpp_management.tpp_validation]
+    Implementation_path = “”
+    ```
+
+4. If a TPP validation is not configured, a TPP role validation will be performed. For this to happen, enable the 
+following:
+
+    ``` toml 
+    [open_banking.gateway.tpp_management.psd2_role_validation]
+    enabled = true
+    ```
+
+5. For TPP role validation, the applicable role names should be configured against the scope names as follows:
+
+    - The sample configuration below performs role validation for AISP and PISP flows.
+
+    ``` toml
     [open_banking.gateway.tpp_management.psd2_role_validation]
     enabled = true
     [[open_banking.gateway.tpp_management.allowed_scopes]]
     name = "accounts"
-    roles = "AISP, PISP"
+    roles = "AISP"
     [[open_banking.gateway.tpp_management.allowed_scopes]]
     name = "payments"
     roles = "PISP"
     ```
- 
-By default, external TPP validation is enforced in two occurrences:
 
-- API-level 
-- Dynamic Client Registration (DCR)
- 
-    1. You can apply the `APITPPValidationExecutor` executor to compare the roles in the transport certificate against 
-    roles in the request scope: 
+6. To configure the supported Signature and Digest hash algorithms:
 
-        - An example given below to find how  `APITPPValidationExecutor`  applies to the sample Accounts API in `<APIM_HOME>/repository/conf/deployment.toml`:
-```toml
-[[open_banking.gateway.openbanking_gateway_executors.type]]
-name = "Accounts"
-[[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-name = "com.wso2.openbanking.accelerator.gateway.executor.impl.tpp.validation.executor.APITPPValidationExecutor"
-priority = 3
-``` 
+   - The default algorithms are configured as given below. If you do not configure algorithms, the default values are used:
 
-    2. For Dynamic Client Registration, apply `DCRTPPValidationExecutor` to validate the roles in the transport certificate against 
-    the roles in the TPP's SSA.
-
-        - The relevant configuration is in the `<APIM_HOME>/repository/conf/deployment.toml` file as follows:
-```toml
-[[open_banking.gateway.openbanking_gateway_executors.type]]
-name = "DCR"
-[[open_banking.gateway.openbanking_gateway_executors.type.executors]]
-name = "com.wso2.openbanking.accelerator.gateway.executor.impl.tpp.validation.executor.DCRTPPValidationExecutor"
-priority = 3
-```
+     ``` toml
+     [open_banking_berlin.gateway.signature_verification]
+     supported_hash_algorithms = ["SHA-256", "SHA-512"]
+     supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
+     ```
