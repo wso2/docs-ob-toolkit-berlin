@@ -66,7 +66,7 @@ validating the transport layer certificate a TPP has obtained.
 ###Role validation 
 According to the NextGenPSD2 specification, TPPs have roles 
 for the services they provide. The TPP’s role is defined in their transport certificate (QWAC certificate 
-that they obtain from an NCA), which WSO2 Open Banking checks in the API and Dynamic Client Registration flows. 
+that they obtain from an NCA), which WSO2 Open Banking checks in the NextGenPSD2XS2AFramework API flow. 
 If the role exists in the transport certificate, WSO2 Open Banking allows the TPP to invoke the API.
 
 Following are the roles that a TPP can have:
