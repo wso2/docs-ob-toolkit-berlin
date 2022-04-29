@@ -44,27 +44,19 @@ The diagram below explains the flow and how the Grant Handler and Token Filters 
 ### Token Filter
 
 A Token Filter is engaged at the Servlet container level before the request approaches the Token API. The Token Filter 
-engages the following validators:
+engages the MTLS enforcement validator.
 
-   - **MTLS enforcement validator**: This enforces that a certificate needs to be passed during the token creation. This 
-   certificate is then bound to the access token. 
+The **MTLS enforcement validator** enforces that a certificate needs to be passed during the token creation. This 
+certificate is then bound to the access token. 
    
-    !!! note "To decode the certificate when it is passed from the load balancer to the Gateway:"
-           1. Open the `<IS_HOME>/repository/conf/deployment.toml` file.
-           2. Add the following configurations and set the value to `true`.
-              ``` toml
-               [open_banking.identity.mutualtls] 
-               client_certificate_encode=true 
-              ```
-           3. Restart the servers.
-      
-   - **Client authenticator validator**: This validates whether the token request follows the client authentication 
-   method format that was registered through Dynamic Client Registration. While ensuring that it is a registered client 
-   authenticator, this validator also limits the client authentication methods for regulatory applications. Regulatory 
-   applications are allowed to register either the `private_key_jwt` or `tls_client_auth` method as the client 
-   authentication method.
-   - **Signature enforcement validator**: This validates whether the client assertion is signed with the algorithm that 
-   was registered through Dynamic Client Registration.
+!!! note "To decode the certificate when it is passed from the load balancer to the Gateway:"
+        1. Open the `<IS_HOME>/repository/conf/deployment.toml` file.
+        2. Add the following configurations and set the value to `true`.
+           ``` toml
+            [open_banking.identity.mutualtls] 
+            client_certificate_encode=true 
+           ```
+        3. Restart the servers.
 
 ### Grant Handler
 
@@ -76,28 +68,16 @@ engaged when issuing tokens:
    - Refresh Grant Handler  
    
 Mutual TLS authentication is enabled by default in WSO2 Open Banking. When MTLS authentication is enabled, 
-the **Signature algorithm enforcement validator**, **Client authentication enforcement validator**, and the 
-**MTLS enforcement validator** are engaged. Regardless of the client authentication method, you need to ensure that the 
+the **MTLS enforcement validator** is engaged. You need to ensure that the 
 TLS certificate is passed with every token request. 
 
 ## Client Authentication 
 
 According to OAuth 2.0, the authorization server and the client need to establish a client authentication method that 
 meets the security requirements of the authorization server. The client has the option of choosing the authentication 
-method. However, the algorithm to sign the ID token needs to be restricted for each client. The OpenID specification 
-mentions a set of client authentication methods to authenticate the clients to the authorization server when using the 
-token endpoint.
+method. The OpenID specification mentions a set of client authentication methods to authenticate the clients to the 
+authorization server when using the token endpoint. Regulatory applications can use either `private_key_jwt` 
+or `tls_client_auth` as the authentication method.
 
-During the client registration process, the client can register an authentication method. Regulatory applications are 
-allowed to register either `private_key_jwt` or `tls_client_auth` as the authentication method. However, if no 
-authentication method is registered, 
-[the default method](https://openid.net/specs/openid-connect-core-1_0.html#ClientAuthentication), 
-which is `client_secret_basic` is used. 
 
-According to [OAuth 2.0 Dynamic Client Registration (DCR)](https://www.google.com/url?q=https://tools.ietf.org/html/rfc7591%23section-2&sa=D&source=editors&ust=1619022501431000&usg=AOvVaw2Axr2N7pHOdBR0co99WNkV), 
-a registered client has a set of metadata values that are associated with their client identifier. 
-
-  - The **token_endpoint_auth_method** metadata field specifies the client authentication method. If the value of this field 
-  is not specified, the default client authentication method which is `client_secret_basic` is configured.
-  - The **token_endpoint_auth_signing_alg** field specifies the token endpoint signing algorithm.
 
