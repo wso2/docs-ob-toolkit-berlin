@@ -69,7 +69,6 @@ nav:
   - 'Learn':
     - 'Consent Management':
        - 'Introduction': learn/consent-management.md
-       - 'Consent Manager': learn/consent-manager.md
     - 'Consent Authorization': learn/consent-authorization-intro.md
     - 'Token Authentication': learn/token-authentication.md
     - 'TPP Onboarding':
@@ -81,13 +80,13 @@ nav:
     - 'API Security':
        - 'Introduction': learn/api-security.md
        - 'Configuration': learn/api-security-configuration.md
+    - 'Integration with Bank': learn/integration-with-bank.md
   - 'Try out':
     - 'Deploy NextGenPSD2XS2A API': try-out/deploy-nextgenpsd2-api.md
     - 'TPP Onboarding': try-out/tpp-onboarding.md
     - 'Account Information Service Flow': try-out/account-information-service-flow.md
     - 'Payment Initiation Service Flow': try-out/payment-initiation-service-flow.md
     - 'Confirmation of Funds flow': try-out/confirmation-of-funds-flow.md
-    - 'Consent Manager': try-out/consent-manager.md
   - 'References':
     - 'Identity Server Configuration Catalog': references/config-catalog-is.md
     - 'API Manager Configuration Catalog': references/config-catalog-apim.md
