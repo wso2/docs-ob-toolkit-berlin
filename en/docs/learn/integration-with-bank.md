@@ -336,9 +336,7 @@ When passing the `user_id` a JSON response must be returned. Then it automatical
 ### Payable Accounts API
 
 The back-end endpoint for the Payable Accounts API is used to retrieve the payable accounts of the user during the
-authentication flow. If a TPP has not provided any debtor account in the payment initiation request, the PSU is able to
-select one of the payable accounts when providing the consent to the payment. If the TPP has sent the debtor account in
-the initiation request, this API is used to validate the provided account against actual payable accounts. When invoking this
+authentication flow. This API validates the provided account against actual payable accounts. When invoking this
 API, the `consentId` and `userId` (PSU ID) must be sent in the URL as query parameters.
 
 The back end endpoints for payable and sharable accounts retrieval can be configured in the
