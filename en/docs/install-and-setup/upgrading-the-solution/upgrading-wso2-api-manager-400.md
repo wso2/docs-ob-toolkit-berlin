@@ -42,7 +42,7 @@
       Once the Identity Server 5.11.0 is configured as the Resident Key Manager, start the Identity Server 5.11.0.
 
 1. Start the WSO2 API Manager 4.0.0 server and create a Custom Key Manager by following the
-   [Configuring IS as Key Manager](../../try-out/dynamic-client-regsitration-flow.md#configuring-is-as-key-manager) documentation.
+   [Configuring IS as Key Manager](https://ob.docs.wso2.com/en/latest/learn/dynamic-client-registration-try-out/#step-2-configure-is-as-key-manager) documentation.
 
 2. Do not copy any other Key Manager specific configurations from the previous API Manager version to the latest 
 one that points to the Identity Server.
@@ -82,7 +82,7 @@ and click **Select**.
 7. Go to **Deployments** using the left menu pane.
 8. Click **Deploy New Version**.
 9. Select the **API Gateway type** and **Deploy**.
-10. Repeat these steps for all APIs. 
+10. Repeat these steps for all the APIs. 
 
 ### Enable Schema Validation
 
@@ -96,7 +96,7 @@ This section explains how to enable Schema Validation for APIs.
 6. Go to **Deployments** using the left menu pane.
 7. Click **Deploy New Version**.
 8. Select the **API Gateway type** and **Deploy**.
-10. Repeat these steps for all APIs except for the Dynamic Client Registration(DCR) API. 
+10. Repeat these steps for all the APIs. 
 
 ### Update Workflow-Extensions
 
