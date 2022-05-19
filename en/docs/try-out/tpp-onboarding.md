@@ -1,5 +1,8 @@
 This page explains how to onboard the TPP applications using the WSO2 API Manager Developer Portal.
 
+!!! tip "Before you begin:"
+    Configure [WSO2 Identity Server as the Key Manager](../get-started/configure-is-as-key-manager.md). 
+
 ### Step 1: Sign up as a TPP
 
 1. Go to the Developer portal at `<https://<APIM_HOST>:9443/devportal>`.

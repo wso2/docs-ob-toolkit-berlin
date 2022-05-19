@@ -56,6 +56,7 @@ nav:
       - 'Get Started': get-started/quick-start-guide.md
       - 'Set up Toolkits': get-started/set-up-toolkits.md
       - 'Configure Users and Roles': get-started/configure-users-and-roles.md
+      - 'Configure IS as Key Manager': get-started/configure-is-as-key-manager.md
       - 'Deploy API': get-started/deploy-api.md
       - 'TPP Onboarding': get-started/tpp-onboarding.md
       - 'Tryout Flow': get-started/try-out-flow.md
@@ -66,6 +67,13 @@ nav:
     - 'Configuring Identity Server': install-and-setup/configuring-identity-server-for-ob.md
     - 'Configuring API Manager': install-and-setup/configuring-api-manager-for-ob.md
     - 'Configuring Users and Roles': install-and-setup/configuring-users-and-roles.md
+    - 'Upgrade':
+      - 'Upgrading the solution': install-and-setup/upgrading-the-solution/upgrading-the-solution.md
+      - 'Upgrading to API Manager 3.2.0': install-and-setup/upgrading-the-solution/upgrading-wso2-api-manager-320.md
+      - 'Upgrading to Identity Server 5.11.0': install-and-setup/upgrading-the-solution/upgrading-wso2-identity-server.md
+      - 'Upgrading to API Manager 4.0.0': install-and-setup/upgrading-the-solution/upgrading-wso2-api-manager-400.md
+      - 'Open Banking Data Migration': install-and-setup/upgrading-the-solution/open-banking-data-migration.md
+      - 'Modifications After Migration': install-and-setup/upgrading-the-solution/modifications-after-migration.md
   - 'Learn':
     - 'Consent Management':
        - 'Introduction': learn/consent-management.md
