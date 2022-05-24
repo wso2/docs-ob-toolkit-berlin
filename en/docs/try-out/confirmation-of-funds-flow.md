@@ -10,13 +10,25 @@ Payment Instrument Issuer Service (PIIS).
 2. Navigate to the API listing page, and click on the **NextGenPSD2XS2AFramework API**.
 3. Click **Create New Version**.
 4. Set the version number to **v2** and click **Create**.
-5. You are redirected to the API Overview page.
-6. Select **Runtime** from the left menu pane. 
-7. Click the **Edit** button under **Request > Message Mediation**. ![edit_message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
-8. Select the **Custom Policy** option.
-9. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/cof-consents-dynamic-endpoint-sequence-1.3.6.xml` insequence file.
-11. Click **Select**.
-12. Scroll down and click **SAVE**.
+5. You are redirected to the API Overview page of NextGenPSD2XS2AFramework API **v2**.
+6. Select **API Configurations > API Definition** from the left menu panel. <br/> ![api_definition](../assets/img/try-out/cof-flow/select-api-definition.png)
+7. Click **Import Definition**. ![import_definition](../assets/img/try-out/cof-flow/import_definition.png)
+8. Set the Input Type to **OpenAPI File/Archive** and click **Browse File To Upload**.
+9. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/psd2-confirmation-of-funds-consent 2.0 20190607.yaml` file.
+   ![api_definition](../assets/img/try-out/cof-flow/new_api_definition.png)
+10. Click **Import**. The changes are auto-saved.
+11. Select **Runtime** from the left menu panel. 
+12. Click the **Edit** button under **Request > Message Mediation**. ![edit_message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
+13. Select the **Custom Policy** option.
+14. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/cof-consents-dynamic-endpoint-sequence-1.3.6.xml` 
+    insequence file and click **Select**.
+15. Scroll down and click **SAVE**.
+16. Go to **Deployments** using the left menu pane and click **Deploy New Revision**.
+17. Provide a description for the new revision.
+18. Select `localhost` from the dropdown list.
+19. Click **Deploy**.
+20. Go to **Overview** using the left menu panel.
+21. Click **Publish**.
 
 ### Subscribing to NextGenPSD2XS2A API v2 
 
