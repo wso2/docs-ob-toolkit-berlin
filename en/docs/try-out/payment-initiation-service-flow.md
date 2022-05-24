@@ -9,11 +9,11 @@ Once you register the application, generate an application access token.
 
 1. Generate the client assertion by signing the following JSON payload using supported algorithms. 
 
-    ??? note "Use the sample certificates for signing and transports layer security testing purposes. Click here to see how it is done..."
+    ??? note "Use the sample certificates for signing and transport layer security testing purposes. Click here to see how it is done..."
         1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
             - The client trust stores for the Identity Server and API Manager are located in the following locations:
-               - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
-               - `<IS_HOME>/repository/resources/security/client-truststore.jks`
+                   - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
+                   - `<IS_HOME>/repository/resources/security/client-truststore.jks`
         2. Use the following commands to add the certificate to the client trust store:
                ```shell
                keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
@@ -383,6 +383,7 @@ the response.
     -H 'Date: Fri, 11 Mar 2022 15:35:39 IST' \
     -H 'PSU-IP-Address: 192.168.1.5' \
     -H 'PSU-ID: admin@wso2.com' \
+    -H 'TPP-Explicit-Authorisation-Preferred: true' \
     -H 'PSU-ID-Type: email' \
     -H 'Accept: */*' \
     -H 'Digest: SHA-256=AMuUQALJmENhCTR9yTo6R6WsRN80O2bWjm0Jpsfhq/g6' \
@@ -516,7 +517,7 @@ browser to prompt the invocation of the authorize API:
         [Consent Authorization with PKCE](../learn/consent-authorization-intro.md).
 
 2. Upon successful authentication, the PISP is redirected to the consent authorise page. Use the login credentials of a 
-user that has a subscriber role.
+user that has a **subscriber** role.
 
 3. The page displays the data requested by the TPP for that particular consent along with its accounts and permissions.
 
@@ -537,11 +538,11 @@ In this section, you will be generating an access token using the authorization 
 
 1. Generate the client assertion by signing the following JSON payload using supported algorithms. 
 
-    ??? note "Use the sample certificates for signing and transports layer security testing purposes. Click here to see how it is done..."
+    ??? note "Use the sample certificates for signing and transport layer security testing purposes. Click here to see how it is done..."
         1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
-           - The client trust stores for the Identity Server and API Manager are located in the following locations:
-              - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
-              - `<IS_HOME>/repository/resources/security/client-truststore.jks`
+            - The client trust stores for the Identity Server and API Manager are located in the following locations:
+                   - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
+                   - `<IS_HOME>/repository/resources/security/client-truststore.jks`
         2. Use the following commands to add the certificate to the client trust store:
            ```shell
            keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
