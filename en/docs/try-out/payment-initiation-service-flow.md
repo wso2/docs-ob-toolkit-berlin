@@ -383,6 +383,7 @@ the response.
     -H 'Date: Fri, 11 Mar 2022 15:35:39 IST' \
     -H 'PSU-IP-Address: 192.168.1.5' \
     -H 'PSU-ID: admin@wso2.com' \
+    -H 'TPP-Explicit-Authorisation-Preferred: true' \
     -H 'PSU-ID-Type: email' \
     -H 'Accept: */*' \
     -H 'Digest: SHA-256=AMuUQALJmENhCTR9yTo6R6WsRN80O2bWjm0Jpsfhq/g6' \
