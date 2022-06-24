@@ -49,7 +49,7 @@ template: templates/single-column.html
     		</div>
     		<!-- end card -->
     		<!-- card -->
-    		<div class="card" onclick="location.href='learn/dynamic-client-registration';">
+    		<div class="card" onclick="location.href='learn/tpp-onboarding';">
     			<div class="line"></div>
     			<div class="card-icon">
     				<i class="material-icons md-36">app_registration</i>
