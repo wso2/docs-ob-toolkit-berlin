@@ -29,8 +29,13 @@ Once you register the application, generate an application access token.
                issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OpenBanking Pre-Production Issuing CA, OU=OpenBanking, O=WSO2 (UK) LIMITED, L=COL, ST=WP, C=LK"
                ```
         4. Restart the servers.
-        5. Download the certificate and keys attached [here](../../assets/attachments/certificates.zip) and use them for testing purposes.
-    
+        5. Download the following certificates and keys, and use them for testing purposes.
+            - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
+              [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
+              layer security testing purposes.
+            - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
+              [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
+
     ``` tab='Format'
     
     {
@@ -55,7 +60,7 @@ Once you register the application, generate an application access token.
     eyJraWQiOiJXX1RjblFWY0hBeTIwcTh6Q01jZEJ5cm9vdHciLCJhbGciOiJQUzI1NiJ9.eyJzdWIiOiJQU0RHQi1PQi1Vbmtub3duMDAxNTgwMDAwMUhRUXJaQUFYIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTQ0Ni9vYXV0aDIvdG9rZW4iLCJpc3MiOiJQU0RHQi1PQi1Vbmtub3duMDAxNTgwMDAwMUhRUXJaQUFYIiwiZXhwIjoxODI3NjY5MzMyLCJpYXQiOjE4Mjc2NTkzMzIsImp0aSI6IjE0MzIyNDM2MzQzNDM1NDQ1In0.qUq9q_Qa5eiVW5C6QzMvB1sX9Ttwz0Db8c2wmRXyrUWDpeoaolUYT_Diu1o33R4U4MME3nBMCdl0wQ1AVnuzjgV6s3TLcyxlphcoGXYVwOLsQBfbLKTzGiz10UORb3WQc9BwxhZVPDWyFXGlqUNwjPbaUslWoal9KMsbnXlBFKQd8GWjhS-kXHn66kAHwH-7DLZ_Z7D01oW2aFon5sWBZfKD_t9NeQJ9gdPs45ermSM45FixlKXkPPXiIq-_w5Hw1Zw_lEW6fVpWCS6IRz5pBtpHO8s_KESjxuPb1dzrV31AZC7BplWeaRRC5UslObbejw35P5v9CQqJR5Uc7_mX0Q
     ```
 
-2. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
+3. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
 ``` curl
 curl -X POST \
 https://<IS_HOST>:9446/oauth2/token \
@@ -557,8 +562,12 @@ In this section, you will be generating an access token using the authorization 
               issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OpenBanking Pre-Production Issuing CA, OU=OpenBanking, O=WSO2 (UK) LIMITED, L=COL, ST=WP, C=LK"
               ```
         4. Restart the servers.
-        5. Download the certificate and keys attached [here](../../assets/attachments/certificates.zip) and use them for testing purposes.
-
+        5. Download the following certificates and keys, and use them for testing purposes.
+            - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
+              [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
+              layer security testing purposes.
+            - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
+              [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
 
     ``` tab="Format"
       {
