@@ -69,7 +69,12 @@ Once you register the application, generate an application access token.
               issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OpenBanking Pre-Production Issuing CA, OU=OpenBanking, O=WSO2 (UK) LIMITED, L=COL, ST=WP, C=LK"
               ```
         4. Restart the servers.
-        5. Download the certificate and keys attached [here](../../assets/attachments/certificates.zip) and use them for testing purposes.
+        5. Download the following certificates and keys, and use them for testing purposes.
+            - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
+              [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
+              layer security testing purposes.
+            - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
+              [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
 
     ``` tab='Format'
     
@@ -515,8 +520,12 @@ In this section, you will be generating an access token using the authorization 
              issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OpenBanking Pre-Production Issuing CA, OU=OpenBanking, O=WSO2 (UK) LIMITED, L=COL, ST=WP, C=LK"
              ```
         4. Restart the servers.
-        5. Download the certificate and keys attached [here](../../assets/attachments/certificates.zip) and use them for testing purposes.
-
+        5. Download the following certificates and keys, and use them for testing purposes.
+             - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
+               [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
+               layer security testing purposes.
+             - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
+               [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
 
     ``` tab="Format"
       {
