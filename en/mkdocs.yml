@@ -77,6 +77,7 @@ nav:
   - 'Learn':
     - 'Consent Management':
        - 'Introduction': learn/consent-management.md
+       - 'Consent Manager': learn/consent-manager.md
     - 'Consent Authorization': learn/consent-authorization-intro.md
     - 'Token Authentication': learn/token-authentication.md
     - 'TPP Onboarding':
