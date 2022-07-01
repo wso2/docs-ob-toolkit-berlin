@@ -154,15 +154,15 @@ The following section lists the different security measures taken at each of the
 
 ### Authorization Request
 
-WSO2 Open Banking Accelerator supports authentication mechanisms such as PKCE to fulfil FAPI requirements
+WSO2 Open Banking supports authentication mechanisms such as PKCE to fulfil FAPI requirements
 during the Authorization flow.
 
 ### Token Request
 
-API consumer applications use the Token Endpoint to obtain access tokens, id tokens, and optionally, a refresh token.
+TPP applications use the Token Endpoint to obtain access tokens, id tokens, and optionally, a refresh token.
 Following security features are available in WSO2 Open Banking during Token flows.
 
-- The API consumer application can authenticate the authorization server when accessing the token endpoint using any of
+- The TPP application can authenticate the authorization server when accessing the token endpoint using any of
   the following methods:
     - Private key JWT authentication (Auth code grant)
     - MTLS authentication (Auth code grant)
@@ -172,7 +172,7 @@ Following security features are available in WSO2 Open Banking during Token flow
 
 ### Resource Request
 
-After an API consumer application obtains an access token, it is used to invoke a resource endpoint. In this request,
+After an TPP application obtains an access token, it is used to invoke a resource endpoint. In this request,
 the following validations will be performed:
 
 - Token validity verification
