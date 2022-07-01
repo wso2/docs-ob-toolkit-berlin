@@ -78,7 +78,7 @@ Following are the roles that a TPP can have:
  |Card-Based Payment Instrument Issuer|Issues card-based payment instruments that can be used to initiate a payment transaction from a payment account held with another payment service provider.|
 
 !!!tip
-    An TPP can have one or more roles. For example, if a TPP provides an application to view account 
+    A TPP can have one or more roles. For example, if a TPP provides an application to view account 
     information as well as to initiate payments, the roles of the TPP are **Account Information Service Provider** 
     and **Payment Initiation Services Provider**.
      
@@ -172,7 +172,7 @@ Following security features are available in WSO2 Open Banking during Token flow
 
 ### Resource Request
 
-After an TPP application obtains an access token, it is used to invoke a resource endpoint. In this request,
+After a TPP application obtains an access token, it is used to invoke a resource endpoint. In this request,
 the following validations will be performed:
 
 - Token validity verification
