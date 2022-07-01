@@ -2,7 +2,7 @@ This page provides instructions to use the NextGenPsd2XS2AFramework API to provi
 Service (AIS) as a sample. For more information, see the [Try out](../try-out/account-information-service-flow.md) section.
 
 !!! tip "Before you begin:"
-    Deploy the [NextGenPsd2XS2AFramework API](deploy-nextgenpsd2-api.md). 
+    Deploy the [NextGenPsd2XS2AFramework API](../try-out/deploy-nextgenpsd2-api.md). 
 
 ### Generating application access token
 
@@ -90,7 +90,7 @@ consents.
  - Transactions: permission to access the accounts and its transaction information
 
 Given below is a sample request for a **Dedicated accounts consent**. To learn more about consent types, see 
-[Types of consents](#types-of-consents).
+[Types of consents](../try-out/account-information-service-flow.md#types-of-consents).
 
 1. Create a consent using the following request format:
 ```
