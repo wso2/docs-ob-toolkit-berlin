@@ -16,49 +16,51 @@ of Funds Service (FCS) via the NextGenPsd2XS2AFramework API.
 
 5. Click **Next**.
 
-6. Set the context to `/xs2a` and leave the endpoint empty. ![set-context](../assets/img/try-out/account-flow/set-context.png)
+6. Set the context to `/xs2a`.
 
-7. Click **Create** to create the API. ![create-accounts](../assets/img/get-started/quick-start-guide/create-accounts.png)
+7. Remove the existing endpoint configuration and leave the field empty. ![set-context](../assets/img/try-out/account-flow/set-context.png)
 
-8. After the API is successfully created, go to **Portal Configurations** using the left menu panel. ![portal-configurations](../assets/img/get-started/quick-start-guide/portal-configurations.png)
+8. Click **Create** to create the API. ![create-accounts](../assets/img/get-started/quick-start-guide/create-accounts.png)
 
-9. Select **Subscriptions** from the left menu pane and set the business plan to **Unlimited: Allows unlimited requests**. ![business-plan](../assets/img/get-started/quick-start-guide/business-plan.png)
+9. After the API is successfully created, go to **Portal Configurations** using the left menu panel. ![portal-configurations](../assets/img/get-started/quick-start-guide/portal-configurations.png)
 
-10. Click **Save**.
+10. Select **Subscriptions** from the left menu pane and set the business plan to **Unlimited: Allows unlimited requests**. ![business-plan](../assets/img/get-started/quick-start-guide/business-plan.png)
 
-11. Select **Runtime** from the left menu pane.
+11. Click **Save**.
 
-12. Toggle the **Schema Validation** button to enable Schema Validation. ![schema-validation](../assets/img/get-started/quick-start-guide/schema-validation.png)
+12. Select **Runtime** from the left menu pane.
 
-13. Click the **Edit** button under **Request > Message Mediation**. ![edit_message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
+13. Toggle the **Schema Validation** button to enable Schema Validation. ![schema-validation](../assets/img/get-started/quick-start-guide/schema-validation.png)
 
-14. Select the **Custom Policy** option.
+14. Click the **Edit** button under **Request > Message Mediation**. ![edit_message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
 
-15. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/dynamic-endpoint-insequence-1.3.6.xml` insequence file. ![uplaoad_insequence](../assets/img/try-out/account-flow/upload-insequence.png)
+15. Select the **Custom Policy** option.
 
-16. Click **Select**.
+16. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/dynamic-endpoint-insequence-1.3.6.xml` insequence file. ![uplaoad_insequence](../assets/img/try-out/account-flow/upload-insequence.png)
 
-17. Scroll down and click **SAVE**.
+17. Click **Select**.
 
-18. Use the left menu panel and go to **API Configurations > Endpoints**.
+18. Scroll down and click **SAVE**.
+
+19. Use the left menu panel and go to **API Configurations > Endpoints**.
 
     ![select_endpoints](../assets/img/get-started/quick-start-guide/select-endpoints.png)
 
-19. Add a **Dynamic Endpoint**. ![add_dynamic_endpoint](../assets/img/get-started/quick-start-guide/add_dynamic_endpoint.png)
+20. Add a **Dynamic Endpoint**. ![add_dynamic_endpoint](../assets/img/get-started/quick-start-guide/add_dynamic_endpoint.png)
 
-20. Go to **Deployments** using the left menu pane.
+21. Go to **Deployments** using the left menu pane.
 
     ![select_deployments](../assets/img/get-started/quick-start-guide/select-deployments.png)
 
-21. Select the API Gateway type, in this scenario, it is **Default**. ![api_gateway](../assets/img/get-started/quick-start-guide/dcr-api-gateway.png)
+22. Select the API Gateway type, in this scenario, it is **Default**. ![api_gateway](../assets/img/get-started/quick-start-guide/dcr-api-gateway.png)
 
-22. Click **Deploy**.
+23. Click **Deploy**.
 
-23. Go to **Overview** using the left menu pane.
+24. Go to **Overview** using the left menu pane.
 
     ![select_overview](../assets/img/get-started/quick-start-guide/select-overview.png)
 
-24. Click **Publish**. ![publish_api](../assets/img/get-started/quick-start-guide/publish-api.png)
+25. Click **Publish**. ![publish_api](../assets/img/get-started/quick-start-guide/publish-api.png)
 
 ### Summarized information for configuring API
 
