@@ -199,14 +199,15 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
 
     ![consent manger homepage](../assets/img/learn/consent-manager/consent-manger-homepage.png)
 
-The three tabs are as follows:
+5. There three tabs for as **Accounts**, **Payments** and **Funds Confirmations** consents.
+
+6. Under each consent type there are two tabs:
 
    - **Active**: Lists active consents that can access your account/payment information.
-   - **Expired**: Lists expired consent that cannot access your account/payment information anymore.
-   - **Withdrawn**: Lists the consents that you have revoked.
+   - **Revoked**: Lists the consents that you have revoked.
 
 !!! tip
-    Use the **Search** button to search consents.
+    Use the **Search** button to search consents. ![search consent](../assets/img/learn/consent-manager/search-button.png)
 
 ### Viewing consent details
 
@@ -227,13 +228,16 @@ account numbers, and permissions that you have granted.
     
 - Revoking a consent consists of 2 steps:
 
-    - Step 1: The first step shows the impact of withdrawing the consent.
+    - Step 1: The first step shows the impact of revoking the consent.
     
         ![stop sharing step 1](../assets/img/learn/consent-manager/stop-sharing-step1.png)
     
     - Step 2: Displays the information the consent has access to. 
     
         ![stop sharing step 2](../assets/img/learn/consent-manager/stop-sharing-step2.png)
-    
-- Once you click **Stop Sharing**, the status of the consent changes to `withdrawn`. You can find this consent in the 
-**Withdrawn** tab now.
+  
+    - Once you click **Stop Sharing**, the status of the consent changes to `revoked`. 
+
+        ![stop sharing step 3](../assets/img/learn/consent-manager/stop-sharing-step3.png)
+
+- You can find this consent in the **Revoked** tab now.
