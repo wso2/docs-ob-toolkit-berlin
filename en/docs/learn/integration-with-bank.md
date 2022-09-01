@@ -229,6 +229,19 @@ authorisation scenario in the Payments API:
  3. Each owner should perform the authorisation of the consent.
  4. Upon consent approval of all owners, the consent status changes to `ACCP`.
  
+#### Debtor Account Currency Validation
+
+During the authorization process, you can perform a currency validation for the debtor account.
+
+If the payment is made from a sub-account when there is not enough balance in the original debtor account:
+
+- The bank should implement a custom authorization retrieval step to check for other sub-accounts for the required
+  balances to make the payment.
+- If the payment is made from a different debtor account and not the one provided with the consent, the bank should 
+  customise the UI to display the account from which the payment amount was deducted.
+- The bank needs to implement a custom authorization persist step to amend the original consent with the account 
+  reference that was used to deduct the payment amount.
+
 ### Funds Confirmation
 
 In WSO2 Open Banking, integration of the Confirmation of Funds (CoF) consent flow with the core banking system is used 
