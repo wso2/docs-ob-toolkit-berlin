@@ -231,16 +231,17 @@ authorisation scenario in the Payments API:
  
 #### Debtor Account Currency Validation
 
-During the authorization process, you can perform a currency validation for the debtor account.
+During the authorisation process, you can perform a currency validation for the debtor account.
 
 If the payment is made from a sub-account when there is not enough balance in the original debtor account:
 
-- The bank should implement a custom authorization retrieval step to check for other sub-accounts for the required
-  balances to make the payment.
+- The bank should implement a [custom authorisation retrieval step](https://ob.docs.wso2.com/en/latest/develop/consent-management-authorize/#retrieve) 
+  to check for other sub-accounts for the required balances to make the payment.
 - If the payment is made from a different debtor account and not the one provided with the consent, the bank should 
-  customise the UI to display the account from which the payment amount was deducted.
-- The bank needs to implement a custom authorization persist step to amend the original consent with the account 
-  reference that was used to deduct the payment amount.
+  [customise the UI](https://ob.docs.wso2.com/en/latest/develop/customize-consent-page/) 
+  to display the account from which the payment amount was deducted.
+- The bank needs to implement a [custom authorisation persist step](https://ob.docs.wso2.com/en/latest/develop/consent-management-authorize/#persist)
+  to amend the original consent with the account reference that was used to deduct the payment amount.
 
 ### Funds Confirmation
 
