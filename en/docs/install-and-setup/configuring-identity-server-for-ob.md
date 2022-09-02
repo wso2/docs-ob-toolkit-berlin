@@ -175,15 +175,28 @@ the consent page.
 
 16. Configure the following tags regarding Payment consents:
 
-    - `auth_cancellation.enable`: To enable authorisation for payment cancellation, set this flag to true.
+    - `auth_cancellation.enable`: To enable authorisation for payment cancellation, set this flag to `true`.
     - `bulk_payments.max_future_payment_days`: To define the maximum number of payment execution days allowed by the
       ASPSP. The bulk payments request payload contains the `requested execution date`, which is an optional element and
       the configuration checks whether the mentioned `requested execution date` is within the allowed period.
+    - `debtor_acc_currency_validation.enable`: To perform a currency validation for the debtor account during the 
+       authorization process, set this flag to `true`. By default, this value is `true`. 
+        - If the debtor account retrieved from the payable accounts endpoint doesn't match the currency of the 
+          debtor account in the consent initiation request payload, the payment will be rejected. 
+        - If the value is `false`, validation is not performed, and the debtor account in the consent 
+          initiation request will be used as the debtor account.
+        
+            !!! note
+                When the bank can decide to deduct the amount of the payment from a sub-account of a different currency 
+                type when the original debtor account does not have enough balance or there is no account from 
+                the originally requested currency type in the bank backend, set `debtor_acc_currency_validation.enable` 
+                to `false`
 
     ``` toml
     [open_banking_berlin.consent.payments]
     auth_cancellation.enable = true
     bulk_payments.max_future_payment_days = "10"
+    debtor_acc_currency_validation.enable = true
     ```
 
 17. Configure the Well Known endpoint of the Identity Server by replacing the `<APIM_HOST>` placeholder with the hostname
