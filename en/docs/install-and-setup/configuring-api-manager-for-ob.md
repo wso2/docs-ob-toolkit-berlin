@@ -75,40 +75,40 @@ database server, and the JDBC driver.
     consent.validation.endpoint="https://<IS_HOST>:9446/api/openbanking/consent/validate"
     ```
 
-7. `FrequencyPerDay` is a header parameter sent in the API invocation request to indicate the requested maximum 
-     frequency for access without PSU involvement per day. This enables throttling requests according to frequency per 
-     day value provided in accounts initiation request. For a request to be throttled, the TPP should initiate the request.
+7. The `frequencyPerDay` value is sent in the consent initiation request body to indicate the requested maximum frequency 
+   for access without PSU involvement per day. This enables throttling requests according to the `frequencyPerDay` value provided 
+   in accounts initiation request. For a request to be throttled, the TPP should initiate the request.
 
     ``` toml
     [open_banking_berlin.consent.freq_per_day]
     enable = true
     ```
     
-10. Configure the supported signature algorithms and digest algorithms using the following configurations. They are 
-    used in `SignatureValidationExecutor` to perform signature verification and digest validation. You can configure any 
-    number of algorithms by separating them using a comma. By default, the following values are configured:
+8. Configure the supported signature algorithms and digest algorithms using the following configurations. They are 
+   used in `SignatureValidationExecutor` to perform signature verification and digest validation. You can configure any 
+   number of algorithms by separating them using a comma. By default, the following values are configured:
 
-    ``` toml
-    [open_banking_berlin.gateway.signature_verification]
-    supported_hash_algorithms = ["SHA-256", "SHA-512"]
-    supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
-    ```
+   ``` toml
+   [open_banking_berlin.gateway.signature_verification]
+   supported_hash_algorithms = ["SHA-256", "SHA-512"]
+   supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
+   ```
     
-11. By default, the following regex is used to validate the Organization Id:
+9. By default, the following regex is used to validate the Organization Id:
 
-    ```
-    ^PSD[A-Z]{2}-[A-Z]{2,8}-[a-zA-Z0-9]*$
-    ```
+   ```
+   ^PSD[A-Z]{2}-[A-Z]{2,8}-[a-zA-Z0-9]*$
+   ```
     
-    You can override the above and use your own regex when validating the Organization Id of the TPP application. 
-    Configure the required regex:
+   You can override the above and use your own regex when validating the Organization Id of the TPP application. 
+   Configure the required regex:
 
-    ```
-    [open_banking.berlin.keymanager.org_id_validation]
-    regex=”<CUSTOM_REGEX>”
-    ```
+   ```
+   [open_banking.berlin.keymanager.org_id_validation]
+   regex=”<CUSTOM_REGEX>”
+   ```
     
-    For more information, see [Customize Consumer Key Validation](../learn/tpp-onboarding-configuration.md)
+   For more information, see [Customize Consumer Key Validation](../learn/tpp-onboarding-configuration.md)
 
 ## Starting servers
 
