@@ -76,8 +76,8 @@ database server, and the JDBC driver.
     ```
 
 7. `FrequencyPerDay` is a header parameter sent in the API invocation request to indicate the requested maximum 
-     frequency for access without PSU involvement per day.  This enables throttling requests according to frequency per 
-     day value provided in accounts initiation request.
+     frequency for access without PSU involvement per day. This enables throttling requests according to frequency per 
+     day value provided in accounts initiation request. For a request to be throttled, the TPP should initiate the request.
 
     ``` toml
     [open_banking_berlin.consent.freq_per_day]
