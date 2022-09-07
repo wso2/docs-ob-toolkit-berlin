@@ -342,8 +342,8 @@ number of times it can be invoked; this is determined by the `frequencyPerDay` v
 - The request will be throttled out after the number of invocations for an endpoint exceeds the `frequencyPerDay` value. 
 The TPP can only re-invoke that particular endpoint once the throttled out time is elapsed.
 - For a request to be throttled, the TPP should initiate the request. You can determine if the request is initiated 
-by the TPP by checking the presence of the `PSU-IP-Address` header. The request is throttled according to the `frequencyPerDay` 
-value only if the `PSU-IP-Address` header is not present in the retrieval request.
+by the TPP by checking the presence of the `PSU-IP-Address` header. If the `PSU-IP-Address` header is not present in the 
+retrieval request, the request is throttled according to the `frequencyPerDay` value.
   - The configurations are as follows:
       - In the `<IS_HOME>/repository/conf/deployment.toml` file:
         
