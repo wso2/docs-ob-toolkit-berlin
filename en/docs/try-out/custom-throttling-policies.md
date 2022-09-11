@@ -33,14 +33,36 @@ This page explains how to deploy a custom throttling policy for the NextGenPSD2 
 
 4. Enter the following policy details and click **Add**.
 
-    ???tip "Click here to see the full list of Custom Throttling Policies..."
-        | Policy Name         | Siddhi Query            |
-        | -------------       | -------------           |
-        | LimitAdminRequests  | `@From(eventtable='rdbms', datasource.name='WSO2OB_DB', table.name='OB_CONSENT')`</br>`define table OB_CONSENT(CONSENT_ID string, RECEIPT string, CREATED_TIME long, UPDATED_TIME long, CLIENT_ID string, CONSENT_TYPE string, CURRENT_STATUS string, CONSENT_FREQUENCY int, VALIDITY_TIME long, RECURRING_INDICATOR bool);`</br></br>`FROM RequestStream`</br>`SELECT true AS isEligible, userId, str:concat(cast(map:get(propertiesMap, 'accountId'),'string'),':', cast(map:get(propertiesMap, 'consentId'),'string'),':', userId, ':', cast(map:get(propertiesMap, 'consumerKey'),'string')) as throttleKey, cast(map:get(propertiesMap, 'consumerKey'),'string') as clientId, cast(map:get(propertiesMap, 'consentId'),'string') as consentId`</br>`INSERT INTO EligibilityStream;`</br></br>`from OB_CONSENT as a`</br>`join EligibilityStream as s on a.CONSENT_ID == s.consentId and a.CLIENT_ID == s.clientId and a.CURRENT_STATUS == 'valid'`</br>`select CONSENT_FREQUENCY, throttleKey, isEligible, consentId, userId`</br>`insert into EligibilityStream1;`</br></br>`FROM EligibilityStream1[isEligible==true]#throttler:timeBatch(1 day)`</br>`SELECT throttleKey, (count(throttleKey) > CONSENT_FREQUENCY) as isThrottled, expiryTimeStamp group by throttleKey`</br>`INSERT ALL EVENTS into ResultStream;`</br></br>`from ResultStream#throttler:emitOnStateChange(throttleKey, isThrottled)`</br>`select *`</br>`insert into GlobalThrottleStream;` |
+    ???tip "Click here to see the Siddhi Query for the `LimitAdminRequests` Custom Throttling Policy."
+        ```
+        @From(eventtable='rdbms', datasource.name='WSO2OB_DB', table.name='OB_CONSENT')
+        define table OB_CONSENT(CONSENT_ID string, RECEIPT string, CREATED_TIME long, UPDATED_TIME long, CLIENT_ID string, CONSENT_TYPE string, CURRENT_STATUS string, CONSENT_FREQUENCY int, VALIDITY_TIME long, RECURRING_INDICATOR bool);
 
+        FROM RequestStream
+        SELECT true AS isEligible, userId, str:concat(cast(map:get(propertiesMap,
+        'accountId'),'string'),':', cast(map:get(propertiesMap,
+        'consentId'),'string'),':', userId, ':', cast(map:get(propertiesMap,
+        'consumerKey'),'string')) as throttleKey,
+        cast(map:get(propertiesMap, 'consumerKey'),'string') as clientId,
+        cast(map:get(propertiesMap, 'consentId'),'string') as consentId
+        INSERT INTO EligibilityStream;
+
+        from OB_CONSENT as a
+        join EligibilityStream as s on a.CONSENT_ID == s.consentId and a.CLIENT_ID == s.clientId and a.CURRENT_STATUS == 'valid'
+        select CONSENT_FREQUENCY, throttleKey, isEligible, consentId, userId
+        insert into EligibilityStream1;
+
+        FROM EligibilityStream1[isEligible==true]#throttler:timeBatch(1 day)
+        SELECT throttleKey, (count(throttleKey) > CONSENT_FREQUENCY) as isThrottled, expiryTimeStamp group by throttleKey
+        INSERT ALL EVENTS into ResultStream;
+
+        from ResultStream#throttler:emitOnStateChange(throttleKey, isThrottled)
+        select *
+        insert into GlobalThrottleStream;
+
+        ```
      ![select_custom_policies](../assets/img/try-out/custom-throttling-policies/fill-policy-details.png)
 
     !!! note
         As shown in the above Siddhi query, the throttle key must match the key template format. If there is a mismatch 
         between the key template format and the throttle key, requests will not be throttled.
-
