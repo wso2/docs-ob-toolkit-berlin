@@ -79,36 +79,75 @@ database server, and the JDBC driver.
    for access without PSU involvement per day. This enables throttling requests according to the `frequencyPerDay` value provided 
    in accounts initiation request. For a request to be throttled, the TPP should initiate the request.
 
-    ``` toml
-    [open_banking_berlin.consent.freq_per_day]
-    enable = true
-    ```
-    
+    1. To configure the custom throttling policy, enable the `frequencyPerDay` property as follows:
+
+        ``` toml
+        [open_banking_berlin.consent.freq_per_day]
+        enable = true
+        ```
+
+    2. Deploy the throttling policy located in `<WSO2_OB_APIM_BERLIN_TOOLKIT_HOME>/repository/resources/frequencyPerDayPolicy` 
+       as a custom throttling policy in the admin portal of WSO2 Open Banking API Manager. See [API Manager Documentation](https://apim.docs.wso2.com/en/4.0.0/design/rate-limiting/advanced-topics/custom-throttling/) for the instructions.
+
+        !!! note
+            - Set the Throttle Key as follows:
+            ```
+            $customProperty.accountId:$customProperty.consentId:$userId:$customProperty.consumerKey
+            ```
+            - Set the Siddhi query as follows:
+            ```
+            @From(eventtable='rdbms', datasource.name='WSO2OB_DB', table.name='OB_CONSENT')
+            define table OB_CONSENT(CONSENT_ID string, RECEIPT string, CREATED_TIME long, UPDATED_TIME long, CLIENT_ID string, CONSENT_TYPE string, CURRENT_STATUS string, CONSENT_FREQUENCY int, VALIDITY_TIME long, RECURRING_INDICATOR bool);
+
+            FROM RequestStream
+            SELECT true AS isEligible, userId, str:concat(cast(map:get(propertiesMap,
+            'accountId'),'string'),':', cast(map:get(propertiesMap,
+            'consentId'),'string'),':', userId, ':', cast(map:get(propertiesMap,
+            'consumerKey'),'string')) as throttleKey,
+            cast(map:get(propertiesMap, 'consumerKey'),'string') as clientId,
+            cast(map:get(propertiesMap, 'consentId'),'string') as consentId
+            INSERT INTO EligibilityStream;
+
+            from OB_CONSENT as a
+            join EligibilityStream as s on a.CONSENT_ID == s.consentId and a.CLIENT_ID == s.clientId and a.CURRENT_STATUS == 'valid'
+            select CONSENT_FREQUENCY, throttleKey, isEligible, consentId, userId
+            insert into EligibilityStream1;
+
+            FROM EligibilityStream1[isEligible==true]#throttler:timeBatch(1 day)
+            SELECT throttleKey, (count(throttleKey) > CONSENT_FREQUENCY) as isThrottled, expiryTimeStamp group by throttleKey
+            INSERT ALL EVENTS into ResultStream;
+
+            from ResultStream#throttler:emitOnStateChange(throttleKey, isThrottled)
+            select *
+            insert into GlobalThrottleStream;
+
+            ```
+
 8. Configure the supported signature algorithms and digest algorithms using the following configurations. They are 
    used in `SignatureValidationExecutor` to perform signature verification and digest validation. You can configure any 
    number of algorithms by separating them using a comma. By default, the following values are configured:
 
-   ``` toml
-   [open_banking_berlin.gateway.signature_verification]
-   supported_hash_algorithms = ["SHA-256", "SHA-512"]
-   supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
-   ```
+    ``` toml
+    [open_banking_berlin.gateway.signature_verification]
+    supported_hash_algorithms = ["SHA-256", "SHA-512"]
+    supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
+    ```
     
-9. By default, the following regex is used to validate the Organization Id:
+    By default, the following regex is used to validate the Organization Id:
 
-   ```
-   ^PSD[A-Z]{2}-[A-Z]{2,8}-[a-zA-Z0-9]*$
-   ```
+    ```
+    ^PSD[A-Z]{2}-[A-Z]{2,8}-[a-zA-Z0-9]*$
+    ```
     
-   You can override the above and use your own regex when validating the Organization Id of the TPP application. 
-   Configure the required regex:
+    You can override the above and use your own regex when validating the Organization Id of the TPP application. 
+    Configure the required regex:
 
-   ```
-   [open_banking.berlin.keymanager.org_id_validation]
-   regex=”<CUSTOM_REGEX>”
-   ```
+    ```
+    [open_banking.berlin.keymanager.org_id_validation]
+    regex=”<CUSTOM_REGEX>”
+    ```
     
-   For more information, see [Customize Consumer Key Validation](../learn/tpp-onboarding-configuration.md)
+    For more information, see [Customize Consumer Key Validation](../learn/tpp-onboarding-configuration.md)
 
 ## Starting servers
 
