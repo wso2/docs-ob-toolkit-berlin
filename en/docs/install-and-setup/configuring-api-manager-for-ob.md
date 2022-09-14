@@ -76,39 +76,57 @@ database server, and the JDBC driver.
     ```
 
 7. The `frequencyPerDay` value is sent in the consent initiation request body to indicate the requested maximum frequency 
-   for access without PSU involvement per day. This enables throttling requests according to the `frequencyPerDay` value provided 
-   in accounts initiation request. For a request to be throttled, the TPP should initiate the request.
+   for access without PSU involvement per day. 
+
+    - This enables request throttling according to the `frequencyPerDay` value provided in accounts initiation request.
+    - For a request to be throttled, the TPP should initiate the request.
+
+    a. To configure the custom throttling policy, enable the following configuration:
 
     ``` toml
     [open_banking_berlin.consent.freq_per_day]
     enable = true
     ```
-    
-8. Configure the supported signature algorithms and digest algorithms using the following configurations. They are 
-   used in `SignatureValidationExecutor` to perform signature verification and digest validation. You can configure any 
-   number of algorithms by separating them using a comma. By default, the following values are configured:
 
-   ``` toml
-   [open_banking_berlin.gateway.signature_verification]
-   supported_hash_algorithms = ["SHA-256", "SHA-512"]
-   supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
-   ```
-    
-9. By default, the following regex is used to validate the Organization Id:
+    b. Deploy the throttling policy located in `<WSO2_OB_APIM_BERLIN_TOOLKIT_HOME>/repository/resources/frequencyPerDayPolicy` 
+       as a custom throttling policy in the Admin Portal of WSO2 API Manager. 
 
-   ```
-   ^PSD[A-Z]{2}-[A-Z]{2,8}-[a-zA-Z0-9]*$
-   ```
-    
-   You can override the above and use your own regex when validating the Organization Id of the TPP application. 
-   Configure the required regex:
+    !!! note
+            - Set the Throttle Key as follows:
+            ```
+            $customProperty.accountId:$customProperty.consentId:$userId:$customProperty.consumerKey
+            ```
+            - Set the Siddhi Query provided in the `<WSO2_OB_APIM_BERLIN_TOOLKIT_HOME>/repository/resources/frequencyPerDayPolicy` file.
 
-   ```
-   [open_banking.berlin.keymanager.org_id_validation]
-   regex=”<CUSTOM_REGEX>”
-   ```
+            See [API Manager Documentation](https://apim.docs.wso2.com/en/4.0.0/design/rate-limiting/advanced-topics/custom-throttling/) for the instructions.
+
+8. The supported signature algorithms and digest algorithms are used in `SignatureValidationExecutor` to perform signature verification and digest validation.
+
+    - You can configure them using the following configurations.
+    - You can configure any number of algorithms by separating them using a comma. 
+    - By default, the following values are configured:
+
+        ``` toml
+        [open_banking_berlin.gateway.signature_verification]
+        supported_hash_algorithms = ["SHA-256", "SHA-512"]
+        supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA"]
+        ```
     
-   For more information, see [Customize Consumer Key Validation](../learn/tpp-onboarding-configuration.md)
+9. By default, the following regex is used to validate the Organization ID:
+
+    ```
+    ^PSD[A-Z]{2}-[A-Z]{2,8}-[a-zA-Z0-9]*$
+    ```
+    
+    You can override the above and use your own regex when validating the Organization ID of the TPP application. 
+    Configure the required regex as follows:
+
+    ```
+    [open_banking.berlin.keymanager.org_id_validation]
+    regex=”<CUSTOM_REGEX>”
+    ```
+    
+    For more information, see [Customize Consumer Key Validation](../learn/tpp-onboarding-configuration.md)
 
 ## Starting servers
 
