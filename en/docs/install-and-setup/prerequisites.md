@@ -4,7 +4,7 @@ banking requirements with additional benefits beyond compliance. This toolkit ru
 
 - WSO2 Open Banking Accelerator 3.0
 - WSO2 Identity Server 5.11.0
-- WSO2 API Manager 4.0.0
+- WSO2 API Manager 4.1.0 or WSO2 API Manager 4.0.0
 
 !!! note
     The WSO2 Open Banking Berlin Toolkit is built by customizing the WSO2 Open Banking Accelerator and helps you 
@@ -25,6 +25,15 @@ Given below is a product matrix for different versions of WSO2 Open Banking Berl
 | Version | Mandatory Components | 
 | --------| ---------------------|  
 | 1.0.0 | wso2-obam-toolkit-berlin-1.0.0 <br/> wso2-obiam-toolkit-berlin-1.0.0 | 
+
+## Compatible Base Product Versions
+
+Given below is the compatible base product matrix for WSO2 Open Banking Berlin Toolkit 1.0.0:
+
+| Base Product              | Compatible Versions |
+|---------------------------|---------------------|
+| WSO2 Identity Server     | 5.11.0              |
+| WSO2 API Manager         | 4.1.0 <br/> 4.0.0   |
 
 ## Prerequisites for a Deployment
 
@@ -71,7 +80,7 @@ Listed below are the prerequisites for a successful deployment:
                <ul>
                   <li> <a href="https://ob.docs.wso2.com/en/latest/install-and-setup/prerequisites/#prerequisites-for-a-deployment">Open Banking Accelerator compatibility</a></li>
                   <li> <a href="https://is.docs.wso2.com/en/5.11.0/setup/environment-compatibility/">Identity Server compatibility</a></li>
-                  <li> <a href="https://apim.docs.wso2.com/en/4.0.0/install-and-setup/setup/reference/product-compatibility/">API Manager compatibility</a></li>
+                  <li> <a href="https://apim.docs.wso2.com/en/latest/install-and-setup/setup/reference/product-compatibility/">API Manager compatibility</a></li>
                </ul>
             </ul>
          </td>
