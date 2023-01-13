@@ -22,6 +22,7 @@ management, and access authorization among numerous other features to set up an 
 
 Given below is a product matrix for different versions of WSO2 Open Banking Berlin Toolkit:
 
+
 | Version | Mandatory Components | 
 | --------| ---------------------|  
 | 1.0.0 | wso2-obam-toolkit-berlin-1.0.0 <br/> wso2-obiam-toolkit-berlin-1.0.0 | 
