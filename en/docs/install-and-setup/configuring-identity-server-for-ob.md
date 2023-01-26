@@ -207,6 +207,53 @@ the consent page.
      oauth_metadata_endpoint = "https://<APIM_HOST>:8243/.well-known/openid-configuration"
      ```
 
+18. Configure the base URL for payment submission as follows:
+
+    By default, the base URL for the payment mock backend of the WSO2 Open Banking API Manager is configured.
+
+     ``` toml
+     [open_banking_berlin.consent.payments]
+     backend_url = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/payments"
+     ```
+
+     The payment submission request is sent with the suffix submit with the payment ID appended to the above base URL.
+
+     ```xml
+     https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/payments/submit/{paymentId}
+     ```
+
+     The payment cancellation submission request is sent with the suffix cancel with the payment ID appended to the above base URL.
+
+     ```xml
+     https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/payments/cancel/{paymentId}
+     ```
+
+    !!! note
+        - The above-mentioned suffixes `submit` and `cancel` can be used to identify whether the coming request is a payment submission or a payment cancellation submission.
+        - `paymentId` can be used to identify the particular payment resource.
+
+19. Configure the consent persist steps after the `BerlinAccountListRetrievalStep` and before the `BerlinConsentPersistStep`. Set the priorities as needed.
+
+    Configure the consent persist step to submit the payment to the bank back end as follows:
+    
+    ```toml
+    [[open_banking.consent.authorize_steps.persist]]
+    class = "com.wso2.openbanking.berlin.consent.extensions.authorize.impl.persist.PaymentSubmissionBankingIntegrationStep"
+    priority = 1
+    ```
+    
+    Configure the consent persist step to submit the payment cancellation to the bank back end as follows:
+    
+    ```toml
+    [[open_banking.consent.authorize_steps.persist]]
+    class = "com.wso2.openbanking.berlin.consent.extensions.authorize.impl.persist.PaymentCancellationBankingIntegrationStep"
+    priority = 2
+    ```
+
+    !!! note
+         - For a successful payment submission or payment cancellation, `PaymentSubmissionBankingIntegrationStep` and `PaymentCancellationBankingIntegrationStep` expect a **202 Accepted** response code from the bank.
+         - The Consent ID (`paymentId`) of the payment consent will be used to address a particular payment. The bank needs to implement a mapping mechanism to map the consent ID (`paymentId`) to the ID of the payment that persists in the bank back end.
+
 ## Starting servers
 
 1. Go to the `<IS_HOME>/bin` directory using a terminal.

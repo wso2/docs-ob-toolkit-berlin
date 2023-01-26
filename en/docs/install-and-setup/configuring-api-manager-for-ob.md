@@ -128,6 +128,18 @@ database server, and the JDBC driver.
     
     For more information, see [Customize Consumer Key Validation](../learn/tpp-onboarding-configuration.md)
 
+10. Replace the existing `com.wso2.openbanking.accelerator.gateway.executor.impl.consent.ConsentEnforcementExecutor` configuration with the below configuration for all Accounts, Payments, and Funds Confirmations executor types.
+
+    ```toml
+    [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
+    name = "com.wso2.openbanking.berlin.gateway.executors.BerlinConsentEnforcementExecutor"
+    priority = 7
+    ```
+    
+    !!! note
+         - Add this executor before `com.wso2.openbanking.berlin.gateway.executors.ErrorHandlingExecutor`.
+         - Update the priority of the executor accordingly.
+
 ## Starting servers
 
 1. Go to the `<APIM_HOME>/bin` directory using a terminal.
