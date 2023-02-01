@@ -156,7 +156,7 @@ the consent page.
        consent ID by WSO2 Open Banking Berlin Toolkit. Also, when disabled, the account ID validation should be 
        performed by the bank backend.
     - `freq_per_day`: Configure minimum frequency per day for recurring consents. For more details, see 
-        [Types of consents](../try-out/account-information-service-flow.md#types-of-consents)
+        [Types of consents](../try-out/account-information-service-flow.md#types-of-consents).
     - `valid_until_date_cap.enable`: To enable the feature that provides the accounts consents a fixed amount of days 
        after which the consents will expire.
     - `valid_until_date_cap.value`: To define the number of days all account consent will be valid until. This is only 
@@ -216,13 +216,13 @@ the consent page.
      backend_url = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/payments"
      ```
 
-     The payment submission request is sent with the suffix submit with the payment ID appended to the above base URL.
+     The payment submission request is sent with the suffix `submit` with the payment ID appended to the above base URL.
 
      ```xml
      https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/payments/submit/{paymentId}
      ```
 
-     The payment cancellation submission request is sent with the suffix cancel with the payment ID appended to the above base URL.
+     The payment cancellation submission request is sent with the suffix `cancel` with the payment ID appended to the above base URL.
 
      ```xml
      https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/payments/cancel/{paymentId}
@@ -230,7 +230,7 @@ the consent page.
 
     !!! note
         - The above-mentioned suffixes `submit` and `cancel` can be used to identify whether the coming request is a payment submission or a payment cancellation submission.
-        - `paymentId` can be used to identify the particular payment resource.
+        - The `paymentId` parameter can be used to identify the particular payment resource.
 
 19. Configure the consent persist steps after the `BerlinAccountListRetrievalStep` and before the `BerlinConsentPersistStep`. Set the priorities as needed.
 

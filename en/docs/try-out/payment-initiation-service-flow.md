@@ -614,7 +614,7 @@ In this section, you will be generating an access token using the authorization 
        }
       ```
 
-### Payment information/ status retrieval related requests
+### Payment information/status retrieval related requests
 
 !!! note
     All the following endpoints need a user access token to retrieve payment information.
@@ -656,10 +656,9 @@ Header: X-Request-ID: 6bb5c0b0-5f63-4872-b3dc-e4987f58f879
 ```
 
 !!! note
-    - This response is constructed by the core banking back end.
+    - This response should be constructed by the core banking back end.
     - The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
     - The response to the request must comply with the response specified in the specification.
-
 
 **GET /bulk-payments/{payment-product}/{paymentId}**
 
@@ -802,9 +801,8 @@ Header: X-Request-ID: d029c37a-d464-4304-b175-7c27fd7f5728
         - Instant payments
         - Bulk payments
         - Periodic payments
-    - Instant payments cannot be cancelled and are restricted from within the solution. 
-    - The bank should decide whether the payment cancellation needs authorization or not. 
-    - For a successful payment cancellation, a bulk or periodic payment needs to be submitted successfully.
+    - Only bulk payments and periodic payments can be cancelled. 
+    - The bank should decide whether the payment cancellation needs authorization or not.
 
 **DELETE /{payment-service}/{payment-product}/{paymentId}**
 
@@ -814,8 +812,8 @@ To cancel an already submitted payment
 
     !!! note
         - Successful response code will be either 204 or 202. This is decided by the bank.
-        - 204 as the response code indicates that the bank does not need the authorization to cancel this payment. Therefore, the payment status will be updated from the banking side as `CANC`. The consent status will be updated as `CANC`.
-        - 202 as the response code indicates that the bank needs the authorization to cancel this payment. The consent status will be updated to `ACTC`.
+        - If you get 204 as the response code, it indicates that the bank does not need authorization to cancel this payment. Therefore, the payment status must be updated from the banking side as `CANC`. The consent status will be updated as `CANC`.
+        - If you get 202 as the response code, it indicates that the bank needs the authorization to cancel this payment. The consent status will be updated to `ACTC`.
 
 Sample DELETE Request for a bulk payment cancellation without authorization is given below:
 
@@ -932,7 +930,7 @@ ASPSP-SCA-Approach: REDIRECT
 
 If the `POST cancellation-authorisations` request is successful, the TPP should send the authorization request as follows to inform the bank to cancel the payment. Then the bank displays a page similar to the consent page asking the PSU to approve or deny the cancellation authorization. 
 
-```toml
+```
 https://localhost:9446/oauth2/authorize/?scope=pis:<payment_id>&response_type=code&redirect_uri=<redirect_uri>&state=55e9d72a-218c-44bb-824e-cf0d61c3fdb1&code_challenge_method=S256&client_id=<client_id>&code_challenge=re6uXq06M40gS82XcmUM6s9SQVTxtY5bLSYCNLuS1XE
 ```
 
