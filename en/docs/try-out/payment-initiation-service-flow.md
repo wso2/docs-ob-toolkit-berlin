@@ -616,6 +616,11 @@ In this section, you will be generating an access token using the authorization 
 
 ### Payment information/status retrieval related requests
 
+!!! info
+    This is only available as a WSO2 Update from **WSO2 Open Banking Identity Server Berlin Toolkit Level 1.0.0.5** and
+    **WSO2 Open Banking API Manager Berlin Toolkit Level 1.0.0.5** onwards. For more information on updating, see
+    [Getting WSO2 Updates](../install-and-setup/setting-up-servers.md#getting-wso2-updates).
+
 !!! note
     All the following endpoints need a user access token to retrieve payment information.
 
@@ -795,6 +800,11 @@ Header: X-Request-ID: d029c37a-d464-4304-b175-7c27fd7f5728
     - The response to the request must comply with the response specified in the specification.
 
 ### Payment cancellation requests
+
+!!! info
+    This is only available as a WSO2 Update from **WSO2 Open Banking Identity Server Berlin Toolkit Level 1.0.0.5** and
+    **WSO2 Open Banking API Manager Berlin Toolkit Level 1.0.0.5** onwards. For more information on updating, see
+    [Getting WSO2 Updates](../install-and-setup/setting-up-servers.md#getting-wso2-updates).
 
 !!! note
     - There are three types of payments.
