@@ -251,7 +251,7 @@ the consent page.
     ```
 
     !!! note
-         - For a successful payment submission or payment cancellation, `PaymentSubmissionBankingIntegrationStep` and `PaymentCancellationBankingIntegrationStep` expect a **202 Accepted** response code from the bank.
+         - For a successful payment submission or payment cancellation, `PaymentSubmissionBankingIntegrationStep` and `PaymentCancellationBankingIntegrationStep` require a **202 Accepted** response code from the bank.
          - The Consent ID (`paymentId`) of the payment consent will be used to address a particular payment. The bank needs to implement a mapping mechanism to map the consent ID (`paymentId`) to the ID of the payment that persists in the bank back end.
 
 ## Starting servers

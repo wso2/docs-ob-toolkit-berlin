@@ -812,7 +812,7 @@ Header: X-Request-ID: d029c37a-d464-4304-b175-7c27fd7f5728
     [Getting WSO2 Updates](../install-and-setup/setting-up-servers.md#getting-wso2-updates).
 
 !!! tip "Before you begin:"
-    1. Update the following files:
+    1. Update the following files with the files in the latest update level:
         - `dynamic-endpoint-insequence-1.3.6.xml` insequence file
         - OpenAPI File
     2. Redeploy the NextGenPsd2XS2AFramework API.
@@ -830,8 +830,8 @@ To cancel an already submitted payment
 
     !!! note
         - Successful response code will be either 204 or 202. This is decided by the bank.
-        - If you get 204 as the response code, it indicates that the bank does not need authorization to cancel this payment. Therefore, the payment status must be updated from the banking side as `CANC`. The consent status will be updated as `CANC`.
-        - If you get 202 as the response code, it indicates that the bank needs the authorization to cancel this payment. The consent status will be updated to `ACTC`.
+        - If you get 204 as the response code, it indicates that the bank does not need authorization to cancel this payment. Therefore, the payment status must be updated by the bank as `CANC`. The consent status will be updated as `CANC`.
+        - If you get 202 as the response code, it indicates that the bank needs the authorization to cancel this payment. Therefore, the payment status must be updated by the bank as `ACTC`. The consent status will be updated to `ACTC`.
 
 Sample DELETE Request for a bulk payment cancellation without authorization is given below:
 
