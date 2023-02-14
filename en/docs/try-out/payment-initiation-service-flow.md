@@ -613,3 +613,352 @@ In this section, you will be generating an access token using the authorization 
           "expires_in":3600
        }
       ```
+
+### Payment information/status retrieval related requests
+
+!!! info
+    This is only available as a WSO2 Update from **WSO2 Open Banking Identity Server Berlin Toolkit Level 1.0.0.5** and
+    **WSO2 Open Banking API Manager Berlin Toolkit Level 1.0.0.5** onwards. For more information on updating, see
+    [Getting WSO2 Updates](../install-and-setup/setting-up-servers.md#getting-wso2-updates).
+
+!!! tip "Before you begin:"
+    1. Update the following files:
+        - `dynamic-endpoint-insequence-1.3.6.xml` insequence file
+        - OpenAPI File
+    2. Redeploy the NextGenPsd2XS2AFramework API.
+
+All the following endpoints need a user access token to retrieve payment information.
+
+**GET /payments/{payment-product}/{paymentId}**
+
+``` tab="Request"
+curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/payments/sepa-credit-transfers/4a8ac7c7-d5ee-42cb-8a29-44fc7778bd96' \
+-H 'PSU-IP-Address: 127.0.1.1' \
+-H 'PSU-ID-Type: email' \
+-H 'X-Request-ID: 6bb5c0b0-5f63-4872-b3dc-e4987f58f879' \
+-H 'Date: Mon, 31 Oct 2022 11:59:20 GMT' \
+-H 'PSU-ID: admin@wso2.com' \
+-H 'Signature: keyId="SN=de730ec5733ead1b,CA=1.2.840.113549.1.9.1=#16116d616c7368616e694077736f322e636f6d,CN=OpenBanking Pre-Production Issuing CA,OU=OpenBanking,O=WSO2 (UK) LIMITED,L=COL,ST=WP,C=LK",algorithm="rsa-sha256", headers="digest x-request-id date psu-id",signature=f/ozcQhnzQwGCGNbMe1bdpYMTqECO65uVBrwGCCYGajtilTs9O0wh3cA3Mrdtw2JUreEmSKDFpb0gjNObHCP6wdtOoCZpzU2EKhdhcPFVqkcJfL+9rMrJZU2l+U6sZs+FO7Bc2H/VQnvXXHRjD9UfPkrBLSvftDm1LxodQkei+7QuCfmvltILfynFQ/c/85ITnYqUQzlP6f/LDsWjOgQqXwWTVW7WMOHitLENwGaHNy6EjiIPFZIVYNJdHd51XHbqMNN332QQuE26IRzfUqy2Cus8a94hE8OZ4hx863M7V8YKIfWj3MSJSicSXwCeMClXalphV1NKUixRDKuqds85Q==' \
+-H 'Digest: SHA-256=RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o= \
+-H 'TPP-Signature-Certificate: <SIGNATURE_CERTIFICATE>' \
+-H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
+```
+
+``` tab="Response"
+200 OK
+Header: X-Request-ID: 6bb5c0b0-5f63-4872-b3dc-e4987f58f879
+{
+   "debtorAccount": {
+       "iban": "DE12345678901234567890",
+       "currency": "EUR"
+   },
+   "creditorName": "Merchant123",
+   "transactionStatus": "ACCP",
+   "creditorAccount": {
+       "iban": "DE98765432109876543210"
+   },
+   "instructedAmount": {
+       "amount": "123.50",
+       "currency": "EUR"
+   },
+   "remittanceInformationUnstructured": "Ref Number Merchant"
+}
+```
+
+!!! note
+    - This response should be constructed by the core banking back end.
+    - The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
+    - The response to the request must comply with the response specified in the specification.
+
+**GET /bulk-payments/{payment-product}/{paymentId}**
+
+``` tab="Request"
+curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/319b67d3-f66d-42e3-b05d-2e26006ba775' \
+-H 'PSU-IP-Address: 127.0.1.1' \
+-H 'PSU-ID-Type: email' \
+-H 'X-Request-ID: f044aa8c-eee3-4d2b-8c22-49652bdf1531' \
+-H 'Date: Mon, 31 Oct 2022 11:52:49 GMT' \
+-H 'PSU-ID: admin@wso2.com' \
+-H 'Signature: keyId="SN=de730ec5733ead1b,CA=1.2.840.113549.1.9.1=#16116d616c7368616e694077736f322e636f6d,CN=OpenBanking Pre-Production Issuing CA,OU=OpenBanking,O=WSO2 (UK) LIMITED,L=COL,ST=WP,C=LK",algorithm="rsa-sha256", headers="digest x-request-id date psu-id",signature=lVHEoQ1PKXE3Ns7fW97I0gqluiu6mmXU+KKmccZmWVggCw1UEdjKLUSfV5a7GMj9qJyh8ddiXVRqnRcUUbSTpq72Czuvy+iuD/FBZuJmFrLIyxZ5G5nf50/CS9UauLPF2XBp7cAiz7ot+ON0oixNfOxv/hlFy7BXADo3rT4VlHE1Gy0eajHW5Sb8TMItkS1WqWHreSvPJw0uUr2/LfGA1gNCX+qNRi4KOboCWSlArlAneR1tvJ5Ng7jSe8lG+Z60neovBtDuFEdQSJK1wRAvTW3Akz//Cj5z7fp04NC+nK2ORhb8CzC8yW2ly4m/z48BAyWyEI9M4f2VesBJ0dubSA==' \
+-H 'Digest: SHA-256=RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o= \
+-H 'TPP-Signature-Certificate: <SIGNATURE_CERTIFICATE>' \
+-H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
+```
+
+``` tab="Response"
+200 OK
+Header: X-Request-ID: f044aa8c-eee3-4d2b-8c22-49652bdf1531
+{
+   "debtorAccount": {
+       "iban": "DE40100100103307118608"
+   },
+   "requestedExecutionDate": "2025-08-01",
+   "transactionStatus": "ACCP",
+   "payments": [
+       {
+           "creditorName": "Merchant123",
+           "creditorAccount": {
+               "iban": "DE02100100109307118603"
+           },
+           "instructedAmount": {
+               "amount": "123.50",
+               "currency": "EUR"
+           },
+           "remittanceInformationUnstructured": "Ref Number Merchant 1"
+       },
+       {
+           "creditorName": "Merchant456",
+           "creditorAccount": {
+               "iban": "FR7612345987650123456789014"
+           },
+           "instructedAmount": {
+               "amount": "34.10",
+               "currency": "EUR"
+           },
+           "remittanceInformationUnstructured": "Ref Number Merchant 2"
+       }
+   ],
+   "batchBookingPreferred": true
+}
+```
+
+!!! note
+    - This response is constructed by the core banking back end.
+    - The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
+    - The response to the request must comply with the response specified in the specification.
+
+**GET /periodic-payments/{payment-product}/{paymentId}**
+
+``` tab="Request"
+curl -X GET 'https://localhost:8243/xs2a/v1/periodic-payments/sepa-credit-transfers/31169aed-3a46-4404-9035-99de2e776a60' \
+-H 'PSU-IP-Address: 127.0.1.1' \
+-H 'PSU-ID-Type: email' \
+-H 'X-Request-ID: eea1ced4-2ae3-499a-9e10-192d8e2ecb7a' \
+-H 'Date: Mon, 31 Oct 2022 12:08:10 GMT' \
+-H 'PSU-ID: admin@wso2.com' \
+-H 'Signature: keyId="SN=de730ec5733ead1b,CA=1.2.840.113549.1.9.1=#16116d616c7368616e694077736f322e636f6d,CN=OpenBanking Pre-Production Issuing CA,OU=OpenBanking,O=WSO2 (UK) LIMITED,L=COL,ST=WP,C=LK",algorithm="rsa-sha256", headers="digest x-request-id date psu-id",signature=znJTzGuMdw/GUGnFypWMQVZkxUDJ4VhO1rv2Ro7PBSFX1SpA/XkfcrydXIVXtUDEcUpiBSi97C3JzT93aN8htBgd2gEvEocVfxogXnylfcpQzu07JkMLdcr9MOvHJpZ6CxO0GRkhKYndDPXB1o/gDIRMLcDQNPyvSrMQT+lMuzKlJDCsZ3wkwu9HPSRfrpb5Mrc2T9vU8fa1kqOUCfOkrx8MIo42GnZB/BTYdzdNwRLJA0bbqPcFTFnhYhqfhUTDFfd+me6ull2zrijEp7x3oWO7wNHBqtGWJbUaQHaha6OSWGrtb5cSIfAU3hqFGiJKvnZN32hfPyBX3tcUq6m5xg==' \
+-H 'Digest: SHA-256=RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o=' \
+-H 'TPP-Signature-Certificate: <SIGNATURE_CERTIFICATE>' \
+-H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
+```
+
+``` tab="Response"
+200 OK
+Header: X-Request-ID: eea1ced4-2ae3-499a-9e10-192d8e2ecb7a
+{
+   "executionRule": "following",
+   "debtorAccount": {
+       "iban": "DE12345678901234567890"
+   },
+   "creditorName": "Merchant123",
+   "transactionStatus": "ACCP",
+   "endDate": "2023-09-10",
+   "dayOfExecution": "01",
+   "creditorAccount": {
+       "iban": "DE98765432109876543210"
+   },
+   "instructedAmount": {
+       "amount": "123.50",
+       "currency": "EUR"
+   },
+   "remittanceInformationUnstructured": "Ref Number Abonnement",
+   "startDate": "2023-09-05",
+   "frequency": "Monthly"
+}
+```
+
+!!! note
+    - This response is constructed by the core banking back end.
+    - The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
+    - The response to the request must comply with the response specified in the specification.
+
+**GET /{payment-service}/{payment-product}/{paymentId}/status**
+
+This request is applicable for instant payments, bulk payments, and periodic payments.
+
+Given below is a sample request for a periodic payment:
+
+``` tab="Request"
+curl -X GET 'https://localhost:8243/xs2a/v1/periodic-payments/sepa-credit-transfers/31169aed-3a46-4404-9035-99de2e776a60/status' \
+-H 'PSU-IP-Address: 127.0.1.1' \
+-H 'PSU-ID-Type: email' \
+-H 'X-Request-ID: d029c37a-d464-4304-b175-7c27fd7f5728' \
+-H 'Date: Mon, 31 Oct 2022 12:12:08 GMT' \
+-H 'PSU-ID: admin@wso2.com' \
+-H 'Signature: keyId="SN=de730ec5733ead1b,CA=1.2.840.113549.1.9.1=#16116d616c7368616e694077736f322e636f6d,CN=OpenBanking Pre-Production Issuing CA,OU=OpenBanking,O=WSO2 (UK) LIMITED,L=COL,ST=WP,C=LK",algorithm="rsa-sha256", headers="digest x-request-id date psu-id",signature=AEtotwhYvGkGQEZYD0a/rvBwW6JCqJ2hBFha8lQdcSI/zruoxF2cYkeRNSir3pwTYF9QmYwp2aPJZ8LoAozSHNQUs2Q9BmNHVET/g8HFV+7iBzfEqK6Mtyzu0u9u7qhBaLdu3vq1gSyMuQHPFoKgWgTGGVFiL0cTICp1Zka5niCxa6GGGwpwvER9DrApSk3nvwm/+vwHwmEEeP3LoQubvKDyDF6Vj438VLKpMGBl1kWv/WwkLhIUSW6OSVvxX+xWhgYBS0qxEW8FroSJIul1ncbhst8qAgFCmoV4fSon1o9qaEHQwnnIec/qpldbtEOmEZNGVCmnfu2OY1XyVw3Vxw==' \
+-H 'Digest: SHA-256=RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o=' \
+-H 'TPP-Signature-Certificate: <SIGNATURE_CERTIFICATE>' \
+-H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
+```
+
+``` tab="Response"
+200 OK
+Header: X-Request-ID: d029c37a-d464-4304-b175-7c27fd7f5728
+{
+   "transactionStatus": "ACCP"
+}
+```
+
+!!! note
+    - This response is constructed by the core banking back end.
+    - The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
+    - The response to the request must comply with the response specified in the specification.
+
+### Payment cancellation requests
+
+!!! info
+    This is only available as a WSO2 Update from **WSO2 Open Banking Identity Server Berlin Toolkit Level 1.0.0.5** and
+    **WSO2 Open Banking API Manager Berlin Toolkit Level 1.0.0.5** onwards. For more information on updating, see
+    [Getting WSO2 Updates](../install-and-setup/setting-up-servers.md#getting-wso2-updates).
+
+!!! tip "Before you begin:"
+    1. Update the following files with the files in the latest update level:
+        - `dynamic-endpoint-insequence-1.3.6.xml` insequence file
+        - OpenAPI File
+    2. Redeploy the NextGenPsd2XS2AFramework API.
+
+There are three types of payments as instant payments, bulk payments, and periodic payments.
+
+   - Only bulk payments and periodic payments can be cancelled. 
+   - The bank should decide whether the payment cancellation needs authorization or not.
+
+**DELETE /{payment-service}/{payment-product}/{paymentId}**
+
+To cancel an already submitted payment
+
+- This will go to the core banking back end and respond accordingly.
+
+    !!! note
+        - Successful response code will be either 204 or 202. This is decided by the bank.
+        - If you get 204 as the response code, it indicates that the bank does not need authorization to cancel this payment. Therefore, the payment status must be updated by the bank as `CANC`. The consent status will be updated as `CANC`.
+        - If you get 202 as the response code, it indicates that the bank needs the authorization to cancel this payment. Therefore, the payment status must be updated by the bank as `ACTC`. The consent status will be updated to `ACTC`.
+
+Sample DELETE Request for a bulk payment cancellation without authorization is given below:
+
+``` tab="Request"
+curl -X DELETE 'https://localhost:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517' \
+-H 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' \
+-H 'PSU-IP-Address: 127.0.0.1' \
+-H 'TPP-Signature-Certificate: <SIGNATURE_CERTIFICATE>' \
+-H 'PSU-ID: admin@wso2.com' \
+-H 'Digest: SHA-256=RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o=' \
+-H 'Signature: keyId="SN=de730ec5733ead1b,CA=1.2.840.113549.1.9.1=#16116d616c7368616e694077736f322e636f6d,CN=OpenBanking Pre-Production Issuing CA,OU=OpenBanking,O=WSO2 (UK) LIMITED,L=COL,ST=WP,C=LK",algorithm="rsa-sha256", headers="digest x-request-id date psu-id",signature=pCFdkT3tzqow04u9CVZGHWfhSQEXdMFdwXTVzsQNPLBQ2BSbnNhe9sg62MTcxUP5IIL+GVZ0UKy/UPjRT0KnWT7DGEIL9XVIg1J64nFZDV03kPrKF9eyx14eX7FJGn2TSbO/5G7FB33019j45RmHusRB6g0iunpOaf7Bciy3YtDz5De4OuHDyRkAP4RICBBRLXraLA6pUmHVutqI/UBbvZGJgJ7klgvt0MBHUYtMOdKsPSuFjNX5lcimBVwkI/RkMIVcbNF5Wt90YnbwxI6LzpNtBKbLonvFNBFhsRgsiTEFfUjMz8jL2P0g2S7g2XHWo2Is7Nl8VXIVV8oWuCqxOw==' \
+-H 'Date: Mon, 31 Oct 2022 12:25:56 GMT' \
+-H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
+```
+
+``` tab="Response"
+Header: 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' 
+204 No Content
+```
+
+!!! note
+
+     If the bank decides not to require an authorization to cancel the payment, the response will be a 204 response code with no response body. The payment cancellation flow will end from there and the payment will be cancelled.
+
+Sample DELETE Request for a bulk payment cancellation with authorization is given below:
+
+``` tab="Request"
+curl -X DELETE 'https://localhost:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517' \
+-H 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' \
+-H 'PSU-IP-Address: 127.0.0.1' \
+-H 'TPP-Signature-Certificate: <SIGNATURE_CERTIFICATE>' \
+-H 'PSU-ID: admin@wso2.com' \
+-H 'Digest: SHA-256=RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o=' \
+-H 'Signature: keyId="SN=de730ec5733ead1b,CA=1.2.840.113549.1.9.1=#16116d616c7368616e694077736f322e636f6d,CN=OpenBanking Pre-Production Issuing CA,OU=OpenBanking,O=WSO2 (UK) LIMITED,L=COL,ST=WP,C=LK",algorithm="rsa-sha256", headers="digest x-request-id date psu-id",signature=pCFdkT3tzqow04u9CVZGHWfhSQEXdMFdwXTVzsQNPLBQ2BSbnNhe9sg62MTcxUP5IIL+GVZ0UKy/UPjRT0KnWT7DGEIL9XVIg1J64nFZDV03kPrKF9eyx14eX7FJGn2TSbO/5G7FB33019j45RmHusRB6g0iunpOaf7Bciy3YtDz5De4OuHDyRkAP4RICBBRLXraLA6pUmHVutqI/UBbvZGJgJ7klgvt0MBHUYtMOdKsPSuFjNX5lcimBVwkI/RkMIVcbNF5Wt90YnbwxI6LzpNtBKbLonvFNBFhsRgsiTEFfUjMz8jL2P0g2S7g2XHWo2Is7Nl8VXIVV8oWuCqxOw==' \
+-H 'Date: Mon, 31 Oct 2022 12:25:56 GMT' \
+-H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
+```
+
+``` tab="Response"
+200 OK
+Header: 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' 
+{
+   "transactionStatus": "ACTC",
+   "chosenScaMethod": {
+       "authenticationVersion": "1.0",
+       "name": "SMS OTP on Mobile",
+       "authenticationType": "SMS_OTP",
+       "explanation": "SMS based one time password",
+       "authenticationMethodId": "sms-otp"
+   },
+   "_links": {
+       "self": {
+           "href": "/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517"
+       },
+       "startAuthorisationWithPsuIdentification": {
+           "href": "/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517/cancellation-authorisations"
+       },
+       "status": {
+           "href": "/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517/status"
+       }
+   }
+}
+```
+
+!!! note
+
+     - If the bank requires an authorization to cancel the payment, the core banking backend will return a 202 response code and the body must comply with the specification.
+     
+     - The transactionStatus property must be `ACTC`.
+
+If the bank returns `202` with the above payload for the `DELETE` request, the `POST /{payment-service}/{payment-product}/{paymentId}/cancellation-authorisations` request must be sent to create an authorization resource for the cancellation. This is indicated in the response of the `DELETE` request in the `startAuthorisationWithPsuIdentification` property. This request requires an application access token.
+
+A sample POST cancellation authorisations request for bulk payments type is given below:
+
+``` tab="Request"
+curl -X POST 'https://localhost:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/697a4c4b-b939-4a18-8bfa-eae30ea90804/cancellation-authorisations' \
+-H 'Content-Type: application/json' \
+-H 'PSU-IP-Address: 127.0.1.1' \
+-H 'PSU-ID-Type: email' \
+-H 'X-Request-ID: 2a7fb573-5a2d-49ba-bcdc-4b438930df1b' \
+-H 'PSU-ID: admin@wso2.com' \
+-H 'Digest: SHA-256=RBNvo1WzZ4oRRq0W9+hknpT7T8If536DEMBg9hyq/4o=' \
+-H 'Signature: keyId="SN=de730ec5733ead1b,CA=1.2.840.113549.1.9.1=#16116d616c7368616e694077736f322e636f6d,CN=OpenBanking Pre-Production Issuing CA,OU=OpenBanking,O=WSO2 (UK) LIMITED,L=COL,ST=WP,C=LK",algorithm="rsa-sha256", headers="digest x-request-id date psu-id",signature=OAAiz/XR3B7cj6g7Esmet8LX/gqJ3Hi7di4IurF8mn8oe/fxtBFC/sy6H+BEpPhySbDdE4TGoIhKESrhcuDHOYGIHWC1bwxCvV1V9P1XWcZmobBLPY9BCoM7osmblKcEvettmU+jPAUTCzNKmOxJIQouDkjf63+r/celk3Q/U0SE+RHByr47Dn3Bf54Fpeue2akzFfltyflTJaNCJIRjKIQSumBX27miQyhBhUkX0Et4M4fHPTmMcLitx5z52RufYSqQAuAtvKXaiVbM87g9MYDEvXhusxYNTx0HNYxvPrmL4KZCJvpeY4GbFRCE8qq8UMFJp95SCkhGOoJrpjHRUA==' \
+-H 'Date: Mon, 31 Oct 2022 12:58:37 GMT' \
+-H 'TPP-Signature-Certificate: <SIGNATURE_CERTIFICATE>' \
+-H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>' \
+--data-raw '{}'
+```
+
+``` tab="Response"
+201 Created
+Header: X-Request-ID:2a7fb573-5a2d-49ba-bcdc-4b438930df1b
+ASPSP-SCA-Approach: REDIRECT
+{
+   "authorisationId": "df702657-b5be-4a6e-a8e4-5ce4db592b8e",
+   "scaStatus": "received",
+   "chosenScaMethod": {
+       "authenticationVersion": "1.0",
+       "name": "SMS OTP on Mobile",
+       "authenticationType": "SMS_OTP",
+       "explanation": "SMS based one time password",
+       "authenticationMethodId": "sms-otp"
+   },
+   "_links": {
+       "scaStatus": {
+           "href": "/v1/bulk-payments/sepa-credit-transfers/697a4c4b-b939-4a18-8bfa-eae30ea90804/cancellation-authorisations/df702657-b5be-4a6e-a8e4-5ce4db592b8e"
+       },
+       "scaOAuth": {
+           "href": "https://localhost:8243/.well-known/openid-configuration"
+       }
+   }
+}
+```
+
+If the `POST cancellation-authorisations` request is successful, the TPP should send the authorization request as follows to inform the bank to cancel the payment. Then the bank displays a page similar to the consent page asking the PSU to approve or deny the cancellation authorization. 
+
+```
+https://localhost:9446/oauth2/authorize/?scope=pis:<payment_id>&response_type=code&redirect_uri=<redirect_uri>&state=55e9d72a-218c-44bb-824e-cf0d61c3fdb1&code_challenge_method=S256&client_id=<client_id>&code_challenge=re6uXq06M40gS82XcmUM6s9SQVTxtY5bLSYCNLuS1XE
+```
+
+Given below is a sample page for cancellation authorization for bulk payment type:
+
+[ ![consent_page](../assets/img/try-out/payment-flow/cancellation-authorization-bulk-payment.png) ](../assets/img/try-out/payment-flow/cancellation-authorization-bulk-payment.png)
+
+- If the PSU proceeds to the cancellation by selecting Confirm,
+    - The payment cancellation will be submitted to the core banking back end
+    - It will be cancelled by the bank.
+- If the PSU selects Deny,
+    - The cancellation flow will end without submitting the payment cancellation
+    - The payment will not be cancelled.
