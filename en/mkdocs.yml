@@ -83,7 +83,9 @@ nav:
     - 'TPP Onboarding':
        - 'Introduction': learn/tpp-onboarding.md
        - 'Configuration': learn/tpp-onboarding-configuration.md
-    - 'Strong Customer Authentication': learn/strong-customer-authentication.md
+    - 'Strong Customer Authentication':
+       - 'Introduction': learn/strong-customer-authentication.md
+       - 'Configuration': learn/strong-customer-authentication-configuration.md
     - 'API Security':
        - 'Introduction': learn/api-security.md
        - 'Configuration': learn/api-security-configuration.md
