@@ -44,7 +44,7 @@ you can configure it using WSO2 Authenticators by adding that according to the [
 
 Adding these authenticators will result in different adaptive authentication scripts used in the deployment.
 
-In addition, if you have an exemption mechanism (for example, a fraud detection component that are exempt from SCA), 
+In addition, if you have an exemption mechanism (for example, a fraud detection component which is an exemption from SCA), 
 it should be called from the same adaptive authentication script.
 
 This means the adaptive authentication script differs for each deployment, and where to place the above-mentioned status update calls varies accordingly.
@@ -124,7 +124,7 @@ var onLoginRequest = function (context) {
 };
 ```
 
-If you have a mechanism to exempt SCA, you can call it. Based on the result, you can update statuses as in the following sample.
+If you have a mechanism to exempt SCA, you can call it. Based on the result, you can update the statuses as in the following sample.
 
 ```java
 var psuChannel = "Online Banking";
