@@ -17,18 +17,51 @@ Payment Instrument Issuer Service (PIIS).
 9. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/psd2-confirmation-of-funds-consent 2.0 20190607.yaml` file.
    ![api_definition](../assets/img/try-out/cof-flow/new_api_definition.png)
 10. Click **Import**. The changes are auto-saved.
-11. Select **Runtime** from the left menu panel. 
-12. Click the **Edit** button under **Request > Message Mediation**. ![edit_message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
-13. Select the **Custom Policy** option.
-14. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/cof-consents-dynamic-endpoint-sequence-1.3.6.xml` 
-    insequence file and click **Select**.
-15. Scroll down and click **SAVE**.
-16. Go to **Deployments** using the left menu pane and click **Deploy New Revision**.
-17. Provide a description for the new revision.
-18. Select `localhost` from the dropdown list.
-19. Click **Deploy**.
-20. Go to **Overview** using the left menu panel.
-21. Click **Publish**.
+11. Add a custom policy. Follow the instructions given below according to the API Manager version you are using:
+
+    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.0.0..."
+
+        1. Select **Runtime** from the left menu panel. 
+        2. Click the **Edit** button under **Request > Message Mediation**. ![edit_message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
+        3. Select the **Custom Policy** option.
+        4. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/cof-consents-dynamic-endpoint-sequence-1.3.6.xml` 
+            insequence file and click **Select**.
+        5. Scroll down and click **SAVE**.
+
+    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.1.0..."
+
+        1. Go to **Develop -> API Configurations -> Policies** in the left menu pane.<br><br>
+        <div style="width:40%">
+        ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
+        </div>
+
+        2. On the **Policy List** card, click on **Add New Policy**.
+
+        3. Fill in the **Create New Policy**.
+
+        4. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/cof-consents-dynamic-endpoint-sequence-1.3.6.xml` insequence file.
+
+        5. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: <br><br>
+        <div style="width:35%">
+        ![successful](../assets/img/get-started/quick-start-guide/successful.png)
+        </div>
+
+        6. Expand the API endpoint you want from the list of API endpoints. For example: ![expand_api_endpoint](../assets/img/get-started/quick-start-guide/expand-api-endpoint.png)
+
+        7. Expand the HTTP method from the API endpoint you selected. For example: ![expand_http_method](../assets/img/get-started/quick-start-guide/expand-http-method.png)
+
+        8. Drag and drop the previously created policy to the **Request Flow** of the API endpoint. ![request_flow](../assets/img/get-started/quick-start-guide/request-flow.png)
+
+        9. Select **Apply to all resources** and click **Save**.
+
+        10. Scroll down and click **Save**.
+
+12. Go to **Deployments** using the left menu pane and click **Deploy New Revision**.
+13. Provide a description for the new revision.
+14. Select `localhost` from the dropdown list.
+15. Click **Deploy**.
+16. Go to **Overview** using the left menu panel.
+17. Click **Publish**.
 
 ### Subscribing to NextGenPSD2XS2A API v2 
 
