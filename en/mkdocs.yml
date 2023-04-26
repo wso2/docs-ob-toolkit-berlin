@@ -96,6 +96,7 @@ nav:
     - 'Account Information Service Flow': try-out/account-information-service-flow.md
     - 'Payment Initiation Service Flow': try-out/payment-initiation-service-flow.md
     - 'Confirmation of Funds flow': try-out/confirmation-of-funds-flow.md
+    - 'Consent Manager': try-out/consent-manager.md
   - 'References':
     - 'Identity Server Configuration Catalog': references/config-catalog-is.md
     - 'API Manager Configuration Catalog': references/config-catalog-apim.md
