@@ -56,7 +56,7 @@ It is verified in this step. You can use the sample certificates attached below:
     WSO2 Open Banking Berlin Toolkit provides Electronic Identification and Trust Services (eIDAS) validation services
     for TPP validation.
 
-1. Download the root and issuer certificates found [here](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/252018873/OB+Root+and+Issuing+Certificates+for+Sandbox).
+1. Download the root and issuer certificates found [here](../assets/attachments/CA_Cert.zip).
 
 2. Issue the given command and upload them to the client trust stores available in the following locations:
     - `<APIM_HOME>/repository/resources/security/client-truststore.jks` 
