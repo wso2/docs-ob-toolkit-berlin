@@ -99,6 +99,7 @@ Listed below are the prerequisites for a successful deployment:
          <td>
             <ul>
                <li>MySQL 8.0</li>
+               See <a href="https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/prerequisites/#compatibility">Compatibility</a> if you are using MySQL 8.0.
                <li>Oracle 19c</li>
                <li>Microsoft SQL Server 2017</li>
                <li> PostgreSQL 13</li>
@@ -117,6 +118,14 @@ Listed below are the prerequisites for a successful deployment:
 
 WSO2 Open Banking Berlin Toolkit 1.0.0 is supported on the following platforms:
 
+!!!note
+    To use MySQL 8.0, you need to create the database with `charset latin1` as shown below:
+
+    ```
+    create database regdb
+    character set latin1;
+    ```
+    
 <table>
    <tbody>
       <tr>
