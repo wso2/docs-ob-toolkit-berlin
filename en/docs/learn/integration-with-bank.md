@@ -475,4 +475,4 @@ In accounts, payments and funds confirmation services, the X-Request-ID is used 
 
 Idempotency validation for consent requests are handled by the WSO2 Open Banking solution.
 
-Idempotency validation for retrieval requests should be handled in the core banking system. The required validations should be performed and then the response will be built according to the NextGenPSD2 specification.
+Idempotency validation for retrieval requests should be handled in the core banking system. The required validations should be performed and then the response should be built according to the NextGenPSD2 specification.
