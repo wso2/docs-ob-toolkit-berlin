@@ -468,10 +468,10 @@ The response from the API should be formatted as follows:
 
 ## X-Request-ID
 
-In accounts, payments and funds confirmation services, the X-Request-ID is used as an identifier to verify a replication of an action. The use cases of the X-Request-ID are:
+In accounts, payments and funds confirmation services, the X-Request-ID is used as an identifier to verify a replication of an action. The X-Request-ID header is used for the following types of endpoints:
 
-- Account/Payment/Funds Confirmation consent requests
-- Account/Payment/Funds Confirmation retrieval requests
+- Account/Payment/Funds Confirmation consent endpoints
+- Account/Payment/Funds Confirmation retrieval endpoints
 
 Idempotency validation for consent requests are handled by the WSO2 Open Banking solution.
 
