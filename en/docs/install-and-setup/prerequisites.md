@@ -3,8 +3,8 @@ building an open banking solution from scratch, you can use WSO2 Open Banking Be
 banking requirements with additional benefits beyond compliance. This toolkit runs on top of the following WSO2 products:
 
 - WSO2 Open Banking Accelerator 3.0
-- WSO2 Identity Server 5.11.0
-- WSO2 API Manager 4.1.0 or WSO2 API Manager 4.0.0
+- WSO2 Identity Server 6.1.0, 6.0.0 or 5.11.0
+- WSO2 API Manager 4.2.0 or 4.1.0 or 4.0.0
 
 !!! note
     The WSO2 Open Banking Berlin Toolkit is built by customizing the WSO2 Open Banking Accelerator and helps you 
@@ -31,8 +31,8 @@ Given below is a product matrix for different versions of WSO2 Open Banking Berl
 
 Given below is the compatible base product matrix for WSO2 Open Banking Berlin Toolkit 1.0.0:
 
-| Base Product              | Compatible Versions |
-|---------------------------|---------------------|
+| Base Product              | Combination 01      | Combination 02   |
+|---------------------------|---------------------|------------------|
 | WSO2 Identity Server     | 5.11.0              | 6.0.0 <br/> 6.1.0 |
 | WSO2 API Manager         | 4.1.0 <br/> 4.0.0   | 4.2.0             |
 
