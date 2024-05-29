@@ -33,8 +33,8 @@ Given below is the compatible base product matrix for WSO2 Open Banking Berlin T
 
 | Base Product              | Compatible Versions |
 |---------------------------|---------------------|
-| WSO2 Identity Server     | 5.11.0              |
-| WSO2 API Manager         | 4.1.0 <br/> 4.0.0   |
+| WSO2 Identity Server     | 5.11.0              | 6.0.0 <br/> 6.1.0 |
+| WSO2 API Manager         | 4.1.0 <br/> 4.0.0   | 4.2.0             |
 
 ## Prerequisites for a Deployment
 
