@@ -254,6 +254,15 @@ the consent page.
          - For a successful payment submission or payment cancellation, `PaymentSubmissionBankingIntegrationStep` and `PaymentCancellationBankingIntegrationStep` require a **202 Accepted** response code from the bank.
          - The Consent ID (`paymentId`) of the payment consent will be used to address a particular payment. The bank needs to implement a mapping mechanism to map the consent ID (`paymentId`) to the ID of the payment that persists in the bank back end.
 
+20. To enable idempotency support for the consent APIs:
+    
+        ```toml
+        [open_banking.consent.idempotency]
+        enabled=true
+        allowed_time_duration=1440
+        ```
+
+
 ## Starting servers
 
 1. Go to the `<IS_HOME>/bin` directory using a terminal.
