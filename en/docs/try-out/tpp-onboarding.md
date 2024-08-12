@@ -92,7 +92,7 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
        | Callback URL | The URL used by the TPP to receive the authorization code sent from the bank. The authorisation code can be used later to generate an OAuth2 access token. <br/> **This is a mandatory field for the authorization code grant type.** |
        | Regulatory Application | The type of application. If your application is compliant with the NextGenPSD2XS2AFramework framework, it is a Regulatory application. |
        | Organization Id | The Organization Identifier as provided in the application certificate. For example. PSDUK-NCA-OrganizationID |
-       | Application Certificate | This is the content of the application certificate (.PEM) that you created in the step above.  <br/> For testing purposes, you may use this sample application certificate. <br/> **For Regulatory applications, it is mandatory to use an application certificate.** |
+       | Application Certificate | This is the content of the application certificate (.PEM) that you created in the step above.  <br/> For testing purposes, you may use this sample application certificate. <br/> **For Regulatory applications, it is mandatory to use an application certificate.** You can download the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) for testing purposes|
 
       ![enter_application_details](../assets/img/get-started/quick-start-guide/tpp-onboarding/enter-application-details-1.png)
       ![enter_application_details](../assets/img/get-started/quick-start-guide/tpp-onboarding/enter-application-details-2.png)
