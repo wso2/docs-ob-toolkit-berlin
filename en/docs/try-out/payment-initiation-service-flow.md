@@ -7,68 +7,43 @@ This page provides instructions to use the NextGenPSD2XS2AFramework API to provi
 
 Once you register the application, generate an application access token.
 
-1. Generate the client assertion by signing the following JSON payload using supported algorithms. 
+1. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
 
-    ??? note "Use the sample certificates for signing and transport layer security testing purposes. Click here to see how it is done..."
-        1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
-            - The client trust stores for the Identity Server and API Manager are located in the following locations:
-                   - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
-                   - `<IS_HOME>/repository/resources/security/client-truststore.jks`
-        2. Use the following commands to add the certificate to the client trust store:
-               ```shell
-               keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
-               ```
-        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
-            - Add `SHA1withRSA` as a supported signature algorithm:
-               ```
-               supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
-               ```
-            - Update the following tag according to the sample:
-               ```
-               [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
-               issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
-               ```
-        4. Restart the servers.
-        5. Download the following certificates and keys, and use them for testing purposes.
-            - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
-              [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
-              layer security testing purposes.
-            - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
-              [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
+   ??? note "Use the sample certificates for testing purposes. Click here to see how it is done..."
+       1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
+       - The client trust stores for the Identity Server and API Manager are located in the following locations:
+       - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
+       - `<IS_HOME>/repository/resources/security/client-truststore.jks`
+       2. Use the following commands to add the certificate to the client trust store:
+       ```shell
+       keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
+       ```
+       3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
+       - Add `SHA1withRSA` as a supported signature algorithm:
+       ```
+       supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
+       ```
+       - Update the following tag according to the sample:
+       ```
+       [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+       issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
+       ```
+       4. Restart the servers.
+       5. Download the following certificates and keys, and use them for testing purposes.
+       - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
+       [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
+       layer security testing purposes.
+       - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
+       [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
 
-    ``` tab='Format'
-    
-    {
-    "alg": "<The algorithm used for signing.>",
-    "kid": "<The thumbprint of the certificate.>",
-    "typ": "JWT"
-    }
-    {
-    "iss": "<This is the issuer of the token. For example, client ID of your application>",
-    "sub": "<This is the subject identifier of the issuer. For example, client ID of your application>",
-    "exp": <This is the epoch time of the token expiration date/time>,
-    "iat": <This is the epoch time of the token issuance date/time>,
-    "jti": "<This is an incremental unique value>",
-    "aud": "<This is the audience that the ID token is intended for. For example, https://<IS_HOST>:9446/oauth2/token>"
-    }
-   
-    <signature: The client assertion must be signed using the private key of the application certificate.>
-
-    ```
-    
-    ``` tab='Sample'
-    eyJraWQiOiJXX1RjblFWY0hBeTIwcTh6Q01jZEJ5cm9vdHciLCJhbGciOiJQUzI1NiJ9.eyJzdWIiOiJQU0RHQi1PQi1Vbmtub3duMDAxNTgwMDAwMUhRUXJaQUFYIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTQ0Ni9vYXV0aDIvdG9rZW4iLCJpc3MiOiJQU0RHQi1PQi1Vbmtub3duMDAxNTgwMDAwMUhRUXJaQUFYIiwiZXhwIjoxODI3NjY5MzMyLCJpYXQiOjE4Mjc2NTkzMzIsImp0aSI6IjE0MzIyNDM2MzQzNDM1NDQ1In0.qUq9q_Qa5eiVW5C6QzMvB1sX9Ttwz0Db8c2wmRXyrUWDpeoaolUYT_Diu1o33R4U4MME3nBMCdl0wQ1AVnuzjgV6s3TLcyxlphcoGXYVwOLsQBfbLKTzGiz10UORb3WQc9BwxhZVPDWyFXGlqUNwjPbaUslWoal9KMsbnXlBFKQd8GWjhS-kXHn66kAHwH-7DLZ_Z7D01oW2aFon5sWBZfKD_t9NeQJ9gdPs45ermSM45FixlKXkPPXiIq-_w5Hw1Zw_lEW6fVpWCS6IRz5pBtpHO8s_KESjxuPb1dzrV31AZC7BplWeaRRC5UslObbejw35P5v9CQqJR5Uc7_mX0Q
-    ```
-
-3. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
 ``` curl
-curl -X POST \
-https://<IS_HOST>:9446/oauth2/token \
---cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
--d 'grant_type=client_credentials&scope=payments%20openid&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion=<CLIENT_ASSERTION_JWT>&redirect_uri=<REDIRECT_URI>&client_id=<CLIENT_ID>'
-```
+   curl -X POST \
+   https://localhost:9446/oauth2/token \
+   --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
+   -d 'grant_type=client_credentials&scope=payments%20openid&client_id=<CLIENT_ID>'
+   ```
 
-3. Upon successful token generation, you can obtain a token as follows:
+2. Upon successful token generation, you can obtain a token as follows:
 ``` json
 {
    "access_token":"eyJ4NXQiOiJOVGRtWmpNNFpEazNOalkwWXpjNU1tWm1PRGd3TVRFM01XWXdOREU1TVdSbFpEZzROemM0WkEiLCJraWQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZ19SUzI1NiIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhZG1pbkB3c28yLmNvbUBjYXJib24uc3VwZXIiLCJhdXQiOiJBUFBMSUNBVElPTiIsImF1ZCI6IlBTREdCLU9CLVVua25vd24wMDE1ODAwMDAxSFFRclpBQVgiLCJuYmYiOjE2NDY4OTEyNzIsImF6cCI6IlBTREdCLU9CLVVua25vd24wMDE1ODAwMDAxSFFRclpBQVgiLCJzY29wZSI6InBheW1lbnRzIiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTQ0Ni9vYXV0aDIvdG9rZW4iLCJjbmYiOnsieDV0I1MyNTYiOiJ5YmVxYUltNTAwSU1QeTE5VmtQZkhSVEpOdDlxdl9RdDVqbUhkdC1iSm1jIn0sImV4cCI6MTY0Njg5NDg3MiwiaWF0IjoxNjQ2ODkxMjcyLCJqdGkiOiI0Zjg0NmQwMS00ZjAxLTQ4YTAtYjliMi1iOTdjNzRmZjUxYTgifQ.CklCtjHYMzc_7u8EacYPQ-O7mhrFs-oR3pIk1fVz93dYwB5Bq959Z--TCT1BIxzWWEhnuD6jiVmdzJQ8LrZu7LczF-lyaP21UEAM5a23ZXmeG_5WZHXONWmKbo4mvcswqwJXbS9dOO1JU8Rx59JMP2zGBjbK3xf0zalWNC4IqQO6xhl8EzcoBahkqBwcygmhf3QyCKXozZpnCqG7HcYwYVFU7F0SKrGpDl2TZ9axWzBjvVOAK9d0G8EQhGjpNy0FY1lS4ZZGbPrUGTuoWBG1WEfqI_CTU7gXi_gGClKjWGXbqEy8FIgh34GCOt5xwx7XJ-nkwzwQzjXtgO1ZNOmdlA",
@@ -541,9 +516,9 @@ given below:
 
 In this section, you will be generating an access token using the authorization code generated in the section [above](#authorizing-a-consent).
 
-1. Generate the client assertion by signing the following JSON payload using supported algorithms. 
-
-    ??? note "Use the sample certificates for signing and transport layer security testing purposes. Click here to see how it is done..."
+1. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
+    
+    ??? note "Use the sample certificates for testing purposes. Click here to see how it is done..."
         1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
             - The client trust stores for the Identity Server and API Manager are located in the following locations:
                    - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
@@ -570,36 +545,11 @@ In this section, you will be generating an access token using the authorization 
             - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
               [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
 
-    ``` tab="Format"
-      {
-      "alg": "<The algorithm used for signing.>",
-      "kid": "<The thumbprint of the certificate.>",
-      "typ": "JWT"
-      }
-     
-      {
-      "iss": "<This is the issuer of the token. For example, client ID of your application>",
-      "sub": "<This is the subject identifier of the issuer. For example, client ID of your application>",
-      "exp": <This is the epoch time of the token expiration date/time>,
-      "iat": <This is the epoch time of the token issuance date/time>,
-      "jti": "<This is an incremental unique value>",
-      "aud": "<This is the audience that the ID token is intended for. For example, https://<IS_HOST>:9446/oauth2/token>"
-      }
-   
-      <signature: The client assertion must be signed using the private key of the application certificate.>
-    ```
-
-    ``` tab="Sample"
-    eyJraWQiOiJXX1RjblFWY0hBeTIwcTh6Q01jZEJ5cm9vdHciLCJhbGciOiJQUzI1NiJ9.eyJzdWIiOiJQU0RHQi1PQi1Vbmtub3duMDAxNTgwMDAwMUhRUXJaQUFYIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTQ0Ni9vYXV0aDIvdG9rZW4iLCJpc3MiOiJQU0RHQi1PQi1Vbmtub3duMDAxNTgwMDAwMUhRUXJaQUFYIiwiZXhwIjoxODI3NjY5MzMyLCJpYXQiOjE4Mjc2NTkzMzIsImp0aSI6IjE0MzIyNDM2MzQzNDM1NDQ1In0.qUq9q_Qa5eiVW5C6QzMvB1sX9Ttwz0Db8c2wmRXyrUWDpeoaolUYT_Diu1o33R4U4MME3nBMCdl0wQ1AVnuzjgV6s3TLcyxlphcoGXYVwOLsQBfbLKTzGiz10UORb3WQc9BwxhZVPDWyFXGlqUNwjPbaUslWoal9KMsbnXlBFKQd8GWjhS-kXHn66kAHwH-7DLZ_Z7D01oW2aFon5sWBZfKD_t9NeQJ9gdPs45ermSM45FixlKXkPPXiIq-_w5Hw1Zw_lEW6fVpWCS6IRz5pBtpHO8s_KESjxuPb1dzrV31AZC7BplWeaRRC5UslObbejw35P5v9CQqJR5Uc7_mX0Q
-    ```
-
-2. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
-    
-    ```
+    ``` curl
     curl -X POST \
     https://<IS_HOST>:9446/oauth2/token \
     --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
-    -d 'client_assertion_type=urn%3Aietf%3Aparams%3Aoauth%3Aclient-assertion-type%3Ajwt-bearer&code=<GENERATED_CODE>&grant_type=authorization_code&redirect_uri=<REDIRECT_URI>&client_assertion=<CLIENT_ASSERTION_JWT>&code_verifier=<CODE_VERIFIER>'
+    -d 'code=<GENERATED_CODE>&grant_type=authorization_code&redirect_uri=<REDIRECT_URI>&code_verifier=<CODE_VERIFIER>&client_id=<CLIENT_ID>'
     ```
 
 3. Upon successful token generation, you can obtain a token as follows:
