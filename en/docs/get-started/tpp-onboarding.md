@@ -96,6 +96,20 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
 
 5. Click **GENERATE KEYS** to generate production or sandbox keys. It generates the consumer key and consumer secret.
 
+6. If you are using **WSO2 Identity Server 6.0.0 or 6.1.0**, follow the below instructions after generating keys:
+
+    1. Sign in to the Management Console at `https://<IS_HOST>:9446/carbon/`.
+
+    2. In the **Main** tab, click **Identity -> Service Providers -> List**.
+
+    3. Select the Service Provider of the created application, and click the corresponding **Edit** icon.
+
+    4. Expand the **Claim Configuration** section.
+
+    5. Select **http://wso2.org/claims/username** from the **Subject Claim URI** list.
+
+    6. Click **Update** to save the configurations.
+
 ### Step 7: Generate application access token
 
 1. Go to the **Applications** tab in the Developer Portal.
