@@ -10,40 +10,42 @@ Once you register the application, generate an application access token.
 
 1. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
 
-   ??? note "Use the sample certificates for testing purposes. Click here to see how it is done..."
-       1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
-       - The client trust stores for the Identity Server and API Manager are located in the following locations:
-       - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
-       - `<IS_HOME>/repository/resources/security/client-truststore.jks`
-       2. Use the following commands to add the certificate to the client trust store:
-       ```shell
-       keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
-       ```
-       3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
-       - Add the relevant signature algorithm supported by the certificate to the following configuration.
-       - Sample certificate supports `SHA1withRSA` signature algorithm:
-       ```
-       supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
-       ```
-       - Configure the issuer of the certificate as below if the certificate needs to be skipped form revocation validation:
-       ```
-       [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
-       issuer_dn = "EMAILADDRESS=<EMAIL_ADDRESS>, CN=<COMMON_NAME>, OU=<ORGANIZATIONAL_UNIT>, O=<ORGANIZATION>, L=<LOCALITY>, ST=<STATE/PROVINCE>, C=<COUNTRY>"
-       ```
-       - Configure as below if the test certificates are used:
-       ```
-       [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
-       issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
-       ```
-       4. Restart the servers.
-       5. Download the following certificates and keys, and use them for testing purposes.
-       - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
-       [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
-       layer security testing purposes.
-       - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
-       [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
+    ??? note "Use the sample certificates for testing purposes. Click here to see how it is done..."
 
-``` curl
+        1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
+        
+        - The client trust stores for the Identity Server and API Manager are located in the following locations:
+        - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
+        - `<IS_HOME>/repository/resources/security/client-truststore.jks`
+        
+        2. Use the following commands to add the certificate to the client trust store:
+        ```shell
+        keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
+        ```
+        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations. Add the relevant signature algorithm supported by the certificate to the following configuration. Sample certificate supports `SHA1withRSA` signature algorithm:
+        ```
+        supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
+        ```
+        Configure the issuer of the certificate as below if the certificate needs to be skipped form revocation validation.
+        ```
+        [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+        issuer_dn = "EMAILADDRESS=<EMAIL_ADDRESS>, CN=<COMMON_NAME>, OU=<ORGANIZATIONAL_UNIT>, O=<ORGANIZATION>, L=<LOCALITY>, ST=<STATE/PROVINCE>, C=<COUNTRY>"
+        ```
+        Configure as below if the test certificates are used:
+        ```
+        [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+        issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
+        ```
+        4. Restart the servers.
+        
+        5. Download the following certificates and keys, and use them for testing purposes.
+        Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
+        [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
+        layer security testing purposes.
+        Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
+        [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
+
+   ``` curl
    curl -X POST \
    https://<IS_HOST>:9446/oauth2/token \
    --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
@@ -51,14 +53,15 @@ Once you register the application, generate an application access token.
    ```
 
 3. Upon successful token generation, you can obtain a token as follows:
-``` json
-{
-   "access_token":"eyJ4NXQiOiJOVGRtWmpNNFpEazNOalkwWXpjNU1tWm1PRGd3TVRFM01XWXdOREU1TVdSbFpEZzROemM0WkEiLCJraWQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZ19SUzI1NiIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhZG1pbkB3c28yLmNvbUBjYXJib24uc3VwZXIiLCJhdXQiOiJBUFBMSUNBVElPTiIsImF1ZCI6IlBTREdCLU9CLVVua25vd24wMDE1ODAwMDAxSFFRclpBQVgiLCJuYmYiOjE2NDY4OTEyNzIsImF6cCI6IlBTREdCLU9CLVVua25vd24wMDE1ODAwMDAxSFFRclpBQVgiLCJzY29wZSI6ImFjY291bnRzIiwiaXNzIjoiaHR0cHM6XC9cL2xvY2FsaG9zdDo5NDQ2XC9vYXV0aDJcL3Rva2VuIiwiY25mIjp7Ing1dCNTMjU2IjoieWJlcWFJbTUwMElNUHkxOVZrUGZIUlRKTnQ5cXZfUXQ1am1IZHQtYkptYyJ9LCJleHAiOjE2NDY4OTQ4NzIsImlhdCI6MTY0Njg5MTI3MiwianRpIjoiNGY4NDZkMDEtNGYwMS00OGEwLWI5YjItYjk3Yzc0ZmY1MWE4In0.cGQ8h0q9WqPM0VcqNLFz0fnWshPxuqNqJCwqierPjCS84pTK9vYVZqzy66-g-tNylFv9RzMYepOoFCFOcGfUAdtj_PR9GRLnRxKHgiCJMhiVEnZQ1kI0sSICqAB9ezGmtJgZwz2pqfnikCOFz-zTO0UumNDxJ48Qx6U4cr98aG34XLg4EKbvsCbIJuPPM1-sqRgPiQPKQ2EyNzHfRWeNPES5J8UhrIcVZ8pfrBqZ68eMFZxYQ7Bzg9Ch3PDcZyNYczGYFmNJD_pyoccZo5bSC7DDp9r4giQR2P_jL23N4AcKz0eww1FsTQOktBtRGrZ2-RT6zqh5kJ0E20BPYOv8Wg",
-   "scope":"accounts",
-   "token_type":"Bearer",
-   "expires_in":3600
-}
-```
+
+      ``` json
+       {
+           "access_token":"eyJ4NXQiOiJOVGRtWmpNNFpEazNOalkwWXpjNU1tWm1PRGd3TVRFM01XWXdOREU1TVdSbFpEZzROemM0WkEiLCJraWQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZ19SUzI1NiIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhZG1pbkB3c28yLmNvbUBjYXJib24uc3VwZXIiLCJhdXQiOiJBUFBMSUNBVElPTiIsImF1ZCI6IlBTREdCLU9CLVVua25vd24wMDE1ODAwMDAxSFFRclpBQVgiLCJuYmYiOjE2NDY4OTEyNzIsImF6cCI6IlBTREdCLU9CLVVua25vd24wMDE1ODAwMDAxSFFRclpBQVgiLCJzY29wZSI6ImFjY291bnRzIiwiaXNzIjoiaHR0cHM6XC9cL2xvY2FsaG9zdDo5NDQ2XC9vYXV0aDJcL3Rva2VuIiwiY25mIjp7Ing1dCNTMjU2IjoieWJlcWFJbTUwMElNUHkxOVZrUGZIUlRKTnQ5cXZfUXQ1am1IZHQtYkptYyJ9LCJleHAiOjE2NDY4OTQ4NzIsImlhdCI6MTY0Njg5MTI3MiwianRpIjoiNGY4NDZkMDEtNGYwMS00OGEwLWI5YjItYjk3Yzc0ZmY1MWE4In0.cGQ8h0q9WqPM0VcqNLFz0fnWshPxuqNqJCwqierPjCS84pTK9vYVZqzy66-g-tNylFv9RzMYepOoFCFOcGfUAdtj_PR9GRLnRxKHgiCJMhiVEnZQ1kI0sSICqAB9ezGmtJgZwz2pqfnikCOFz-zTO0UumNDxJ48Qx6U4cr98aG34XLg4EKbvsCbIJuPPM1-sqRgPiQPKQ2EyNzHfRWeNPES5J8UhrIcVZ8pfrBqZ68eMFZxYQ7Bzg9Ch3PDcZyNYczGYFmNJD_pyoccZo5bSC7DDp9r4giQR2P_jL23N4AcKz0eww1FsTQOktBtRGrZ2-RT6zqh5kJ0E20BPYOv8Wg",
+           "scope":"accounts",
+           "token_type":"Bearer",
+           "expires_in":3600
+       }
+      ```
 
 ### Initiating an account consent
 
@@ -717,38 +720,40 @@ In this section, you will be generating an access token using the authorization 
 
 1. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
 
-   ??? note "Use the sample certificates for testing purposes. Click here to see how it is done..."
-       1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
-       - The client trust stores for the Identity Server and API Manager are located in the following locations:
-       - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
-       - `<IS_HOME>/repository/resources/security/client-truststore.jks`
-       2. Use the following commands to add the certificate to the client trust store:
-       ```shell
-       keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
-       ```
-       3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
-          - Add the relevant signature algorithm supported by the certificate to the following configuration.
-          - Sample certificate supports `SHA1withRSA` signature algorithm:
-       ```
-       supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
-       ```
-       - Configure the issuer of the certificate as below if the certificate needs to be skipped form revocation validation:
-       ```
-       [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
-       issuer_dn = "EMAILADDRESS=<EMAIL_ADDRESS>, CN=<COMMON_NAME>, OU=<ORGANIZATIONAL_UNIT>, O=<ORGANIZATION>, L=<LOCALITY>, ST=<STATE/PROVINCE>, C=<COUNTRY>"
-       ```
-       - Configure as below if the test certificates are used:
-       ```
-       [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
-       issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
-       ```
-       4. Restart the servers.
-       5. Download the following certificates and keys, and use them for testing purposes.
-       - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
-       [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
-       layer security testing purposes.
-       - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
-       [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
+    ??? note "Use the sample certificates for testing purposes. Click here to see how it is done..."
+
+        1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
+        
+        - The client trust stores for the Identity Server and API Manager are located in the following locations:
+        - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
+        - `<IS_HOME>/repository/resources/security/client-truststore.jks`
+        
+        2. Use the following commands to add the certificate to the client trust store:
+        ```shell
+        keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
+        ```
+        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations. Add the relevant signature algorithm supported by the certificate to the following configuration. Sample certificate supports `SHA1withRSA` signature algorithm:
+        ```
+        supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
+        ```
+        Configure the issuer of the certificate as below if the certificate needs to be skipped form revocation validation.
+        ```
+        [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+        issuer_dn = "EMAILADDRESS=<EMAIL_ADDRESS>, CN=<COMMON_NAME>, OU=<ORGANIZATIONAL_UNIT>, O=<ORGANIZATION>, L=<LOCALITY>, ST=<STATE/PROVINCE>, C=<COUNTRY>"
+        ```
+        Configure as below if the test certificates are used:
+        ```
+        [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+        issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
+        ```
+        4. Restart the servers.
+        
+        5. Download the following certificates and keys, and use them for testing purposes.
+        Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
+        [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
+        layer security testing purposes.
+        Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
+        [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
 
     ``` curl
     curl -X POST \
