@@ -19,11 +19,17 @@ Once you register the application, generate an application access token.
        keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
        ```
        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
-       - Add `SHA1withRSA` as a supported signature algorithm:
+          - Add the relevant signature algorithm supported by the certificate to the following configuration.
+          - Sample certificate supports `SHA1withRSA` signature algorithm:
        ```
        supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
        ```
-       - Update the following tag according to the sample:
+       - Configure the issuer of the certificate as below if the certificate needs to be skipped form revocation validation:
+       ```
+       [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+       issuer_dn = "EMAILADDRESS=<EMAIL_ADDRESS>, CN=<COMMON_NAME>, OU=<ORGANIZATIONAL_UNIT>, O=<ORGANIZATION>, L=<LOCALITY>, ST=<STATE/PROVINCE>, C=<COUNTRY>"
+       ```
+       - Configure as below if the test certificates are used:
        ```
        [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
        issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
@@ -527,16 +533,22 @@ In this section, you will be generating an access token using the authorization 
            ```shell
            keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
            ```
-        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
-            - Add `SHA1withRSA` as a supported signature algorithm:
-              ```
-              supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
-              ```
-            - Update the following tag according to the sample:
-              ```
-              [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
-              issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
-              ```
+       3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
+          - Add the relevant signature algorithm supported by the certificate to the following configuration.
+          - Sample certificate supports `SHA1withRSA` signature algorithm:
+       ```
+       supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
+       ```
+       - Configure the issuer of the certificate as below if the certificate needs to be skipped form revocation validation:
+       ```
+       [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+       issuer_dn = "EMAILADDRESS=<EMAIL_ADDRESS>, CN=<COMMON_NAME>, OU=<ORGANIZATIONAL_UNIT>, O=<ORGANIZATION>, L=<LOCALITY>, ST=<STATE/PROVINCE>, C=<COUNTRY>"
+       ```
+       - Configure as below if the test certificates are used:
+       ```
+       [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+       issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
+       ```
         4. Restart the servers.
         5. Download the following certificates and keys, and use them for testing purposes.
             - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
