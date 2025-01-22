@@ -77,7 +77,8 @@ According to OAuth 2.0, the authorization server and the client need to establis
 meets the security requirements of the authorization server. The client has the option of choosing the authentication 
 method. The OpenID specification mentions a set of client authentication methods to authenticate the clients to the 
 authorization server when using the token endpoint. Regulatory applications can use either `private_key_jwt` 
-or `tls_client_auth` as the authentication method.
+or `tls_client_auth` as the authentication method. The NextGenPSD2 implementation guidelines specify `Oauth 2.0 Mutual 
+TLS Client Authentication and Certificate Bound Access Tokens` as the client authentication mechanism.
 
 
 

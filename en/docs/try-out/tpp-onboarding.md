@@ -109,73 +109,47 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
 
 4. Note down the **Consumer Key** for your application.
 
-5. Generate the client assertion by signing the following JSON payload using supported algorithms.
+   5. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
 
-    ??? note "Use the sample certificates for signing and transports layer security testing purposes. Click here to see how it is done..."
-        1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
-            - The client trust stores for the Identity Server and API Manager are located in the following locations:
-               - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
-               - `<IS_HOME>/repository/resources/security/client-truststore.jks`
-        2. Use the following commands to add the certificate to the client trust store:
-               ```shell
-               keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
-               ```
-        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
-            - Add `SHA1withRSA` as a supported signature algorithm:
-               ```
-               supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
-               ```
-            - Update the following tag according to the sample:
-               ```
-               [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
-               issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OpenBanking Pre-Production Issuing CA, OU=OpenBanking, O=WSO2 (UK) LIMITED, L=COL, ST=WP, C=LK"
-               ```
-        4. Restart the servers.
-        5. Download the following certificates and keys, and use them for testing purposes.
-            - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
-              [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
-              layer security testing purposes.
-            - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
-              [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
+      ??? note "Use the sample certificates for testing purposes. Click here to see how it is done..."
+          1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
+          - The client trust stores for the Identity Server and API Manager are located in the following locations:
+          - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
+          - `<IS_HOME>/repository/resources/security/client-truststore.jks`
+          2. Use the following commands to add the certificate to the client trust store:
+          ```shell
+          keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
+          ```
+          3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations:
+             - Add the relevant signature algorithm supported by the certificate to the following configuration.
+             - Sample certificate supports `SHA1withRSA` signature algorithm:
+          ```
+          supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
+          ```
+          - Configure the issuer of the certificate as below if the certificate needs to be skipped form revocation validation:
+          ```
+          [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+          issuer_dn = "EMAILADDRESS=<EMAIL_ADDRESS>, CN=<COMMON_NAME>, OU=<ORGANIZATIONAL_UNIT>, O=<ORGANIZATION>, L=<LOCALITY>, ST=<STATE/PROVINCE>, C=<COUNTRY>"
+          ```
+          - Configure as below if the test certificates are used:
+          ```
+          [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
+          issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
+          ```
+          4. Restart the servers.
+          5. Download the following certificates and keys, and use them for testing purposes.
+          - Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
+          [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
+          layer security testing purposes.
+          - Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
+          [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.    
 
-    ``` tab='Format'
-    
-    {
-    "alg": "<The algorithm used for signing.>",
-    "kid": "<The thumbprint of the certificate.>",
-    "typ": "JWT"
-    }
-     
-    {
-    "iss": "<This is the issuer of the token. For example, client ID of your application>",
-    "sub": "<This is the subject identifier of the issuer. For example, client ID of your application>",
-    "exp": <This is the epoch time of the token expiration date/time>,
-    "iat": <This is the epoch time of the token issuance date/time>,
-    "jti": "<This is an incremental unique value>",
-    "aud": "<This is the audience that the ID token is intended for. For example, https://<IS_HOST>:9446/oauth2/token>"
-    }
-     
-    <signature: The client assertion must be signed using the private key of the application certificate.>
-    ```
-    
-    ``` tab='Sample'
-    eyJraWQiOiIyTUk5WFNLaTZkZHhDYldnMnJoRE50VWx4SmMiLCJhbGciOiJQUzI1NiJ9.eyJzdWIiOiJZRGNHNGY0OUcxM2tXZlZzbnFkaHo4Z2JhMndhIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTQ0Ni9vYXV0aDIvdG9rZW4iLCJpc3MiOiJZRGNHNGY0OUcxM2tXZlZzbnFkaHo4Z2JhMndhIiwiZXhwIjoxNjI4Nzc0ODU1LCJpYXQiOjE2Mjg3NDQ4NTUsImp0aSI6IjE2Mjg3NDQ4NTUxOTQifQ.PkKRSDtkCyXabzLgGwAoy5C3jSORVU8X8sGDVrKpetPnjbCNx2wPlH-PzWUU1n05gdC7lDmoU21nsKLF_nE3iC-9hKEy4YsvJ7PFjNBPMOMUYDhRh9PCkPnec6f042zonb_ZifBq8r1aScUDoZ1L0hq7yjfZubwReFCWbESQ8PauuBuHRl7__kWvglthfgruQ7TTiIWiM60LWYct5TQWSF1IDcYGy03l-9OV5l260JBHPT4heLXzUQTarsh0PoWpv09xYLu8uGCexEt-HtRH8qwJGiFi5PiCA09_KyWVqbrcdjBloCmD5Kiqa1X0AnEbf9kKs0fqvcl7NN5-yVQUjg
-    ```
-    
-    ??? tip "The value of the `aud` claim should contain the same value as the `Identity Provider Entity ID`. Click here to see the Identity Provider Entity ID..."
-        a. Sign in to the Management Console of the Identity Server at `<https://<localhost>t:9446/carbon>`.
-    
-        b. In the **Main** menu, go to **Home > Identity > Identity Providers > Resident**.
-    
-        c. View the value in **Resident Identity Provider > Inbound Authentication Configuration > OAuth2/OpenID Connect Configuration > Identity Provider Entity ID**. By default this value is set to `https://<APIM_HOST>:8243/token` .
-
-6. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
-    ``` curl
-    curl -X POST \
-    https://<IS_HOST>:9446/oauth2/token \
-    --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
-    -d 'grant_type=client_credentials&scope=accounts%20openid&client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer&client_assertion=<CLIENT_ASSERTION_JWT>&redirect_uri=<REDIRECT_URI>&client_id=<CLIENT_ID>'
-    ```
+      ``` curl
+      curl -X POST \
+      https://<IS_HOST>:9446/oauth2/token \
+      --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
+      -d 'grant_type=client_credentials&scope=accounts&client_id=<CLIENT_ID>'
+      ```
 
 7. Upon successful token generation, you can obtain an access token as follows:
 
