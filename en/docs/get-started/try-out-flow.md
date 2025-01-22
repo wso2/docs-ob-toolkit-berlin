@@ -47,7 +47,7 @@ Once you register the application, generate an application access token.
    curl -X POST \
    https://<IS_HOST>:9446/oauth2/token \
    --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
-   -d 'grant_type=client_credentials&scope=accounts%20openid&client_id=<CLIENT_ID>'
+   -d 'grant_type=client_credentials&scope=accounts&client_id=<CLIENT_ID>'
    ```
 
 2. Upon successful token generation, you can obtain a token as follows:

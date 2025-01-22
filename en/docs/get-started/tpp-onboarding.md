@@ -159,7 +159,7 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
       curl -X POST \
       https://<IS_HOST>:9446/oauth2/token \
       --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
-      -d 'grant_type=client_credentials&scope=accounts%20openid&client_id=<CLIENT_ID>'
+      -d 'grant_type=client_credentials&scope=accounts&client_id=<CLIENT_ID>'
       ```
 
 7. Upon successful token generation, you can obtain an access token as follows:
