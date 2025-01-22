@@ -204,7 +204,7 @@ the consent page.
 
      ``` toml
      [open_banking_berlin.consent.sca]
-     oauth_metadata_endpoint = "https://localhost:8243/.well-known/openid-configuration"
+     oauth_metadata_endpoint = "https://<APIM_HOST>:8243/.well-known/openid-configuration"
      ```
 
 18. Configure the base URL for payment submission as follows:
