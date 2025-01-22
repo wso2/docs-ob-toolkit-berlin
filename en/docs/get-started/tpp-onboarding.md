@@ -2,7 +2,7 @@ This page explains how to onboard the TPP applications using the WSO2 API Manage
 
 ### Step 1: Sign up as a TPP
 
-1. Go to the Developer portal at <https://localhost:9443/devportal>.
+1. Go to the Developer portal at <https://<APIM_HOST>:9443/devportal>.
 
 2. Go to the **Applications** tab. ![applications_tab](../assets/img/get-started/quick-start-guide/tpp-onboarding/applications-tab.png)
 
@@ -18,7 +18,7 @@ This page explains how to onboard the TPP applications using the WSO2 API Manage
 
 ### Step 2: Sign in to the Developer Portal as the TPP
 
-1. Now, sign in to the [Developer portal](https://localhost:9443/devportal) as the TPP.
+1. Now, sign in to the [Developer portal](https://<APIM_HOST>:9443/devportal) as the TPP.
 
 2. Enter the username and the password you entered when signing up as a TPP.
 
@@ -151,7 +151,7 @@ The TPP application requires a Client ID (Consumer Key) to access the subscribed
 
    ``` curl
    curl -X POST \
-   https://localhost:9446/oauth2/token \
+   https://<IS_HOST>:9446/oauth2/token \
    --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
    -d 'grant_type=client_credentials&scope=accounts%20openid&client_id=<CLIENT_ID>'
    ```

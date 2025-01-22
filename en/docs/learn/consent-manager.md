@@ -191,7 +191,7 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
         ``` javascript
         window.env = {
             // This option can be retrieved in "src/index.js" with "window.env.API_URL".
-            SERVER_URL: 'https://localhost:9446',
+            SERVER_URL: 'https://<IS_HOST>:9446',
             TENANT_DOMAIN: 'carbon.super',
             NUMBER_OF_CONSENTS: 25,
             VERSION: '3.0.0'
@@ -212,11 +212,11 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
     ``` xml
     <context-param>
     	<param-name>identityServerBaseUrl</param-name>
-    	<param-value>https://localhost:9446</param-value>
+    	<param-value>https://<IS_HOST>:9446</param-value>
     </context-param>
     <context-param>
     	<param-name>apiManagerServerUrl</param-name>
-    	<param-value>https://localhost:8243</param-value>
+    	<param-value>https://<APIM_HOST>:8243</param-value>
     </context-param>
     <context-param>
     	<param-name>scpClientKey</param-name>

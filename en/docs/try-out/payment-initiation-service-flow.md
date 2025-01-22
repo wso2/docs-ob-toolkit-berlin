@@ -38,7 +38,7 @@ Once you register the application, generate an application access token.
 
 ``` curl
    curl -X POST \
-   https://localhost:9446/oauth2/token \
+   https://<IS_HOST>:9446/oauth2/token \
    --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
    -d 'grant_type=client_credentials&scope=payments%20openid&client_id=<CLIENT_ID>'
    ```
@@ -680,7 +680,7 @@ Header: X-Request-ID: f044aa8c-eee3-4d2b-8c22-49652bdf1531
 **GET /periodic-payments/{payment-product}/{paymentId}**
 
 ``` tab="Request"
-curl -X GET 'https://localhost:8243/xs2a/v1/periodic-payments/sepa-credit-transfers/31169aed-3a46-4404-9035-99de2e776a60' \
+curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/periodic-payments/sepa-credit-transfers/31169aed-3a46-4404-9035-99de2e776a60' \
 -H 'PSU-IP-Address: 127.0.1.1' \
 -H 'PSU-ID-Type: email' \
 -H 'X-Request-ID: eea1ced4-2ae3-499a-9e10-192d8e2ecb7a' \
@@ -729,7 +729,7 @@ This request is applicable for instant payments, bulk payments, and periodic pay
 Given below is a sample request for a periodic payment:
 
 ``` tab="Request"
-curl -X GET 'https://localhost:8243/xs2a/v1/periodic-payments/sepa-credit-transfers/31169aed-3a46-4404-9035-99de2e776a60/status' \
+curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/periodic-payments/sepa-credit-transfers/31169aed-3a46-4404-9035-99de2e776a60/status' \
 -H 'PSU-IP-Address: 127.0.1.1' \
 -H 'PSU-ID-Type: email' \
 -H 'X-Request-ID: d029c37a-d464-4304-b175-7c27fd7f5728' \
@@ -786,7 +786,7 @@ To cancel an already submitted payment
 Sample DELETE Request for a bulk payment cancellation without authorization is given below:
 
 ``` tab="Request"
-curl -X DELETE 'https://localhost:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517' \
+curl -X DELETE 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517' \
 -H 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' \
 -H 'PSU-IP-Address: 127.0.0.1' \
 -H 'TPP-Signature-Certificate: <SIGNATURE_CERTIFICATE>' \
@@ -809,7 +809,7 @@ Header: 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b'
 Sample DELETE Request for a bulk payment cancellation with authorization is given below:
 
 ``` tab="Request"
-curl -X DELETE 'https://localhost:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517' \
+curl -X DELETE 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517' \
 -H 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' \
 -H 'PSU-IP-Address: 127.0.0.1' \
 -H 'TPP-Signature-Certificate: <SIGNATURE_CERTIFICATE>' \
@@ -857,7 +857,7 @@ If the bank returns `202` with the above payload for the `DELETE` request, the `
 A sample POST cancellation authorisations request for bulk payments type is given below:
 
 ``` tab="Request"
-curl -X POST 'https://localhost:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/697a4c4b-b939-4a18-8bfa-eae30ea90804/cancellation-authorisations' \
+curl -X POST 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/697a4c4b-b939-4a18-8bfa-eae30ea90804/cancellation-authorisations' \
 -H 'Content-Type: application/json' \
 -H 'PSU-IP-Address: 127.0.1.1' \
 -H 'PSU-ID-Type: email' \
@@ -899,7 +899,7 @@ ASPSP-SCA-Approach: REDIRECT
 If the `POST cancellation-authorisations` request is successful, the TPP should send the authorization request as follows to inform the bank to cancel the payment. Then the bank displays a page similar to the consent page asking the PSU to approve or deny the cancellation authorization. 
 
 ```
-https://localhost:9446/oauth2/authorize/?scope=pis:<payment_id>&response_type=code&redirect_uri=<redirect_uri>&state=55e9d72a-218c-44bb-824e-cf0d61c3fdb1&code_challenge_method=S256&client_id=<client_id>&code_challenge=re6uXq06M40gS82XcmUM6s9SQVTxtY5bLSYCNLuS1XE
+https://<IS_HOST>:9446/oauth2/authorize/?scope=pis:<payment_id>&response_type=code&redirect_uri=<redirect_uri>&state=55e9d72a-218c-44bb-824e-cf0d61c3fdb1&code_challenge_method=S256&client_id=<client_id>&code_challenge=re6uXq06M40gS82XcmUM6s9SQVTxtY5bLSYCNLuS1XE
 ```
 
 Given below is a sample page for cancellation authorization for bulk payment type:

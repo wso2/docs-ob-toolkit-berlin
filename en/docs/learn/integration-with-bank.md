@@ -332,10 +332,10 @@ CoF must be updated individually.
 - Replace the following in the sequence file with the core banking system’s API endpoints for production/sandbox environments:
     - For Accounts (card-accounts) and Payments:
         1. Open the `<APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/dynamic-endpoint-insequence-1.3.6` file.
-        2. Replace the `https://localhost:9443/api/openbanking/berlin/backend/services/accounts` URL.
+        2. Replace the `https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/accounts` URL.
     - For CoF submission request:
         1. Open the `<APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/cof-consents-dynamic-endpoint-sequence-1.3.6` file.
-        2. Replace the `https://localhost:9443/api/openbanking/berlin/backend/services/funds-confirmations` URL.
+        2. Replace the `https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/funds-confirmations` URL.
 
 
 ## Accounts Retrieval Endpoints

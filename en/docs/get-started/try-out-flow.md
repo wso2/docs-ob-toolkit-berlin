@@ -39,7 +39,7 @@ Once you register the application, generate an application access token.
 
    ``` curl
    curl -X POST \
-   https://localhost:9446/oauth2/token \
+   https://<IS_HOST>:9446/oauth2/token \
    --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
    -d 'grant_type=client_credentials&scope=accounts%20openid&client_id=<CLIENT_ID>'
    ```
