@@ -15,8 +15,8 @@
 # under the License.
 
 # Project information
-site_name: WSO2 Open Banking Berlin Toolkit Documentation
-site_description: Documentation for WSO2 Open Banking Berlin Toolkit
+site_name: NextGenPSD2 Reference Toolkit Documentation
+site_description: Documentation for NextGenPSD2 Reference Toolkit
 site_author: WSO2
 site_url: https://berlin.ob.docs.wso2.com/en/latest/
 
@@ -26,7 +26,7 @@ repo_url: https://github.com/wso2/docs-ob-toolkit-berlin
 edit_uri: https://github.com/wso2/docs-ob-toolkit-berlin/edit/main/en/docs/
 
 # Copyright
-copyright: WSO2 Open Banking Berlin Toolkit - Documentation
+copyright: NextGenPSD2 Reference Toolkit - Documentation
 
 # Configuration
 theme: material
@@ -50,7 +50,7 @@ nav:
     - 'Open Banking': get-started/open-banking.md
     - 'Open Banking Requirements': get-started/open-banking-requirements.md
     - 'Regulations and Standards': get-started/regulations-and-standards.md
-    - 'WSO2 Open Banking Berlin Toolkit': get-started/wso2-open-banking-berlin-toolkit.md
+    - 'NextGenPSD2 Reference Toolkit': get-started/wso2-open-banking-berlin-toolkit.md
     - 'About this Release': get-started/about-this-release.md
     - 'Quick Start Guide':
       - 'Get Started': get-started/quick-start-guide.md
@@ -132,17 +132,17 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
-plugins:
-  - search
-  - markdownextradata: {}
-  - redirects:
-      redirect_maps:
-        'install-and-setup/upgrading-the-solution/upgrading-the-solution.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
-        'install-and-setup/upgrading-the-solution/upgrading-wso2-api-manager-320.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
-        'install-and-setup/upgrading-the-solution/upgrading-wso2-identity-server.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
-        'install-and-setup/upgrading-the-solution/upgrading-wso2-api-manager-400.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
-        'install-and-setup/upgrading-the-solution/open-banking-data-migration.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
-        'install-and-setup/upgrading-the-solution/modifications-after-migration.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
+#plugins:
+#  - search
+##  - markdownextradata: {}
+#  - redirects:
+#      redirect_maps:
+#        'install-and-setup/upgrading-the-solution/upgrading-the-solution.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
+#        'install-and-setup/upgrading-the-solution/upgrading-wso2-api-manager-320.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
+#        'install-and-setup/upgrading-the-solution/upgrading-wso2-identity-server.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
+#        'install-and-setup/upgrading-the-solution/upgrading-wso2-api-manager-400.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
+#        'install-and-setup/upgrading-the-solution/open-banking-data-migration.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
+#        'install-and-setup/upgrading-the-solution/modifications-after-migration.md': 'https://berlin.ob.docs.wso2.com/en/latest/install-and-setup/upgrading-the-solution/'
 
 # Extra
 extra_css:

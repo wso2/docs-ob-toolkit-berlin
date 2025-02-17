@@ -1,13 +1,13 @@
-WSO2 Open Banking Berlin Toolkit is a purpose-built solution for regulatory compliance that supports PSD2. Instead of 
-building an open banking solution from scratch, you can use WSO2 Open Banking Berlin Toolkit to meet all open 
+NextGenPSD2 Reference Toolkit is a purpose-built solution for regulatory compliance that supports PSD2. Instead of 
+building an open banking solution from scratch, you can use NextGenPSD2 Reference Toolkit to meet all open 
 banking requirements with additional benefits beyond compliance. This toolkit runs on top of the following WSO2 products:
 
 - WSO2 Open Banking Accelerator 3.0
-- WSO2 Identity Server 6.1.0, 6.0.0 or 5.11.0
-- WSO2 API Manager 4.2.0 or 4.1.0 or 4.0.0
+- WSO2 Identity Server 6.1.0
+- WSO2 API Manager 4.2.0
 
 !!! note
-    The WSO2 Open Banking Berlin Toolkit is built by customizing the WSO2 Open Banking Accelerator and helps you 
+    The NextGenPSD2 Reference Toolkit is built by customizing the WSO2 Open Banking Accelerator and helps you 
     comply with the NextGenPSD2 framework. For more information on the accelerator, see 
     the [WSO2 Open Banking Accelerator Documentation](https://ob.docs.wso2.com/).
 
@@ -20,7 +20,7 @@ management, and access authorization among numerous other features to set up an 
 
 ## Product Matrix
 
-Given below is a product matrix for different versions of WSO2 Open Banking Berlin Toolkit:
+Given below is a product matrix for different versions of NextGenPSD2 Reference Toolkit:
 
 
 | Version | Mandatory Components | 
@@ -29,12 +29,12 @@ Given below is a product matrix for different versions of WSO2 Open Banking Berl
 
 ## Compatible Base Product Versions
 
-Given below is the compatible base product matrix for WSO2 Open Banking Berlin Toolkit 1.0.0:
+Given below is the compatible base product matrix for NextGenPSD2 Reference Toolkit 1.0.0:
 
-| Base Product              | Combination 01      | Combination 02   |
-|---------------------------|---------------------|------------------|
-| WSO2 Identity Server     | 5.11.0              | 6.0.0 <br/> 6.1.0 |
-| WSO2 API Manager         | 4.1.0 <br/> 4.0.0   | 4.2.0             |
+| Base Product              | Version |
+|---------------------------|--------|
+| WSO2 Identity Server     | 6.1.0  |
+| WSO2 API Manager         | 4.2.0  |
 
 ## Prerequisites for a Deployment
 
@@ -116,7 +116,7 @@ Listed below are the prerequisites for a successful deployment:
 
 ## Compatibility 
 
-WSO2 Open Banking Berlin Toolkit 1.0.0 is supported on the following platforms:
+NextGenPSD2 Reference Toolkit 1.0.0 is supported on the following platforms:
 
 !!!note
     To use MySQL 8.0, you need to create the database with `charset latin1` as shown below:

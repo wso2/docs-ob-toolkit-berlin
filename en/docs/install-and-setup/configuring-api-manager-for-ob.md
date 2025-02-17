@@ -1,4 +1,4 @@
-WSO2 Open Banking Berlin Toolkit contains TOML-based configurations. All the server-level configurations of the 
+NextGenPSD2 Reference Toolkit contains TOML-based configurations. All the server-level configurations of the 
 API Manager instance can be applied using a single configuration file, which is the `deployment.toml` file. 
 
 ## Configuring deployment.toml

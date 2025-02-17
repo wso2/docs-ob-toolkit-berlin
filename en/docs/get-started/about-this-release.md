@@ -1,8 +1,8 @@
-WSO2 Open Banking Berlin Toolkit 1.0 provides the technology requirements that banks need to digitally transform and become 
+NextGenPSD2 Reference Toolkit 1.0 provides the technology requirements that banks need to digitally transform and become 
 regulatory-compliant with Payment Service Directive 2 (PSD2) and the Berlin Group's NextGenPSD2 v1.3.6 specification.
 
 This toolkit is based on WSO2 Open Banking 3.0 and contains specific feature customisations to satisfy open banking 
-requirements of NextGenPSD2. You can use WSO2 Open Banking Berlin Toolkit to meet all legislative requirements 
+requirements of NextGenPSD2. You can use NextGenPSD2 Reference Toolkit to meet all legislative requirements 
 with additional benefits beyond compliance. This toolkit comprises three modules:
 
 - **WSO2 Open Banking Identity Server Berlin Toolkit** runs on top of WSO2 Identity Server.

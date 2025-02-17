@@ -1,7 +1,7 @@
 Once you have successfully prepared the environment for the deployment, you can configure the databases.
 
 !!! note 
-    WSO2 Open Banking Berlin Toolkit is [compatible](prerequisites.md#compatibility) with the following DBMSs:
+    NextGenPSD2 Reference Toolkit is [compatible](prerequisites.md#compatibility) with the following DBMSs:
     
      - MySQL 8.0
      - Oracle 19c

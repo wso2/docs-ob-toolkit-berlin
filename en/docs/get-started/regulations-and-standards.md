@@ -29,7 +29,7 @@ developed by the Berlin Group to define the interfaces that a TPP will use, as w
 security concerns. For more details
 
 !!! note
-     WSO2 Open Banking Berlin Toolkit is compliant with the Berlin Group's NextGenPSD2. 
+     NextGenPSD2 Reference Toolkit is compliant with the Berlin Group's NextGenPSD2. 
 
 ## Other regulations and standards
 

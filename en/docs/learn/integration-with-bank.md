@@ -209,7 +209,7 @@ A Swagger definition for the back end is available in the following location:
 
 ### Payments Submission
 
-In the Open Banking payments flow, the WSO2 Open Banking Berlin toolkit manages the consent initiation and
+In the Open Banking payments flow, the NextGenPSD2 Reference Toolkit manages the consent initiation and
 authorisation. The integration of the payments flow with the core banking system is used during the payment authorisation flow.
 
 
@@ -344,7 +344,7 @@ In some banks, some PSUs may have a certain number of accounts, but not all acco
 externally or to make a payment online. Therefore, in a bank, the shareable account list and the payable account list can
 either be the same or different.
 
-In the default WSO2 Open Banking Berlin Toolkit, at least two APIs are expected to return shareable and payable accounts.
+In the default NextGenPSD2 Reference Toolkit, at least two APIs are expected to return shareable and payable accounts.
 When passing the `user_id` a JSON response must be returned. Then it automatically loads the accounts list on the consent page.
 
 ### Payable Accounts API

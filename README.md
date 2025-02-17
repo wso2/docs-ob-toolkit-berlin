@@ -1,4 +1,4 @@
-# WSO2 Open Banking Berlin Toolkit Documentation
+# NextGenPSD2 Reference Toolkit Documentation
 
 This repository contains the source code for WSO2 Open Banking Toolkit - Berlin documentation
 

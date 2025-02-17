@@ -17,51 +17,35 @@ Payment Instrument Issuer Service (PIIS).
 9. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/psd2-confirmation-of-funds-consent 2.0 20190607.yaml` file.
    ![api_definition](../assets/img/try-out/cof-flow/new_api_definition.png)
 10. Click **Import**. The changes are auto-saved.
-11. Add a custom policy. Follow the instructions given below according to the API Manager version you are using:
+11. Go to **Develop -> API Configurations -> Policies** in the left menu pane to add a custom policy. ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
 
-    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.0.0..."
+12. On the **Policy List** card, click on **Add New Policy**.
 
-        1. Select **Runtime** from the left menu panel. 
-        2. Click the **Edit** button under **Request > Message Mediation**. ![edit_message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
-        3. Select the **Custom Policy** option.
-        4. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/cof-consents-dynamic-endpoint-sequence-1.3.6.xml` 
-            insequence file and click **Select**.
-        5. Scroll down and click **SAVE**.
+13. Fill in the **Create New Policy**.
 
-    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.1.0..."
+14. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/cof-consents-dynamic-endpoint-sequence-1.3.6.xml` insequence file.
 
-        1. Go to **Develop -> API Configurations -> Policies** in the left menu pane.<br><br>
-        <div style="width:40%">
-        ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
-        </div>
+15. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: <br><br>
+   <div style="width:35%">
+   ![successful](../assets/img/get-started/quick-start-guide/successful.png)
+   </div>
 
-        2. On the **Policy List** card, click on **Add New Policy**.
+16. Expand the API endpoint you want from the list of API endpoints. For example: ![expand_api_endpoint](../assets/img/get-started/quick-start-guide/expand-api-endpoint.png)
 
-        3. Fill in the **Create New Policy**.
+17. Expand the HTTP method from the API endpoint you selected. For example: ![expand_http_method](../assets/img/get-started/quick-start-guide/expand-http-method.png)
 
-        4. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/ConfirmationOfFunds/cof-consents-dynamic-endpoint-sequence-1.3.6.xml` insequence file.
+18. Drag and drop the previously created policy to the **Request Flow** of the API endpoint. ![request_flow](../assets/img/get-started/quick-start-guide/request-flow.png)
 
-        5. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: <br><br>
-        <div style="width:35%">
-        ![successful](../assets/img/get-started/quick-start-guide/successful.png)
-        </div>
+19. Select **Apply to all resources** and click **Save**.
 
-        6. Expand the API endpoint you want from the list of API endpoints. For example: ![expand_api_endpoint](../assets/img/get-started/quick-start-guide/expand-api-endpoint.png)
+20. Scroll down and click **Save**.
 
-        7. Expand the HTTP method from the API endpoint you selected. For example: ![expand_http_method](../assets/img/get-started/quick-start-guide/expand-http-method.png)
-
-        8. Drag and drop the previously created policy to the **Request Flow** of the API endpoint. ![request_flow](../assets/img/get-started/quick-start-guide/request-flow.png)
-
-        9. Select **Apply to all resources** and click **Save**.
-
-        10. Scroll down and click **Save**.
-
-12. Go to **Deployments** using the left menu pane and click **Deploy New Revision**.
-13. Provide a description for the new revision.
-14. Select `localhost` from the dropdown list.
-15. Click **Deploy**.
-16. Go to **Overview** using the left menu panel.
-17. Click **Publish**.
+21. Go to **Deployments** using the left menu pane and click **Deploy New Revision**. 
+22. Provide a description for the new revision. 
+23. Select `localhost` from the dropdown list. 
+24. Click **Deploy**. 
+25. Go to **Overview** using the left menu panel. 
+26. Click **Publish**.
 
 ### Subscribing to NextGenPSD2XS2A API v2 
 
@@ -199,7 +183,7 @@ https://<APIM_HOST>:8243/xs2a/v2/consents/confirmation-of-funds \
 
 - An account reference is used to address specific accounts. It is a combination of an account identifier and optionally
   a currency.
-- WSO2 Open Banking Berlin toolkit supports IBAN, BBAN and Masked PAN account identifier types. These can be configured
+- NextGenPSD2 Reference Toolkit supports IBAN, BBAN and Masked PAN account identifier types. These can be configured
   using the following configuration in the `<IS_HOME>/repository/conf/deployment.toml` file.
 
     ``` toml
@@ -490,7 +474,7 @@ number of PSUs in a multi-level authorisation context.
 
 
     !!! tip
-        The WSO2 Open Banking Berlin Toolkit requires PKCE support for authorization. The `state` and `code challenge 
+        The NextGenPSD2 Reference Toolkit requires PKCE support for authorization. The `state` and `code challenge 
         method` values indicate the PKCE usage. For more information, see 
         [Consent Authorization with PKCE](../learn/consent-authorization-intro.md).
 

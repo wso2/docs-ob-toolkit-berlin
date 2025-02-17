@@ -56,7 +56,7 @@ The TPP user needs to create certificates to validate whether the TPP is registe
 It is verified in this step. You can use the sample certificates attached below:
 
 !!! note
-    WSO2 Open Banking Berlin Toolkit provides Electronic Identification and Trust Services (eIDAS) validation services
+    NextGenPSD2 Reference Toolkit provides Electronic Identification and Trust Services (eIDAS) validation services
     for TPP validation.
 
 1. Download the root and issuer certificates found [here](../assets/attachments/CA_Cert.zip).

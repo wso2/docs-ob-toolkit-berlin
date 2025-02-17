@@ -1,4 +1,4 @@
-This page provides instructions to deploy the NextGenPsd2XS2AFramework API. WSO2 Open Banking Berlin Toolkit 
+This page provides instructions to deploy the NextGenPsd2XS2AFramework API. NextGenPSD2 Reference Toolkit 
 provides the Account Information Service (AIS), Payment Initiation Service (PIS), and Confirmation on the Availability 
 of Funds Service (FCS) via the NextGenPSD2XS2AFramework API. 
 
@@ -30,64 +30,37 @@ of Funds Service (FCS) via the NextGenPSD2XS2AFramework API.
 
 13. Toggle the **Schema Validation** button to enable Schema Validation. ![schema-validation](../assets/img/get-started/quick-start-guide/schema-validation.png)
 
-14. Add a custom policy. Follow the instructions given below according to the API Manager version you are using:
+14. Go to **Develop -> API Configurations -> Policies** in the left menu pane to add a custom policy. ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
 
-    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.0.0..."
+15. On the **Policy List** card, click on **Add New Policy**.
+16. Fill in the **Create New Policy**.
+17. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/dynamic-endpoint-insequence-1.3.6.xml` insequence file. ![uplaoad_insequence](../assets/img/try-out/account-flow/upload-insequence.png)
 
-        15. Click the **Edit** button under **Request > Message Mediation**. ![edit_message_mediation](../assets/img/get-started/quick-start-guide/edit-message-mediation.png)
-        
-        16. Select the **Custom Policy** option.
-        
-        17. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/dynamic-endpoint-insequence-1.3.6.xml` insequence file. ![uplaoad_insequence](../assets/img/try-out/account-flow/upload-insequence.png)
-        
-        18. Click **Select**.
-        
-        19. Scroll down and click **SAVE**.
+18. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: ![successful](../assets/img/get-started/quick-start-guide/successful.png)
 
-    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.1.0..."
+19. Expand the API endpoint you want from the list of API endpoints. For example: ![expand_api_endpoint](../assets/img/get-started/quick-start-guide/expand-api-endpoint.png)
 
-        15. Go to **Develop -> API Configurations -> Policies** in the left menu pane.<br><br>
-        <div style="width:40%">
-        ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
-        </div>
-        
-        2. On the **Policy List** card, click on **Add New Policy**.
-        
-        3. Fill in the **Create New Policy**.
-        
-        4. Upload the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/dynamic-endpoint-insequence-1.3.6.xml` insequence file. ![uplaoad_insequence](../assets/img/try-out/account-flow/upload-insequence.png)
-        
-        5. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: <br><br>
-        <div style="width:35%">
-        ![successful](../assets/img/get-started/quick-start-guide/successful.png)
-        </div>
-        
-        6. Expand the API endpoint you want from the list of API endpoints. For example: ![expand_api_endpoint](../assets/img/get-started/quick-start-guide/expand-api-endpoint.png)
-        
-        7. Expand the HTTP method from the API endpoint you selected. For example: ![expand_http_method](../assets/img/get-started/quick-start-guide/expand-http-method.png)
-        
-        8. Drag and drop the previously created policy to the **Request Flow** of the API endpoint. ![request_flow](../assets/img/get-started/quick-start-guide/request-flow.png)
-        
-        9. Select **Apply to all resources** and click **Save**.
-        
-        10. Scroll down and click **Save**.
+20. Expand the HTTP method from the API endpoint you selected. For example: ![expand_http_method](../assets/img/get-started/quick-start-guide/expand-http-method.png)
 
-16. Use the left menu panel and go to **API Configurations > Endpoints**.
+21. Drag and drop the previously created policy to the **Request Flow** of the API endpoint. ![request_flow](../assets/img/get-started/quick-start-guide/request-flow.png)
+
+22. Select **Apply to all resources** and click **Save**.
+
+23. Scroll down and click **Save**.
+
+24. Use the left menu panel and go to **API Configurations > Endpoints**.
 
     ![select_endpoints](../assets/img/get-started/quick-start-guide/select-endpoints.png)
 
-17. Add a **Dynamic Endpoint**. ![add_dynamic_endpoint](../assets/img/get-started/quick-start-guide/add_dynamic_endpoint.png)
+25. Add a **Dynamic Endpoint**. ![add_dynamic_endpoint](../assets/img/get-started/quick-start-guide/add_dynamic_endpoint.png)
 
-18. Go to **Deployments** using the left menu pane.
+26. Go to **Deployments** using the left menu pane.
 
     ![select_deployments](../assets/img/get-started/quick-start-guide/select-deployments.png)
 
-19. Select the API Gateway type, in this scenario, it is **Default**. ![api_gateway](../assets/img/get-started/quick-start-guide/dcr-api-gateway.png)
-
-20. Click **Deploy**.
-
-21. Go to **Overview** using the left menu pane.
+27. Select the API Gateway type, in this scenario, it is **Default**. ![api_gateway](../assets/img/get-started/quick-start-guide/dcr-api-gateway.png)
+28. Click **Deploy**. 
+29. Go to **Overview** using the left menu pane.
 
     ![select_overview](../assets/img/get-started/quick-start-guide/select-overview.png)
-
-22. Click **Publish**. ![publish_api](../assets/img/get-started/quick-start-guide/publish-api.png)
+30. Click **Publish**. ![publish_api](../assets/img/get-started/quick-start-guide/publish-api.png)
