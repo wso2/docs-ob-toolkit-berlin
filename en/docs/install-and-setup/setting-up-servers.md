@@ -1,19 +1,14 @@
-This section guides you to set up and prepare the servers to run WSO2 Open Banking Berlin Toolkit.
+This section guides you to set up and prepare the servers to run NextGenPSD2 Reference Toolkit.
 
 ## Installing base products
 
-1. WSO2 Open Banking Berlin Toolkit runs on top of WSO2 Identity Server and API Manager, which are 
-referred to as base products. Before setting up the accelerator, download and install the base products. You can use any of the following combinations:
+1. NextGenPSD2 Reference Toolkit runs on top of WSO2 Identity Server and API Manager, which are 
+referred to as base products. Before setting up the accelerator, download and install the base products.
 
-    | Base Product              | Combination 01                                                                                                             | Combination 02                                                              |
-    |---------------------------|----------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------|
-    | WSO2 Identity Server      | [5.11.0](https://wso2.com/identity-and-access-management/previous-releases/)                                               | [6.0.0](https://wso2.com/identity-and-access-management/previous-releases/) or [6.1.0](https://wso2.com/identity-and-access-management/previous-releases/)|
-    | WSO2 API Manager          | [4.1.0](https://wso2.com/api-management/previous-releases/) or [4.0.0](https://wso2.com/api-management/previous-releases/) | [4.2.0](https://wso2.com/api-manager/)                                      |
-2. To configure the Identity Server with the API Manager, install the respective WSO2 IS Connector according to the API Manager version you have downloaded.
-
-    - [WSO2 IS Connector for API Manager 4.2.0](https://apim.docs.wso2.com/en/4.2.0/assets/attachments/administer/wso2is-extensions-1.6.8.zip)
-    - [WSO2 IS Connector for API Manager 4.1.0](https://apim.docs.wso2.com/en/4.1.0/assets/attachments/administer/wso2is-extensions-1.4.2.zip)
-    - [WSO2 IS Connector for API Manager 4.0.0](https://apim.docs.wso2.com/en/4.0.0/assets/attachments/administer/wso2is-extensions-1.2.10.zip)
+    - [WSO2 Identity Server 6.1.0](https://wso2.com/identity-server/)
+    - [WSO2 API Manager 4.2.0](https://wso2.com/api-manager/)
+    
+2. To configure the Identity Server with the API Manager, install [WSO2 IS Connector for API Manager 4.2.0](https://apim.docs.wso2.com/en/4.2.0/assets/attachments/administer/wso2is-extensions-1.6.8.zip).
 
 ## Installing WSO2 Open Banking Accelerator 
     
@@ -47,7 +42,7 @@ homes.
         This documentation will refer to the above-extracted directories of the accelerators as 
         `<OB_IS_ACCELERATOR_HOME>` and `<OB_APIM_ACCELERATOR_HOME>` respectively.
         
-## Installing WSO2 Open Banking Berlin Toolkit
+## Installing NextGenPSD2 Reference Toolkit
 
 !!! tip "Before you begin"
     See the environment [compatibility](prerequisites.md) to determine whether the current toolkit version is 
@@ -258,7 +253,7 @@ client-truststore of all the servers.
 
 ## Copying the deployment.toml
 
-WSO2 Open Banking Berlin Toolkit contains TOML-based configurations. All the server-level configurations of the instance 
+NextGenPSD2 Reference Toolkit contains TOML-based configurations. All the server-level configurations of the instance 
 can be applied using a single configuration file, which is the `deployment.toml` file. 
 
 1. Replace the existing `deployment.toml` file in the API Manager as follows:

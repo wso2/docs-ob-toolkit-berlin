@@ -29,17 +29,17 @@ template: templates/single-column.html
 
 <div>
     <header>
-        <h1>Welcome to the WSO2 Open Banking Berlin Toolkit Documentation!</h1>
+        <h1>Welcome to the NextGenPSD2 Reference Toolkit Documentation!</h1>
     </header>
     <div class="md-main .md-content" style="float:left; width: 45%;  text-align:justify; max-height:100%; ">
         <p>
-        Open Banking Berlin Toolkit delivers end-to-end compliance for Berlin Group's NextGenPSD2 Framework. It increases the speed 
+        NextGenPSD2 Reference Toolkit delivers end-to-end compliance for Berlin Group's NextGenPSD2 Framework. It increases the speed 
         and reduces the complexity of adopting open banking compliance. Instead of building a solution from scratch, you 
-        can simply deploy WSO2 Open Banking Berlin Toolkit to meet all legislative requirements with additional benefits 
+        can simply deploy NextGenPSD2 Reference Toolkit to meet all legislative requirements with additional benefits 
         beyond compliance.       
         </p>
         <p>
-        The toolkit runs on top of WSO2 Identity Server, WSO2 API Manager, and WSO2 Streaming Integrator. 
+        The toolkit runs on top of WSO2 Identity Server and WSO2 API Manager. 
         Get a head start with our Quick Start Guide or dive straight into the documentation to understand what we offer.
         </p>
      </div>

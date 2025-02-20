@@ -1,4 +1,4 @@
-WSO2 Open Banking Berlin Toolkit contains TOML-based configurations. All the server-level configurations of the Identity 
+NextGenPSD2 Reference Toolkit contains TOML-based configurations. All the server-level configurations of the Identity 
 Server instance can be applied using a single configuration file, which is the `deployment.toml` file. 
 
 ## Configuring deployment.toml
@@ -125,7 +125,7 @@ the consent page.
     ```
 
 11. An account reference is used to address specific accounts. It is a combination of an account identifier and optionally
-    a currency. The WSO2 Open Banking Berlin toolkit supports IBAN, BBAN and Masked PAN account identifier types. You 
+    a currency. The NextGenPSD2 Reference Toolkit supports IBAN, BBAN and Masked PAN account identifier types. You 
     can configure them using the following tag:
 
     ``` toml
@@ -152,8 +152,8 @@ the consent page.
 14. Configure the following tags regarding Account consents:
 
     - `single_acc_no_retrieval_validation.enable`: If enabled, the permission validation will be performed against the 
-       account ID by WSO2 Open Banking Berlin Toolkit. If disabled, the permission validation happens against the 
-       consent ID by WSO2 Open Banking Berlin Toolkit. Also, when disabled, the account ID validation should be 
+       account ID by NextGenPSD2 Reference Toolkit. If disabled, the permission validation happens against the 
+       consent ID by NextGenPSD2 Reference Toolkit. Also, when disabled, the account ID validation should be 
        performed by the bank backend.
     - `freq_per_day`: Configure minimum frequency per day for recurring consents. For more details, see 
         [Types of consents](../try-out/account-information-service-flow.md#types-of-consents).

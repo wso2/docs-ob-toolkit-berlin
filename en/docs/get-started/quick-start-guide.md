@@ -1,4 +1,4 @@
-WSO2 Open Banking Berlin Toolkit contains the customizations done on top of WSO2  Open Banking Accelerator to comply with 
+NextGenPSD2 Reference Toolkit contains the customizations done on top of WSO2  Open Banking Accelerator to comply with 
 the Berlin Group's NextGenPSD2 Framework. This toolkit has been developed as an extension of WSO2 Open Banking Accelerator. 
 The accelerators run on top of WSO2 Identity Server and WSO2 API Manager, which are referred to as base products.
 
@@ -51,7 +51,7 @@ accelerators:
     - wso2-obiam-accelerator-3.0.0
     - wso2-obam-accelerator-3.0.0
             
-## Installing WSO2 Open Banking Berlin Toolkit
+## Installing NextGenPSD2 Reference Toolkit
 
 1. If you have an active WSO2 Open Banking subscription, contact us via 
 [WSO2 Online Support System](https://support.wso2.com/) to download Open Banking Berlin Toolkit 1.0.0.
@@ -60,7 +60,7 @@ accelerators:
         If you don't have a WSO2 Open Banking subscription, [contact us](https://wso2.com/solutions/financial/open-banking/#contact) 
         for more information.
               
-2. Extract the downloaded WSO2 Open Banking Berlin Toolkit zip files. WSO2 Open Banking Berlin Toolkit contains the following 
+2. Extract the downloaded NextGenPSD2 Reference Toolkit zip files. NextGenPSD2 Reference Toolkit contains the following 
 accelerators:
    
     - wso2-obiam-toolkit-berlin-1.0.0

@@ -63,61 +63,40 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
     
 8. Click **Create**. 
     
-9. Add a custom policy. Follow the instructions given below according to the API Manager version you are using:
+9. Go to **Develop -> API Configurations -> Policies** in the left menu pane to add a custom policy. ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
+   
+10. On the **Policy List** card, click on **Add New Policy**.
 
-    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.0.0..."
+11. Fill in the **Create New Policy**.
 
-        1. Go to **Develop > API Configurations > Runtime** using the left menu pane.![select_runtime](../assets/img/get-started/quick-start-guide/select-runtime.png)
-           
-        2. Click the edit button under **Request > Message Mediation**.![message_mediation](../assets/img/try-out/consent-manager/message_mediation.png)
-          
-        3. Now, select the **Custom Policy** option. 
-        
-        4. Download the `scp-insequence.xml` file available <a href="../../assets/attachments/scp-insequence.xml" download> here </a> and use it as the Mediation Policy. 
-        
-        5. Upload the `scp-insequence.xml` file and click **SELECT**.
-        
-        6. Scroll down and click **SAVE**. 
+12. Download the `scp-insequence.xml` file available <a href="../../assets/attachments/scp-insequence.xml" download> here </a> and use it as the Mediation Policy. 
 
-    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.1.0..."
+13. Upload the `scp-insequence.xml` file and click **SELECT**.
 
-        1. Go to **Develop -> API Configurations -> Policies** in the left menu pane.<br><br>
-        <div style="width:40%">
-        ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
-        </div>
+14. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: <br><br>
+   <div style="width:35%">
+   ![successful](../assets/img/get-started/quick-start-guide/successful.png)
+   </div>
 
-        2. On the **Policy List** card, click on **Add New Policy**.
+15. Expand the API endpoint you want from the list of API endpoints.
 
-        3. Fill in the **Create New Policy**.
+16. Expand the HTTP method from the API endpoint you selected. 
 
-        4. Download the `scp-insequence.xml` file available <a href="../../assets/attachments/scp-insequence.xml" download> here </a> and use it as the Mediation Policy. 
-        
-        5. Upload the `scp-insequence.xml` file and click **SELECT**.
+17. Drag and drop the previously created policy to the **Request Flow** of the API endpoint. For example, ![request_flow](../assets/img/get-started/quick-start-guide/request-flow.png)
 
-        6. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: <br><br>
-        <div style="width:35%">
-        ![successful](../assets/img/get-started/quick-start-guide/successful.png)
-        </div>
+18. Select **Apply to all resources** and click **Save**.
 
-        7. Expand the API endpoint you want from the list of API endpoints.
+19. Scroll down and click **Save**.
 
-        8. Expand the HTTP method from the API endpoint you selected. 
+20. Go to **Overview** using the left menu pane.
 
-        9. Drag and drop the previously created policy to the **Request Flow** of the API endpoint. For example, ![request_flow](../assets/img/get-started/quick-start-guide/request-flow.png)
+21. Click **Deploy**. 
 
-        10. Select **Apply to all resources** and click **Save**.
+22. Set the API Gateways configurations and deploy the API.
 
-        11. Scroll down and click **Save**.
+23. Go back to **Overview**.
 
-10. Go to **Overview** using the left menu pane.
- 
-11. Click **Deploy**. 
-
-12. Set the API Gateways configurations and deploy the API.
-
-13. Go back to **Overview**.
-
-14. Click **Publish**.
+24. Click **Publish**.
 
 ## Subscribing to Self-Care Portal API
 

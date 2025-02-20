@@ -500,7 +500,7 @@ browser to prompt the invocation of the authorize API:
 
 
     !!! tip
-        The WSO2 Open Banking Berlin Toolkit requires PKCE support for authorization. The `state` and `code challenge 
+        The NextGenPSD2 Reference Toolkit requires PKCE support for authorization. The `state` and `code challenge 
         method` values indicate the PKCE usage. For more information, see 
         [Consent Authorization with PKCE](../learn/consent-authorization-intro.md).
 

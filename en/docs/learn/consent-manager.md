@@ -65,61 +65,39 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
 
 9. Go to **Portal Configurations > Subscriptions > Select Business Plan as 'Unlimited'** using the left menu pane.
 
-10. Add a custom policy. Follow the instructions given below according to the API Manager version you are using:
-
-    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.0.0..."
-    
-         1. Go to **Develop > API Configurations > Runtime** using the left menu pane.![select_runtime](../assets/img/get-started/quick-start-guide/select-runtime.png)
-            
-         2. Click the edit button under **Request > Message Mediation**.![message_mediation](../assets/img/try-out/consent-manager/message_mediation.png)
-           
-         3. Now, select the **Custom Policy** option. 
-         
-         4. Download the `scp-insequence.xml` file available <a href="../../assets/attachments/scp-insequence.xml" download> here </a> and use it as the Mediation Policy. 
-         
-         5. Upload the `scp-insequence.xml` file and click **SELECT**.
-         
-         6. Scroll down and click **SAVE**. 
-    
-    ??? note "Click here to see how to add a custom policy if you are using API Manager 4.1.0..."
-    
-         1. Go to **Develop -> API Configurations -> Policies** in the left menu pane.<br><br>
-         <div style="width:40%">
-         ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
-         </div>
-    
-         2. On the **Policy List** card, click on **Add New Policy**.
-    
-         3. Fill in the **Create New Policy**.
-    
-         4. Download the `scp-insequence.xml` file available <a href="../../assets/attachments/scp-insequence.xml" download> here </a> and use it as the Mediation Policy. 
-         
-         5. Upload the `scp-insequence.xml` file and click **SELECT**.
-    
-         6. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: <br><br>
-         <div style="width:35%">
-         ![successful](../assets/img/get-started/quick-start-guide/successful.png)
-         </div>
-    
-         7. Expand the API endpoint you want from the list of API endpoints.
-    
-         8. Expand the HTTP method from the API endpoint you selected. 
-    
-         9. Drag and drop the previously created policy to the **Request Flow** of the API endpoint. For example, ![request_flow](../assets/img/get-started/quick-start-guide/request-flow.png)
-    
-         10. Select **Apply to all resources** and click **Save**.
-    
-         11. Scroll down and click **Save**.
-
-11. Go to **Overview** using the left menu pane.
+10. Go to **Develop -> API Configurations -> Policies** in the left menu pane. ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
  
-12. Click **Deploy**. 
+11. Go to **Develop -> API Configurations -> Policies** in the left menu pane. ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
 
-13. Set the API Gateways configurations and deploy the API.
+12. On the **Policy List** card, click on **Add New Policy**.
 
-14. Go back to **Overview**.
+13. Fill in the **Create New Policy**.
 
-15. Click **Publish**.
+14. Download the `scp-insequence.xml` file available <a href="../../assets/attachments/scp-insequence.xml" download> here </a> and use it as the Mediation Policy. 
+     
+15. Upload the `scp-insequence.xml` file and click **SELECT**.
+
+16. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: ![successful](../assets/img/get-started/quick-start-guide/successful.png)
+
+17. Expand the API endpoint you want from the list of API endpoints.
+
+18. Expand the HTTP method from the API endpoint you selected. 
+
+19. Drag and drop the previously created policy to the **Request Flow** of the API endpoint. For example, ![request_flow](../assets/img/get-started/quick-start-guide/request-flow.png)
+
+20. Select **Apply to all resources** and click **Save**.
+
+21. Scroll down and click **Save**.
+
+22. Go to **Overview** using the left menu pane.
+
+23. Click **Deploy**. 
+
+24. Set the API Gateways configurations and deploy the API.
+
+25. Go back to **Overview**.
+
+26. Click **Publish**.
 
 ## Subscribing to Self-Care Portal API
 

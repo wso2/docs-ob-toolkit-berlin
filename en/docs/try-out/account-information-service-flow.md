@@ -153,7 +153,7 @@ https://<APIM_HOST>:8243/xs2a/v1/consents \
 a currency. 
 - Account references are only used in the context of **Dedicated accounts consents** to define the specific accounts 
 that the consent requires.
-- WSO2 Open Banking Berlin toolkit supports IBAN, BBAN and Masked PAN account identifier types. These can be configured 
+- NextGenPSD2 Reference Toolkit supports IBAN, BBAN and Masked PAN account identifier types. These can be configured 
 using the following configuration in the `<IS_HOME>/repository/conf/deployment.toml` file.
 
     ``` toml

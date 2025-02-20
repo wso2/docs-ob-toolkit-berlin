@@ -1,4 +1,4 @@
-This section guides you to set up and prepare your servers to run WSO2 Open Banking Berlin Toolkit.
+This section guides you to set up and prepare your servers to run NextGenPSD2 Reference Toolkit.
 
 ## Set up accelerators 
 Copy the extracted accelerator directories into the root directories of the respective base products. Use the table to 
@@ -64,7 +64,7 @@ locate the respective root directory of the base products:
 ### Configure database scripts for toolkits
 
 !!! note 
-    WSO2 Open Banking Berlin Toolkit is [compatible](../install-and-setup/prerequisites.md#compatibility) with the following DBMSs:
+    NextGenPSD2 Reference Toolkit is [compatible](../install-and-setup/prerequisites.md#compatibility) with the following DBMSs:
     
      - MySQL 8.0
      - Oracle 19c
