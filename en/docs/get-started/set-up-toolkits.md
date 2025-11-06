@@ -51,6 +51,9 @@ locate the respective root directory of the base products:
  |`wso2is-extensions-1.2.10/dropins/wso2is.notification.event.handlers-1.2.10.jar`|`<IS_HOME>/repository/components/dropins`|
  |`wso2is-extensions-1.2.10/webapps/keymanager-operations.war`|`<IS_HOME>/repository/deployment/server/webapps`|
 
+!!! note
+    Even if you're only updating the Accelerator, you'll still need to run the Toolkit merge process since the Toolkit includes additional changes on top of the Accelerator. After completing the toolkit setup, remember to re-apply any custom modifications you may have made previously.
+
 ## Set up toolkits
 
 Copy the extracted toolkit directories into the root directories of the respective base products. Use the table to 
