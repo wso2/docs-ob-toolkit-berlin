@@ -1,35 +1,43 @@
+---
+title: "Setting up servers"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This section guides you to set up and prepare the servers to run NextGenPSD2 Reference Toolkit.
 
 ## Installing base products
 
 1. NextGenPSD2 Reference Toolkit runs on top of WSO2 Identity Server and API Manager, which are 
-referred to as base products. Before setting up the accelerator, download and install the base products.
+    referred to as base products. Before setting up the accelerator, download and install the base products.
 
     - [WSO2 Identity Server 6.1.0](https://wso2.com/identity-server/)
     - [WSO2 API Manager 4.2.0](https://wso2.com/api-manager/)
-    
+
 2. To configure the Identity Server with the API Manager, install [WSO2 IS Connector for API Manager 4.2.0](https://apim.docs.wso2.com/en/4.2.0/assets/attachments/administer/wso2is-extensions-1.6.8.zip).
 
-## Installing WSO2 Open Banking Accelerator 
-    
-1. If you have an active WSO2 Open Banking subscription, contact us via [WSO2 Online Support System](https://support.wso2.com/) 
-to download Open Banking Accelerator 3.0.0.
+## Installing WSO2 Open Banking Accelerator
 
-    !!! note
-        If you don't have a WSO2 Open Banking subscription, [contact us](https://wso2.com/solutions/financial/open-banking/#contact) 
-        for more information.
-    
+1. If you have an active WSO2 Open Banking subscription, contact us via [WSO2 Online Support System](https://support.wso2.com/) 
+    to download Open Banking Accelerator 3.0.0.
+
+    :::note
+    If you don't have a WSO2 Open Banking subscription, [contact us](https://wso2.com/solutions/financial/open-banking/#contact) 
+    for more information.
+    :::
+
 2. Extract the downloaded WSO2 Open Banking Accelerator zip files. WSO2 Open Banking Accelerator contains the following 
-accelerators.
+    accelerators.
 
     - wso2-obiam-accelerator-3.0.0
     - wso2-obam-accelerator-3.0.0
 
 3. Go to the root directories of WSO2 Identity Server and API Manager. These root directories are the product 
-homes.
- 
-    !!! tip
-        This documentation will refer to the product homes as `<IS_HOME>` and `<APIM_HOME>` respectively.
+    homes.
+
+    :::tip
+    This documentation will refer to the product homes as `<IS_HOME>` and `<APIM_HOME>` respectively.
+    :::
 
 4. Place the relevant accelerator zip files and extract them in their respective product homes:
 
@@ -37,29 +45,32 @@ homes.
     |----| -------------------------------------------|
     |wso2-obiam-accelerator-3.0.0| `<IS_HOME>`|
     |wso2-obam-accelerator-3.0.0.zip| `<APIM_HOME>`|
-     
-    !!! tip
-        This documentation will refer to the above-extracted directories of the accelerators as 
-        `<OB_IS_ACCELERATOR_HOME>` and `<OB_APIM_ACCELERATOR_HOME>` respectively.
-        
+
+    :::tip
+    This documentation will refer to the above-extracted directories of the accelerators as 
+    `<OB_IS_ACCELERATOR_HOME>` and `<OB_APIM_ACCELERATOR_HOME>` respectively.
+    :::
+
 ## Installing NextGenPSD2 Reference Toolkit
 
-!!! tip "Before you begin"
-    See the environment [compatibility](prerequisites.md) to determine whether the current toolkit version is 
-    compatible with your operating system.        
-    
-1. If you have an active WSO2 Open Banking subscription, contact us via [WSO2 Online Support System](https://support.wso2.com/) 
-to download Open Banking Berlin Toolkit 1.0.0.
+:::tip[Before you begin]
+See the environment [compatibility](prerequisites.md) to determine whether the current toolkit version is 
+compatible with your operating system.        
+:::
 
-    !!! note
-        If you don't have a WSO2 Open Banking subscription, [contact us](https://wso2.com/solutions/financial/open-banking/#contact) 
-        for more information.
-    
+1. If you have an active WSO2 Open Banking subscription, contact us via [WSO2 Online Support System](https://support.wso2.com/) 
+    to download Open Banking Berlin Toolkit 1.0.0.
+
+    :::note
+    If you don't have a WSO2 Open Banking subscription, [contact us](https://wso2.com/solutions/financial/open-banking/#contact) 
+    for more information.
+    :::
+
 2. Extract the downloaded WSO2 Open Banking Toolkit zip files. It contains the following toolkits.
 
     - wso2-obiam-toolkit-berlin-1.0.0
     - wso2-obam-toolkit-berlin-1.0.0
-    
+
 3. Go to the product homes directories of WSO2 Identity Server and API Manager.
 
 4. Place the relevant toolkit zip files and extract them in their respective product homes:
@@ -68,11 +79,12 @@ to download Open Banking Berlin Toolkit 1.0.0.
     |----| -------------------------------------------|
     |wso2-obiam-toolkit-berlin-1.0.0.zip| `<IS_HOME>`|
     |wso2-obam-toolkit-berlin-1.0.0.zip| `<APIM_HOME>`|
-     
-    !!! tip
-        This documentation will refer to the above-extracted directories of the toolkits as 
-        `<OB_IS_TOOLKIT_HOME>` and `<OB_APIM_TOOLKIT_HOME>`.
-        
+
+    :::tip
+    This documentation will refer to the above-extracted directories of the toolkits as 
+    `<OB_IS_TOOLKIT_HOME>` and `<OB_APIM_TOOLKIT_HOME>`.
+    :::
+
 ## Getting WSO2 Updates
 
 The WSO2 Update tool delivers hotfixes and updates seamlessly on top of products as WSO2 Updates. They include 
@@ -82,50 +94,86 @@ relevant script.
 1. Go to `<PRODUCT_HOME>/bin` and run the WSO2 Update tool:
 
     - Repeat this step for the WSO2 Identity Server, API Manager, and Stream Integrator products.
-    
-        ```bash tab='On Linux'
+
+        <Tabs>
+        <TabItem value="on-linux" label="On Linux">
+
+        ```bash
         ./wso2update_linux 
         ```
-        
-        ```bash tab='On Mac'
+
+        </TabItem>
+        <TabItem value="on-mac" label="On Mac">
+
+        ```bash
         ./wso2update_darwin
         ```
-        
-        ```bash tab='On Windows'
+
+        </TabItem>
+        <TabItem value="on-windows" label="On Windows">
+
+        ```bash
         ./wso2update_windows.exe
         ```
-      
+
+        </TabItem>
+        </Tabs>
+
 2. Go to `<ACCELERATOR_HOME>/bin` and run the WSO2 Update tool:
 
     - Repeat this step for the WSO2 Open Banking Identity Server and API Manager accelerators.
 
-        ```bash tab='On Linux'
+        <Tabs>
+        <TabItem value="on-linux" label="On Linux">
+
+        ```bash
         ./wso2update_linux 
         ```
-        
-        ```bash tab='On Mac'
+
+        </TabItem>
+        <TabItem value="on-mac" label="On Mac">
+
+        ```bash
         ./wso2update_darwin
         ```
-        
-        ```bash tab='On Windows'
+
+        </TabItem>
+        <TabItem value="on-windows" label="On Windows">
+
+        ```bash
         ./wso2update_windows.exe
         ```
-      
+
+        </TabItem>
+        </Tabs>
+
 3. Go to `<TOOLKIT_HOME>/bin` and run the WSO2 Update tool:
 
     - Repeat this step for the WSO2 Open Banking Identity Server and API Manager toolkits.
 
-        ```bash tab='On Linux'
+        <Tabs>
+        <TabItem value="on-linux" label="On Linux">
+
+        ```bash
         ./wso2update_linux 
         ```
-        
-        ```bash tab='On Mac'
+
+        </TabItem>
+        <TabItem value="on-mac" label="On Mac">
+
+        ```bash
         ./wso2update_darwin
         ```
-        
-        ```bash tab='On Windows'
+
+        </TabItem>
+        <TabItem value="on-windows" label="On Windows">
+
+        ```bash
         ./wso2update_windows.exe
         ```
+
+        </TabItem>
+        </Tabs>
 
 For more information, see the [WSO2 Updates documentation](https://updates.docs.wso2.com/en/latest/updates/overview/).
 
@@ -133,16 +181,16 @@ For more information, see the [WSO2 Updates documentation](https://updates.docs.
 ## Setting up Accelerators
 
 1. To copy the accelerator files to the API Manager server, go to the `<APIM_HOME>/<OB_APIM_ACCELERATOR_HOME>/bin` 
-directory and run the `merge.sh` script as follows:
+    directory and run the `merge.sh` script as follows:
 
-    ``` shell 
+    ```shell
     ./merge.sh
     ```
- 
+
 2. To copy the accelerator files to the Identity Server, go to the `<IS_HOME>/<OB_IS_ACCELERATOR_HOME>/bin` directory 
-and run the `merge.sh` script as follows:
-   
-    ``` shell 
+    and run the `merge.sh` script as follows:
+
+    ```shell
     ./merge.sh
     ```
 
@@ -150,23 +198,23 @@ and run the `merge.sh` script as follows:
 
     | File to copy | Copy to |
     | -------------| ------- |
-    | `wso2is-extensions-1.2.10/dropins/wso2is.key.manager.core-1.2.10.jar` |	`<IS_HOME>/repository/components/dropins`|
+    | `wso2is-extensions-1.2.10/dropins/wso2is.key.manager.core-1.2.10.jar` |   `<IS_HOME>/repository/components/dropins`|
     | `wso2is-extensions-1.2.10/dropins/wso2is.notification.event.handlers-1.2.10.jar` | `<IS_HOME>/repository/components/dropins` |
     | `wso2is-extensions-1.2.10/webapps/keymanager-operations.war` | `<IS_HOME>/repository/deployment/server/webapps` |
 
 ## Setting up Toolkits
 
 1. To copy the toolkit files to the API Manager server, go to the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/bin` 
-directory and run the `merge.sh` script as follows:
+    directory and run the `merge.sh` script as follows:
 
-    ``` shell 
+    ```shell
     ./merge.sh
     ```
- 
+
 2. To copy the toolkit files to the Identity Server, go to the `<IS_HOME>/<OB_IS_TOOLKIT_HOME>/bin` directory 
-and run the `merge.sh` script as follows:
-   
-    ``` shell 
+    and run the `merge.sh` script as follows:
+
+    ```shell
     ./merge.sh
     ```
 
@@ -175,81 +223,86 @@ and run the `merge.sh` script as follows:
 Set your `JAVA_HOME` environment variable to point to the directory where the Java Development Kit (JDK) is installed 
 on the server.
 
-!!! info
-    Environment variables are global system variables accessible by all the processes running under the operating system.
-    
+:::info
+Environment variables are global system variables accessible by all the processes running under the operating system.
+:::
+
 1. Open the .bashrc file (.bash_profile file on Mac) in your home directory using a file editor.
 
 2. Add the following two lines at the bottom of the file. Replace the `<JDK_LOCATION>` placeholder with  the actual 
-directory where the JDK is installed.
-        ``` bash
-        export JAVA_HOME="<JDK_LOCATION>"
-        export PATH=$PATH:$JAVA_HOME/bin
-        ```
+    directory where the JDK is installed.
+    ```bash
+    export JAVA_HOME="<JDK_LOCATION>"
+    export PATH=$PATH:$JAVA_HOME/bin
+    ```
 3. Save the file. To verify that the `JAVA_HOME` variable is set correctly, execute the following command. This 
-should retrieve the JDK installation path:
-        ``` bash
-        echo $JAVA_HOME
-        ```
-        
+    should retrieve the JDK installation path:
+    ```bash
+    echo $JAVA_HOME
+    ```
+
 ## Configuring ports
 
 The open banking solution may run in different machines/servers. It is mandatory to open the ports of each server to 
 allow a successful data flow. The instances mentioned below specify the ports that need to be opened:
 
-|Instance/Product |	Port | Usage |
+|Instance/Product | Port | Usage |
 |-----------------|------| ------|
-| WSO2 Identity Server | 9446 | HTTPS servlet transport <br/> The default URL of the Management Console is `https://<IS_HOST>:9446/carbon` |
-| WSO2 API Manager | 9443 | HTTPS servlet transport <br/>  The default URL of the Management Console is `https://<APIM_HOST>:9443/carbon` |
+| WSO2 Identity Server | 9446 | HTTPS servlet transport <br /> The default URL of the Management Console is `https://<IS_HOST>:9446/carbon` |
+| WSO2 API Manager | 9443 | HTTPS servlet transport <br />  The default URL of the Management Console is `https://<APIM_HOST>:9443/carbon` |
 | | 8243 |  NIO/PT transport HTTPS port |
 | | 7612 | Thrift TCP port to receive events from clients |
 | | 7712 | Thrift SSL port for secure transport where the client is authenticated |
 
 ## Exchanging the certificates
 
-??? warning "If you are using the default keystores available in the products, click here to see how to update keystores..."
-    If you are using the default keystores available in the products, update them by removing any unnecessary or expired 
-    Root CA Certificates.
-    
-    1. The keystores are available in the `<IS_HOME>/repository/resources/security/wso2carbon.jks` and 
+<details className="ob-details ob-details--warning">
+<summary>If you are using the default keystores available in the products, click here to see how to update keystores...</summary>
+
+If you are using the default keystores available in the products, update them by removing any unnecessary or expired 
+Root CA Certificates.
+
+1. The keystores are available in the `<IS_HOME>/repository/resources/security/wso2carbon.jks` and 
     `<APIM_HOME>/repository/resources/security/wso2carbon.jks` files.
-    
-    2. Use the following command to list and identify problematic certificates:
-    ``` bash 
+
+2. Use the following command to list and identify problematic certificates:
+    ```bash
     keytool -list -v -keystore wso2carbon.jks
     ```
-    
-    3. Remove the certificates using the alias as follows: 
-    ``` bash
+
+3. Remove the certificates using the alias as follows: 
+    ```bash
     keytool -delete -alias <ALIAS_TO_REMOVE> -keystore wso2carbon.jks
     ```
+
+</details>
 
 In order to enable secure communication, we need to install the certificates of each component in others. This will 
 facilitate a Secure Socket Layer (SSL). Follow the steps below to implement this:
 
 1. Generate a key against the keystore of a particular server. For example, server A with an alias and common name that 
-is equal to the hostname.
+    is equal to the hostname.
 
-    ``` bash
+    ```bash
     keytool -genkey -alias <keystore_alias> -keyalg RSA -keysize 2048 -validity 3650 -keystore <keystore_path> -storepass <keystore_password> -keypass <key password> -noprompt
     ```
- 
+
 2. Export the public certificate of the newly generated key pair.  
 
-    ``` bash
+    ```bash
     keytool -export -alias <cert_alias> -file <certificate_path> -keystore <keystore path>>
     ```
 
 3. Import the public cert of Server A to the client truststores of all the servers including Server A.
 
-    ``` bash
+    ```bash
     keytool -import -trustcacerts -alias <cert_alias> -file <certificate_path> -keystore <trustore_path> -storepass <keystore_password> -noprompt
     ```
 
 4. Repeat above steps for all the servers.
 
 5. If there is an Active Directory/LDAP configured in your deployment, add the Active Directory certificate to the 
-client-truststore of all the servers.
+    client-truststore of all the servers.
 
 ## Copying the deployment.toml
 
@@ -259,21 +312,21 @@ can be applied using a single configuration file, which is the `deployment.toml`
 1. Replace the existing `deployment.toml` file in the API Manager as follows:
 
     - Go to the `<APIM_HOME>/<OB_APIM_TOOLKIT_HOME>/repository/resources` directory.
-    
+
     - Rename `wso2am-4.0.0-deployment-berlin.toml` to `deployment.toml`.
-    
+
     - Copy the `deployment.toml` file to the `<APIM_HOME>/repository/conf` directory and replace the existing file.
-        
+
 2. Replace the existing `deployment.toml` file in the Identity Server as follows:
 
     - Go to the `<IS_HOME>/<OB_IS_TOOLKIT_HOME>/repository/resources` directory.
-    
+
     - Rename `wso2is-5.11.0-deployment-berlin.toml` to `deployment.toml`.
-    
+
     - Copy the `deployment.toml` file to the `<IS_HOME>/repository/conf` directory to replace the existing file.
-    
+
 3. For instructions on how to configure the `deployment.toml` file, see the following topics:
 
     - [Configuring Identity Server for open banking](configuring-identity-server-for-ob.md)
     - [Configuring API Manager for open banking](configuring-api-manager-for-ob.md)
-   
+        
