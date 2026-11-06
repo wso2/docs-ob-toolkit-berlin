@@ -1,23 +1,6 @@
 ---
-title: "Welcome to the NextGenPSD2 Reference Toolkit Documentation!"
-slug: /
+title: "NextGenPSD2 Reference Toolkit"
 ---
-NextGenPSD2 Reference Toolkit delivers end-to-end compliance for Berlin Group's NextGenPSD2 Framework. It increases the speed
-and reduces the complexity of adopting open banking compliance. Instead of building a solution from scratch, you
-can simply deploy NextGenPSD2 Reference Toolkit to meet all legislative requirements with additional benefits
-beyond compliance.
-
-The toolkit runs on top of WSO2 Identity Server and WSO2 API Manager.
-Get a head start with our Quick Start Guide or dive straight into the documentation to understand what we offer.
-
-![](../assets/img/home/accelerator-toolkit-model.png)
-
-- [Quick Start Guide](quick-start-guide.md): Set up and try out in your local environment
-- [Consent Management](../learn/consent-management.md): Create, view, revoke, and manage consents
-- [Client Registration](../learn/tpp-onboarding.md): A thorough verification before onboarding
-- [Secured API Invocation](../learn/api-security.md): Comprehensive support of FAPI and eIDAS certificate validation
-- [Easily Pluggable](../learn/integration-with-bank.md): Easy integration with core banking systems
-
 NextGenPSD2 Reference Toolkit is based on the WSO2 Open Banking Accelerator. The toolkit is a purpose-built solution for
 regulatory compliance and supports PSD2 and the Berlin Group-NextGenPSD2. It helps align banking and regulatory needs with
 technology infrastructures and regulatory expertise to quickly satisfy compliance. To learn about the features available
@@ -30,7 +13,9 @@ To learn how to set up NextGenPSD2 Reference Toolkit, see the [Quick Start Guide
 WSO2 Open Banking Accelerator is a collection of technologies that increases the speed and reduces the complexity of
 adopting open banking compliance. Instead of building a solution from scratch, you can use WSO2 Open Banking
 Accelerator to meet all legislative requirements with additional benefits beyond compliance. The accelerator runs on top
-of WSO2 Identity Server and WSO2 API Manager.
+of WSO2 Identity Server and WSO2 API Manager. Given below is the model of WSO2 Open Banking Accelerator:
+
+[ ![](../assets/img/home/accelerator-toolkit-model.png) ](pathname:///assets/img/home/accelerator-toolkit-model.png)
 
 For more information,
 see [WSO2 Open Banking Accelerator](https://ob.docs.wso2.com/en/latest/) documentation.
