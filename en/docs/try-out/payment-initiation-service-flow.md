@@ -1,7 +1,14 @@
+---
+title: "Payment Initiation Service Flow"
+---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This page provides instructions to use the NextGenPSD2XS2AFramework API to provide the Payment Initiation Service (PIS).
 
-!!! tip "Before you begin:"
-    Deploy the [NextGenPSD2XS2AFramework API](deploy-nextgenpsd2-api.md). 
+:::tip[Before you begin:]
+Deploy the [NextGenPSD2XS2AFramework API](deploy-nextgenpsd2-api.md). 
+:::
 
 ### Generating application access token
 
@@ -9,19 +16,19 @@ Once you register the application, generate an application access token.
 
 1. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
 
-    ??? note "Use the sample certificates for testing purposes. Click here to see how it is done..."
+    <details className="ob-details ob-details--note">
+    <summary>Use the sample certificates for testing purposes. Click here to see how it is done...</summary>
 
-        1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
-        
+    1. Download the [cert.pem](pathname:///assets/attachments/cert.pem) and upload it to the client trust stores as follows:
         - The client trust stores for the Identity Server and API Manager are located in the following locations:
         - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
         - `<IS_HOME>/repository/resources/security/client-truststore.jks`
-        
-        2. Use the following commands to add the certificate to the client trust store:
+
+    2. Use the following commands to add the certificate to the client trust store:
         ```shell
         keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
         ```
-        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations. Add the relevant signature algorithm supported by the certificate to the following configuration. Sample certificate supports `SHA1withRSA` signature algorithm:
+    3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations. Add the relevant signature algorithm supported by the certificate to the following configuration. Sample certificate supports `SHA1withRSA` signature algorithm:
         ```
         supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
         ```
@@ -35,16 +42,18 @@ Once you register the application, generate an application access token.
         [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
         issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
         ```
-        4. Restart the servers.
-        
-        5. Download the following certificates and keys, and use them for testing purposes.
-        Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
-        [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
-        layer security testing purposes.
-        Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
-        [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
+    4. Restart the servers.
 
-``` curl
+    5. Download the following certificates and keys, and use them for testing purposes.
+        Use the [transport private key](pathname:///assets/attachments/transport-certs/obtransport.key) and
+        [transport public certificate](pathname:///assets/attachments/transport-certs/obtransport.pem) for Transport
+        layer security testing purposes.
+        Use the [signing certificate](pathname:///assets/attachments/signing-certs/obsigning.pem) and
+        [signing private keys](pathname:///assets/attachments/signing-certs/obsigning.key) for signing purposes.
+
+    </details>
+
+````curl
    curl -X POST \
    https://<IS_HOST>:9446/oauth2/token \
    --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
@@ -59,41 +68,45 @@ Once you register the application, generate an application access token.
    "token_type":"Bearer",
    "expires_in":3600
 }
-```
+````
 
 ### Initiating a payment consent
 
 This is where the PISP generates a request to get the consent of the PSU to initiate a payment on behalf of the PSU.
 There are 3 types of payment initiations:
 
-  - Instant payment initiation
-  - Periodic payment initiation
-  - Bulk payment initiation
+- Instant payment initiation
+- Periodic payment initiation
+- Bulk payment initiation
 
 Listed below are the Payment Product types:
- 
- - sepa-credit-transfers 
- - instant-sepa-credit-transfers 
- - target-2-payments 
- - cross-border-credit-transfers
+
+- sepa-credit-transfers 
+- instant-sepa-credit-transfers 
+- target-2-payments 
+- cross-border-credit-transfers
 
 The following steps explain how to try out the Payment Initiation Service.
 
 1. Create a consent using the following request:
 
-    !!! note "Mandatory headers"
-        The following headers are mandatory for this request:
-    
-        - `X-Request-ID`: The unique ID of the request as determined by the initiating party.
-        - `PSU-IP-Address`: The IP Address on which the PSU is connected to the TPP. This header is mandatory for 
-           all accounts and payments consent initiation requests, and optional for funds confirmations consent initiation requests. 
-        - `Signature`: Mandatory by default. If the signature validation is not required, remove 
-          `SignatureValidationExecutor` from the `<APIM_HOME>/repository/conf/deployment.toml`.
-        - `Digest`: Mandatory only if the `Signature` header is present.
+    :::note[Mandatory headers]
+    The following headers are mandatory for this request:
+
+    - `X-Request-ID`: The unique ID of the request as determined by the initiating party.
+    - `PSU-IP-Address`: The IP Address on which the PSU is connected to the TPP. This header is mandatory for 
+        all accounts and payments consent initiation requests, and optional for funds confirmations consent initiation requests. 
+    - `Signature`: Mandatory by default. If the signature validation is not required, remove 
+        `SignatureValidationExecutor` from the `<APIM_HOME>/repository/conf/deployment.toml`.
+    - `Digest`: Mandatory only if the `Signature` header is present.
+    :::
 
     #### For Instant Payment Initiation
 
-    ```  tab="Request"
+    <Tabs>
+    <TabItem value="request" label="Request">
+
+    ```
     curl -X POST 'https://<APIM_HOST>:8243/xs2a/v1/payments/sepa-credit-transfers' \
     -H 'X-Request-ID: 8a725903-f00d-48f9-b23c-457726581fd6' \
     -H 'Date: Fri, 11 Mar 2022 15:35:39 IST' \
@@ -123,8 +136,11 @@ The following steps explain how to try out the Payment Initiation Service.
        "remittanceInformationUnstructured": "Ref Number Merchant"
     }'
     ```
-   
-    ``` tab="Response"
+
+    </TabItem>
+    <TabItem value="response" label="Response">
+
+    ```
     {
        "transactionStatus":"RCVD",
        "chosenScaMethod":{
@@ -152,9 +168,15 @@ The following steps explain how to try out the Payment Initiation Service.
     }
     ```
 
+    </TabItem>
+    </Tabs>
+
     #### For Periodic Payments Initiation
 
-    ``` tab="Request"
+    <Tabs>
+    <TabItem value="request" label="Request">
+
+    ```
     curl -X POST 'https://<APIM_HOST>:8243/xs2a/v1/periodic-payments/sepa-credit-transfers' \
     -H 'X-Request-ID: 2c3e7dbc-9bff-4b23-95a2-93364ace2977' \
     -H 'Date: Fri, 11 Mar 2022 15:35:39 IST' \
@@ -188,8 +210,11 @@ The following steps explain how to try out the Payment Initiation Service.
        "dayOfExecution": "01"
     }'
     ```
-   
-    ``` tab="Response"
+
+    </TabItem>
+    <TabItem value="response" label="Response">
+
+    ```
     {
        "transactionStatus":"RCVD",
        "chosenScaMethod":{
@@ -216,10 +241,16 @@ The following steps explain how to try out the Payment Initiation Service.
        "paymentId":"d6cf82ce-0884-4c64-8a97-2bfbb3574d9e"
     }
     ```
-   
-    #### For Bulk Payments Initiation 
 
-    ``` tab="Request"
+    </TabItem>
+    </Tabs>
+
+    #### For Bulk Payments Initiation
+
+    <Tabs>
+    <TabItem value="request" label="Request">
+
+    ```
     curl -X POST 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfers' \
     -H 'X-Request-ID: 2c3e7dbc-9bff-4b23-95a2-93364ace2978' \
     -H 'Date: Fri, 11 Mar 2022 15:55:39 IST' \
@@ -266,8 +297,11 @@ The following steps explain how to try out the Payment Initiation Service.
        ]
     }'
     ```
-   
-    ``` tab="Response"
+
+    </TabItem>
+    <TabItem value="response" label="Response">
+
+    ```
     {
        "transactionStatus":"RCVD",
        "chosenScaMethod":{
@@ -295,7 +329,10 @@ The following steps explain how to try out the Payment Initiation Service.
     }
     ```
 
-<!---
+    </TabItem>
+    </Tabs>
+
+{/*-
 
     #### Multi-Currency Payments 
 
@@ -318,7 +355,7 @@ The following steps explain how to try out the Payment Initiation Service.
       "remittanceInformationUnstructured":"Ref Number Merchant"
     }
     ```
-   
+
     - The `instructedAmount` and `debtorAccount` objects can have a `currency` element to indicate the payment's currency.
     - The `currency` element is mandatory for the `instructedAmount` object.
     - The `currency` element is optional for the `debtorAccount` object.
@@ -335,15 +372,15 @@ The following steps explain how to try out the Payment Initiation Service.
          - If the provided currency type is different to the currency type in the `debtorAccount`, an error is sent 
            during authorization as the currency types cannot be matched.
 
--->        
- 
+*/}
+
 ### Authorizing a consent
 
 The PISP application redirects the PSU to authenticate and approve/deny the provided consent. This can be achieved in 
 2 ways:
 
-  1. Implicit flow
-  2. Explicit flow
+1. Implicit flow
+2. Explicit flow
 
 The TPP decides the approach using `TPP-Explicit-Authorisation-Preferred`, which is an optional boolean header. 
 This header is sent during the consent initiation request. If `TPP-Explicit-Authorisation-Preferred` is set to `false` 
@@ -363,9 +400,12 @@ The Implicit authorisation flow is as follows:
 The Explicit authorisation flow is as follows:
 
 1. Once the consent is granted, the ASPSP replies with one of the `startAuthorisation` links in the `_links` section of 
-the response.
+    the response.
 
-    ```  tab="Request"
+    <Tabs>
+    <TabItem value="request" label="Request">
+
+    ```
     curl -X POST 'https://<APIM_HOST>:8243/xs2a/v1/payments/sepa-credit-transfers' \
     -H 'X-Request-ID: 8a725903-f00d-48f9-b23c-457726581fd6' \
     -H 'Date: Fri, 11 Mar 2022 15:35:39 IST' \
@@ -397,7 +437,10 @@ the response.
     }'
     ```
 
-    ``` tab="Response"
+    </TabItem>
+    <TabItem value="response" label="Response">
+
+    ```
     {
        "transactionStatus":"RCVD",
        "chosenScaMethod":{
@@ -425,20 +468,29 @@ the response.
     }
     ```
 
+    </TabItem>
+    </Tabs>
+
 2. The TPP uses the `startAuthorisation` link to create an authorisation sub-resource explicitly.
 
     - Replace the `<PAYMENT_SERVICE>` placeholder with the relevant payment product (payments, bulk-payments, periodic-payments). 
-      This request contains an empty JSON payload.
+        This request contains an empty JSON payload.
 
-        ``` tab="Request"
+        <Tabs>
+        <TabItem value="request" label="Request">
+
+        ```
         curl -L -X POST 'https://<APIM_HOST>:8243/xs2a/v1/<PAYMENT_SERVICE>/sepa-credit-transfers/<CONSENT_ID>/authorisations' \
         -H 'X-Request-ID: 10b3a7a1-690c-4317-8959-b7edcf9338db' \
         -H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>' \
         -H 'Content-Type: application/json' \
         -d '{}'
         ```
-      
-        ``` tab="Response"
+
+        </TabItem>
+        <TabItem value="response" label="Response">
+
+        ```
         {
            "authorisationId":"72644123-5880-43ae-9039-bf2d26fe75a1",
            "scaStatus":"received",
@@ -460,17 +512,21 @@ the response.
         }
         ```
 
+        </TabItem>
+        </Tabs>
+
 3. The ASPSP replies with the well-known configuration of the Identity Server in the `_links` section of the response.
 4. The TPP generates the authorisation URL using the well-known URL.
 5. PSU goes through the authorisation flow with that authorisation URL.
 
-    !!! note "Multiple SCA of more than one PSU (Multi-authorization)"
-         - For some accounts, more than one PSU has to give their consent before accessing this account. In this case, Strong
-           Customer Authentication (SCA) has to be executed by more than one PSU.
-         - In a multi-authorization scenario, steps 2 to 5 must be repeated _n_ number of times for _n_ number of PSUs. 
-           The consent becomes `valid` only after all the PSUs approve it.
-         - If only one PSU has authorized the consent, the consent status will change to `partiallyAuthorised`. If one 
-           of the users does not authorize the consent, the consent status will change to `rejected`.
+    :::note[Multiple SCA of more than one PSU (Multi-authorization)]
+    - For some accounts, more than one PSU has to give their consent before accessing this account. In this case, Strong
+        Customer Authentication (SCA) has to be executed by more than one PSU.
+    - In a multi-authorization scenario, steps 2 to 5 must be repeated _n_ number of times for _n_ number of PSUs. 
+        The consent becomes `valid` only after all the PSUs approve it.
+    - If only one PSU has authorized the consent, the consent status will change to `partiallyAuthorised`. If one 
+        of the users does not authorize the consent, the consent status will change to `rejected`.
+    :::
 
 
 #### Authorisation URL
@@ -480,39 +536,44 @@ generate an authorisation URL for the PSU to authorise the consent. This authori
 number of PSUs in a multi-level authorisation context.
 
 1. The ASPSP sends the request to the PSU stating the accounts and information that the TPP wishes to access. The  
-request is a URL in the format given below. Update the placeholders with relevant values and run this in a 
-browser to prompt the invocation of the authorize API:
+    request is a URL in the format given below. Update the placeholders with relevant values and run this in a 
+    browser to prompt the invocation of the authorize API:
 
     ```
     https://<IS_HOST>:9446/oauth2/authorize/?scope=<YOUR_SCOPES>&response_type=code&redirect_uri=<REDIRECT_URI>&state=<DYNAMICALLY_SET_VALUE>&code_challenge_method=<YOUR_CODE_CHALLENGE_METHOD>&client_id=<ORGANIZATION_ID>&code_challenge=<YOUR_CODE_CHALLENGE>
     ```
-    
-    ??? "Click here to see the descriptions for the parameters in Authorisation URL"
-        | Parameter | Description |
-        |-----------|-------------|
-        | scope | This is the reference to the payment consent resource for access. It is in the form of `pis:<consentId>`.|
-        | response_type | The recommended response type is `code`. |
-        | redirect_uri | The TPP's URI that the OAuth2 server redirects the PSU's user agent after the authorisation. |
-        | state | TPPs set a dynamic value to prevent XSRF attacks.|
-        | code_challenge_method | Code verifier transformation method. NextGenPSD2XS2AFramework specification recommends `S256`.
-        | client_id | As provided in the eIDAS certificate, the organization_Identifier must contain the following information in it: <ul> <li> `PSD` as 3 character legal person identity type reference </li><li> 2 character ISO 3166 country code representing the NCA country </li><li> hyphen-minus `-` </li><li> 2-8 character NCA identifier (A-Z uppercase only, no separator - hyphen-minus "-" </li><li> PSP identifier (authorisation number as specified by NCA) </li> </ul> |
-        | code_challenge | This is used to avoid code injection attacks using the PKCE challenge in the cryptographic RFC 7636. For more information, see [RFC 7636](https://tools.ietf.org/html/rfc7636). |
+
+    <details className="ob-details ob-details--note">
+    <summary>Click here to see the descriptions for the parameters in Authorisation URL</summary>
+
+    | Parameter | Description |
+    |-----------|-------------|
+    | scope | This is the reference to the payment consent resource for access. It is in the form of `pis:<consentId>`.|
+    | response_type | The recommended response type is `code`. |
+    | redirect_uri | The TPP's URI that the OAuth2 server redirects the PSU's user agent after the authorisation. |
+    | state | TPPs set a dynamic value to prevent XSRF attacks.|
+    | code_challenge_method | Code verifier transformation method. NextGenPSD2XS2AFramework specification recommends `S256`.
+    | client_id | As provided in the eIDAS certificate, the organization_Identifier must contain the following information in it: <ul> <li> `PSD` as 3 character legal person identity type reference </li><li> 2 character ISO 3166 country code representing the NCA country </li><li> hyphen-minus `-` </li><li> 2-8 character NCA identifier (A-Z uppercase only, no separator - hyphen-minus "-" </li><li> PSP identifier (authorisation number as specified by NCA) </li> </ul> |
+    | code_challenge | This is used to avoid code injection attacks using the PKCE challenge in the cryptographic RFC 7636. For more information, see [RFC 7636](https://tools.ietf.org/html/rfc7636). |
+
+    </details>
 
 
-    !!! tip
-        The NextGenPSD2 Reference Toolkit requires PKCE support for authorization. The `state` and `code challenge 
-        method` values indicate the PKCE usage. For more information, see 
-        [Consent Authorization with PKCE](../learn/consent-authorization-intro.md).
+    :::tip
+    The NextGenPSD2 Reference Toolkit requires PKCE support for authorization. The `state` and `code challenge 
+    method` values indicate the PKCE usage. For more information, see 
+    [Consent Authorization with PKCE](../learn/consent-authorization-intro.md).
+    :::
 
 2. Upon successful authentication, the PISP is redirected to the consent authorise page. Use the login credentials of a 
-user that has a **subscriber** role.
+    user that has a **subscriber** role.
 
 3. The page displays the data requested by the TPP for that particular consent along with its accounts and permissions.
 
     ![consent_page](../assets/img/try-out/payment-flow/consent-page.png)
 
 4. Upon providing consent, an authorization code is generated on the web page of the `redirect_uri`. See the sample 
-given below:
+    given below:
 
     ```
     https://www.wso2.com/?code=5b771c49-dfe3-33f6-abe1-18f0426b8734&state=768ff3be-964c-41d9-9022-848ba379e1bf
@@ -526,19 +587,19 @@ In this section, you will be generating an access token using the authorization 
 
 1. Run the following cURL command in a command prompt to generate the access token. Update the placeholders with relevant values.
 
-    ??? note "Use the sample certificates for testing purposes. Click here to see how it is done..."
+    <details className="ob-details ob-details--note">
+    <summary>Use the sample certificates for testing purposes. Click here to see how it is done...</summary>
 
-        1. Download the [cert.pem](../../assets/attachments/cert.pem) and upload it to the client trust stores as follows:
-        
+    1. Download the [cert.pem](pathname:///assets/attachments/cert.pem) and upload it to the client trust stores as follows:
         - The client trust stores for the Identity Server and API Manager are located in the following locations:
         - `<APIM_HOME>/repository/resources/security/client-truststore.jks`
         - `<IS_HOME>/repository/resources/security/client-truststore.jks`
-        
-        2. Use the following commands to add the certificate to the client trust store:
+
+    2. Use the following commands to add the certificate to the client trust store:
         ```shell
         keytool -import -alias cert -file <PATH_TO_CERT.PEM> -keystore client-truststore.jks -storepass wso2carbon
         ```
-        3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations. Add the relevant signature algorithm supported by the certificate to the following configuration. Sample certificate supports `SHA1withRSA` signature algorithm:
+    3. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and update the following configurations. Add the relevant signature algorithm supported by the certificate to the following configuration. Sample certificate supports `SHA1withRSA` signature algorithm:
         ```
         supported_signature_algorithms = ["SHA256withRSA", "SHA512withRSA", "SHA1withRSA"]
         ```
@@ -552,16 +613,18 @@ In this section, you will be generating an access token using the authorization 
         [[open_banking.gateway.certificate_management.certificate.revocation.excluded]]
         issuer_dn = "EMAILADDRESS=malshani@wso2.com, CN=OB, OU=OB, O=WSO2, L=COL, ST=WP, C=LK"
         ```
-        4. Restart the servers.
-        
-        5. Download the following certificates and keys, and use them for testing purposes.
-        Use the [transport private key](../../assets/attachments/transport-certs/obtransport.key) and
-        [transport public certificate](../../assets/attachments/transport-certs/obtransport.pem) for Transport
-        layer security testing purposes.
-        Use the [signing certificate](../../assets/attachments/signing-certs/obsigning.pem) and
-        [signing private keys](../../assets/attachments/signing-certs/obsigning.key) for signing purposes.
+    4. Restart the servers.
 
-    ``` curl
+    5. Download the following certificates and keys, and use them for testing purposes.
+        Use the [transport private key](pathname:///assets/attachments/transport-certs/obtransport.key) and
+        [transport public certificate](pathname:///assets/attachments/transport-certs/obtransport.pem) for Transport
+        layer security testing purposes.
+        Use the [signing certificate](pathname:///assets/attachments/signing-certs/obsigning.pem) and
+        [signing private keys](pathname:///assets/attachments/signing-certs/obsigning.key) for signing purposes.
+
+    </details>
+
+    ```curl
     curl -X POST \
     https://<IS_HOST>:9446/oauth2/token \
     --cert <TRANSPORT_PUBLIC_KEY_FILE_PATH> --key <TRANSPORT_PRIVATE_KEY_FILE_PATH> \
@@ -570,34 +633,39 @@ In this section, you will be generating an access token using the authorization 
 
 3. Upon successful token generation, you can obtain a token as follows:
 
-      ``` json
-       {
-          "access_token":"eyJ4NXQiOiJOVGRtWmpNNFpEazNOalkwWXpjNU1tWm1PRGd3TVRFM01XWXdOREU1TVdSbFpEZzROemM0WkEiLCJraWQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZ19SUzI1NiIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhZG1pbkB3c28yLmNvbUBjYXJib24uc3VwZXIiLCJhdXQiOiJBUFBMSUNBVElPTl9VU0VSIiwiYXVkIjoiUFNER0ItT0ItVW5rbm93bjAwMTU4MDAwMDFIUVFyWkFBWCIsIm5iZiI6MTY0ODU0MTA2MiwiYXpwIjoiUFNER0ItT0ItVW5rbm93bjAwMTU4MDAwMDFIUVFyWkFBWCIsInNjb3BlIjoicGF5bWVudCBwaXM6YzBkM2RhOGMtZGY3Ny00MjRmLWFiMDEtMGRmNDczODQ3MTNiIiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTQ0Ni9vYXV0aDIvdG9rZW4iLCJjbmYiOnsieDV0I1MyNTYiOiJ5YmVxYUltNTAwSU1QeTE5VmtQZkhSVEpOdDlxdl9RdDVqbUhkdC1iSm1jIn0sImV4cCI6MTY0ODU0NDY2MiwiaWF0IjoxNjQ4NTQxMDYyLCJqdGkiOiIzZDdiOGExOC03MTFjLTQ5Y2ItOWExNi01YmY4MzIwOTRmYzQiLCJjb25zZW50X2lkIjoiYzBkM2RhOGMtZGY3Ny00MjRmLWFiMDEtMGRmNDczODQ3MTNiIn0.vh_YgnDWgLD1cs0XT1s5SgEYDnzueqzB9l_xYYl1HPBkxAc8Xu1Vd8HTK1M3CHAA7Yu2OLug3Zd9pCOUGEtApu2SClDmlEEKOjcoaYFQKIR2ljVsh67eVIWaUZmCb6vF_QoKemhtQ6YDMyfooQiHreFSn3NfjTzNtWsfWFPDlFdHswWWcva-6NKWCY2OxdlITQKmgqdehAP40p6VHFi6GFgumRXl9O5OVzS4FP6BmpBKP_UXZzgrK7TqUcZLKTwWY8vxltZNn2m--6C-IeQOCxWej_Lft3_RRp99-TCKNkDBaTio1hAaXv2h6N7ITHoxBSZbehF94M1mckmiIDE22A",
-          "refresh_token":"5c5d0d00-eb31-38b6-ba97-4f46994051d9",
-          "scope":"payments pis:c0d3da8c-df77-424f-ab01-0df47384713b",
-          "token_type":"Bearer",
-          "expires_in":3600
-       }
-      ```
+    ```json
+     {
+        "access_token":"eyJ4NXQiOiJOVGRtWmpNNFpEazNOalkwWXpjNU1tWm1PRGd3TVRFM01XWXdOREU1TVdSbFpEZzROemM0WkEiLCJraWQiOiJNell4TW1Ga09HWXdNV0kwWldObU5EY3hOR1l3WW1NNFpUQTNNV0kyTkRBelpHUXpOR00wWkdSbE5qSmtPREZrWkRSaU9URmtNV0ZoTXpVMlpHVmxOZ19SUzI1NiIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiJhZG1pbkB3c28yLmNvbUBjYXJib24uc3VwZXIiLCJhdXQiOiJBUFBMSUNBVElPTl9VU0VSIiwiYXVkIjoiUFNER0ItT0ItVW5rbm93bjAwMTU4MDAwMDFIUVFyWkFBWCIsIm5iZiI6MTY0ODU0MTA2MiwiYXpwIjoiUFNER0ItT0ItVW5rbm93bjAwMTU4MDAwMDFIUVFyWkFBWCIsInNjb3BlIjoicGF5bWVudCBwaXM6YzBkM2RhOGMtZGY3Ny00MjRmLWFiMDEtMGRmNDczODQ3MTNiIiwiaXNzIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6OTQ0Ni9vYXV0aDIvdG9rZW4iLCJjbmYiOnsieDV0I1MyNTYiOiJ5YmVxYUltNTAwSU1QeTE5VmtQZkhSVEpOdDlxdl9RdDVqbUhkdC1iSm1jIn0sImV4cCI6MTY0ODU0NDY2MiwiaWF0IjoxNjQ4NTQxMDYyLCJqdGkiOiIzZDdiOGExOC03MTFjLTQ5Y2ItOWExNi01YmY4MzIwOTRmYzQiLCJjb25zZW50X2lkIjoiYzBkM2RhOGMtZGY3Ny00MjRmLWFiMDEtMGRmNDczODQ3MTNiIn0.vh_YgnDWgLD1cs0XT1s5SgEYDnzueqzB9l_xYYl1HPBkxAc8Xu1Vd8HTK1M3CHAA7Yu2OLug3Zd9pCOUGEtApu2SClDmlEEKOjcoaYFQKIR2ljVsh67eVIWaUZmCb6vF_QoKemhtQ6YDMyfooQiHreFSn3NfjTzNtWsfWFPDlFdHswWWcva-6NKWCY2OxdlITQKmgqdehAP40p6VHFi6GFgumRXl9O5OVzS4FP6BmpBKP_UXZzgrK7TqUcZLKTwWY8vxltZNn2m--6C-IeQOCxWej_Lft3_RRp99-TCKNkDBaTio1hAaXv2h6N7ITHoxBSZbehF94M1mckmiIDE22A",
+        "refresh_token":"5c5d0d00-eb31-38b6-ba97-4f46994051d9",
+        "scope":"payments pis:c0d3da8c-df77-424f-ab01-0df47384713b",
+        "token_type":"Bearer",
+        "expires_in":3600
+     }
+    ```
 
 ### Payment information/status retrieval related requests
 
-!!! info
-    This is only available as a WSO2 Update from **WSO2 Open Banking Identity Server Berlin Toolkit Level 1.0.0.5** and
-    **WSO2 Open Banking API Manager Berlin Toolkit Level 1.0.0.5** onwards. For more information on updating, see
-    [Getting WSO2 Updates](../install-and-setup/setting-up-servers.md#getting-wso2-updates).
+:::info
+This is only available as a WSO2 Update from **WSO2 Open Banking Identity Server Berlin Toolkit Level 1.0.0.5** and
+**WSO2 Open Banking API Manager Berlin Toolkit Level 1.0.0.5** onwards. For more information on updating, see
+[Getting WSO2 Updates](../install-and-setup/setting-up-servers.md#getting-wso2-updates).
+:::
 
-!!! tip "Before you begin:"
-    1. Update the following files:
-        - `dynamic-endpoint-insequence-1.3.6.xml` insequence file
-        - OpenAPI File
-    2. Redeploy the NextGenPsd2XS2AFramework API.
+:::tip[Before you begin:]
+1. Update the following files:
+    - `dynamic-endpoint-insequence-1.3.6.xml` insequence file
+    - OpenAPI File
+2. Redeploy the NextGenPsd2XS2AFramework API.
+:::
 
 All the following endpoints need a user access token to retrieve payment information.
 
-**GET /payments/{payment-product}/{paymentId}**
+**GET /payments/\{payment-product\}/\{paymentId\}**
 
-``` tab="Request"
+<Tabs>
+<TabItem value="request" label="Request">
+
+```
 curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/payments/sepa-credit-transfers/4a8ac7c7-d5ee-42cb-8a29-44fc7778bd96' \
 -H 'PSU-IP-Address: 127.0.1.1' \
 -H 'PSU-ID-Type: email' \
@@ -610,7 +678,10 @@ curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/payments/sepa-credit-transfers/4a8
 -H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
 ```
 
-``` tab="Response"
+</TabItem>
+<TabItem value="response" label="Response">
+
+```
 200 OK
 Header: X-Request-ID: 6bb5c0b0-5f63-4872-b3dc-e4987f58f879
 {
@@ -631,14 +702,21 @@ Header: X-Request-ID: 6bb5c0b0-5f63-4872-b3dc-e4987f58f879
 }
 ```
 
-!!! note
-    - This response should be constructed by the core banking back end.
-    - The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
-    - The response to the request must comply with the response specified in the specification.
+</TabItem>
+</Tabs>
 
-**GET /bulk-payments/{payment-product}/{paymentId}**
+:::note
+- This response should be constructed by the core banking back end.
+- The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
+- The response to the request must comply with the response specified in the specification.
+:::
 
-``` tab="Request"
+**GET /bulk-payments/\{payment-product\}/\{paymentId\}**
+
+<Tabs>
+<TabItem value="request" label="Request">
+
+```
 curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/319b67d3-f66d-42e3-b05d-2e26006ba775' \
 -H 'PSU-IP-Address: 127.0.1.1' \
 -H 'PSU-ID-Type: email' \
@@ -651,7 +729,10 @@ curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfer
 -H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
 ```
 
-``` tab="Response"
+</TabItem>
+<TabItem value="response" label="Response">
+
+```
 200 OK
 Header: X-Request-ID: f044aa8c-eee3-4d2b-8c22-49652bdf1531
 {
@@ -688,14 +769,21 @@ Header: X-Request-ID: f044aa8c-eee3-4d2b-8c22-49652bdf1531
 }
 ```
 
-!!! note
-    - This response is constructed by the core banking back end.
-    - The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
-    - The response to the request must comply with the response specified in the specification.
+</TabItem>
+</Tabs>
 
-**GET /periodic-payments/{payment-product}/{paymentId}**
+:::note
+- This response is constructed by the core banking back end.
+- The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
+- The response to the request must comply with the response specified in the specification.
+:::
 
-``` tab="Request"
+**GET /periodic-payments/\{payment-product\}/\{paymentId\}**
+
+<Tabs>
+<TabItem value="request" label="Request">
+
+```
 curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/periodic-payments/sepa-credit-transfers/31169aed-3a46-4404-9035-99de2e776a60' \
 -H 'PSU-IP-Address: 127.0.1.1' \
 -H 'PSU-ID-Type: email' \
@@ -708,7 +796,10 @@ curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/periodic-payments/sepa-credit-tran
 -H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
 ```
 
-``` tab="Response"
+</TabItem>
+<TabItem value="response" label="Response">
+
+```
 200 OK
 Header: X-Request-ID: eea1ced4-2ae3-499a-9e10-192d8e2ecb7a
 {
@@ -733,18 +824,25 @@ Header: X-Request-ID: eea1ced4-2ae3-499a-9e10-192d8e2ecb7a
 }
 ```
 
-!!! note
-    - This response is constructed by the core banking back end.
-    - The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
-    - The response to the request must comply with the response specified in the specification.
+</TabItem>
+</Tabs>
 
-**GET /{payment-service}/{payment-product}/{paymentId}/status**
+:::note
+- This response is constructed by the core banking back end.
+- The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
+- The response to the request must comply with the response specified in the specification.
+:::
+
+**GET /\{payment-service\}/\{payment-product\}/\{paymentId\}/status**
 
 This request is applicable for instant payments, bulk payments, and periodic payments.
 
 Given below is a sample request for a periodic payment:
 
-``` tab="Request"
+<Tabs>
+<TabItem value="request" label="Request">
+
+```
 curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/periodic-payments/sepa-credit-transfers/31169aed-3a46-4404-9035-99de2e776a60/status' \
 -H 'PSU-IP-Address: 127.0.1.1' \
 -H 'PSU-ID-Type: email' \
@@ -757,7 +855,10 @@ curl -X GET 'https://<APIM_HOST>:8243/xs2a/v1/periodic-payments/sepa-credit-tran
 -H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
 ```
 
-``` tab="Response"
+</TabItem>
+<TabItem value="response" label="Response">
+
+```
 200 OK
 Header: X-Request-ID: d029c37a-d464-4304-b175-7c27fd7f5728
 {
@@ -765,43 +866,53 @@ Header: X-Request-ID: d029c37a-d464-4304-b175-7c27fd7f5728
 }
 ```
 
-!!! note
-    - This response is constructed by the core banking back end.
-    - The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
-    - The response to the request must comply with the response specified in the specification.
+</TabItem>
+</Tabs>
+
+:::note
+- This response is constructed by the core banking back end.
+- The `transactionStatus` property shows the status of the real payment at the time the request arrives at the bank backend.
+- The response to the request must comply with the response specified in the specification.
+:::
 
 ### Payment cancellation requests
 
-!!! info
-    This is only available as a WSO2 Update from **WSO2 Open Banking Identity Server Berlin Toolkit Level 1.0.0.5** and
-    **WSO2 Open Banking API Manager Berlin Toolkit Level 1.0.0.5** onwards. For more information on updating, see
-    [Getting WSO2 Updates](../install-and-setup/setting-up-servers.md#getting-wso2-updates).
+:::info
+This is only available as a WSO2 Update from **WSO2 Open Banking Identity Server Berlin Toolkit Level 1.0.0.5** and
+**WSO2 Open Banking API Manager Berlin Toolkit Level 1.0.0.5** onwards. For more information on updating, see
+[Getting WSO2 Updates](../install-and-setup/setting-up-servers.md#getting-wso2-updates).
+:::
 
-!!! tip "Before you begin:"
-    1. Update the following files with the files in the latest update level:
-        - `dynamic-endpoint-insequence-1.3.6.xml` insequence file
-        - OpenAPI File
-    2. Redeploy the NextGenPsd2XS2AFramework API.
+:::tip[Before you begin:]
+1. Update the following files with the files in the latest update level:
+    - `dynamic-endpoint-insequence-1.3.6.xml` insequence file
+    - OpenAPI File
+2. Redeploy the NextGenPsd2XS2AFramework API.
+:::
 
 There are three types of payments as instant payments, bulk payments, and periodic payments.
 
-   - Only bulk payments and periodic payments can be cancelled. 
-   - The bank should decide whether the payment cancellation needs authorization or not.
+- Only bulk payments and periodic payments can be cancelled. 
+- The bank should decide whether the payment cancellation needs authorization or not.
 
-**DELETE /{payment-service}/{payment-product}/{paymentId}**
+**DELETE /\{payment-service\}/\{payment-product\}/\{paymentId\}**
 
 To cancel an already submitted payment
 
 - This will go to the core banking back end and respond accordingly.
 
-    !!! note
-        - Successful response code will be either 204 or 202. This is decided by the bank.
-        - If you get 204 as the response code, it indicates that the bank does not need authorization to cancel this payment. Therefore, the payment status must be updated by the bank as `CANC`. The consent status will be updated as `CANC`.
-        - If you get 202 as the response code, it indicates that the bank needs the authorization to cancel this payment. Therefore, the payment status must be updated by the bank as `ACTC`. The consent status will be updated to `ACTC`.
+    :::note
+    - Successful response code will be either 204 or 202. This is decided by the bank.
+    - If you get 204 as the response code, it indicates that the bank does not need authorization to cancel this payment. Therefore, the payment status must be updated by the bank as `CANC`. The consent status will be updated as `CANC`.
+    - If you get 202 as the response code, it indicates that the bank needs the authorization to cancel this payment. Therefore, the payment status must be updated by the bank as `ACTC`. The consent status will be updated to `ACTC`.
+    :::
 
 Sample DELETE Request for a bulk payment cancellation without authorization is given below:
 
-``` tab="Request"
+<Tabs>
+<TabItem value="request" label="Request">
+
+```
 curl -X DELETE 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517' \
 -H 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' \
 -H 'PSU-IP-Address: 127.0.0.1' \
@@ -813,18 +924,28 @@ curl -X DELETE 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-trans
 -H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
 ```
 
-``` tab="Response"
+</TabItem>
+<TabItem value="response" label="Response">
+
+```
 Header: 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' 
 204 No Content
 ```
 
-!!! note
+</TabItem>
+</Tabs>
 
-     If the bank decides not to require an authorization to cancel the payment, the response will be a 204 response code with no response body. The payment cancellation flow will end from there and the payment will be cancelled.
+:::note
+
+If the bank decides not to require an authorization to cancel the payment, the response will be a 204 response code with no response body. The payment cancellation flow will end from there and the payment will be cancelled.
+:::
 
 Sample DELETE Request for a bulk payment cancellation with authorization is given below:
 
-``` tab="Request"
+<Tabs>
+<TabItem value="request" label="Request">
+
+```
 curl -X DELETE 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/ecf7844a-6876-47c5-86e3-e41c005bd517' \
 -H 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' \
 -H 'PSU-IP-Address: 127.0.0.1' \
@@ -836,7 +957,10 @@ curl -X DELETE 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-trans
 -H 'Authorization: Bearer <APPLICATION_ACCESS_TOKEN>'
 ```
 
-``` tab="Response"
+</TabItem>
+<TabItem value="response" label="Response">
+
+```
 200 OK
 Header: 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b' 
 {
@@ -862,17 +986,24 @@ Header: 'X-Request-ID: 94343777-125d-4d87-80d7-ab62c668514b'
 }
 ```
 
-!!! note
+</TabItem>
+</Tabs>
 
-     - If the bank requires an authorization to cancel the payment, the core banking backend will return a 202 response code and the body must comply with the specification.
-     
-     - The transactionStatus property must be `ACTC`.
+:::note
+
+- If the bank requires an authorization to cancel the payment, the core banking backend will return a 202 response code and the body must comply with the specification.
+
+- The transactionStatus property must be `ACTC`.
+:::
 
 If the bank returns `202` with the above payload for the `DELETE` request, the `POST /{payment-service}/{payment-product}/{paymentId}/cancellation-authorisations` request must be sent to create an authorization resource for the cancellation. This is indicated in the response of the `DELETE` request in the `startAuthorisationWithPsuIdentification` property. This request requires an application access token.
 
 A sample POST cancellation authorisations request for bulk payments type is given below:
 
-``` tab="Request"
+<Tabs>
+<TabItem value="request" label="Request">
+
+```
 curl -X POST 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfers/697a4c4b-b939-4a18-8bfa-eae30ea90804/cancellation-authorisations' \
 -H 'Content-Type: application/json' \
 -H 'PSU-IP-Address: 127.0.1.1' \
@@ -887,7 +1018,10 @@ curl -X POST 'https://<APIM_HOST>:8243/xs2a/v1/bulk-payments/sepa-credit-transfe
 --data-raw '{}'
 ```
 
-``` tab="Response"
+</TabItem>
+<TabItem value="response" label="Response">
+
+```
 201 Created
 Header: X-Request-ID:2a7fb573-5a2d-49ba-bcdc-4b438930df1b
 ASPSP-SCA-Approach: REDIRECT
@@ -912,6 +1046,9 @@ ASPSP-SCA-Approach: REDIRECT
 }
 ```
 
+</TabItem>
+</Tabs>
+
 If the `POST cancellation-authorisations` request is successful, the TPP should send the authorization request as follows to inform the bank to cancel the payment. Then the bank displays a page similar to the consent page asking the PSU to approve or deny the cancellation authorization. 
 
 ```
@@ -920,7 +1057,7 @@ https://<IS_HOST>:9446/oauth2/authorize/?scope=pis:<payment_id>&response_type=co
 
 Given below is a sample page for cancellation authorization for bulk payment type:
 
-[ ![consent_page](../assets/img/try-out/payment-flow/cancellation-authorization-bulk-payment.png) ](../assets/img/try-out/payment-flow/cancellation-authorization-bulk-payment.png)
+[ ![consent_page](../assets/img/try-out/payment-flow/cancellation-authorization-bulk-payment.png) ](pathname:///assets/img/try-out/payment-flow/cancellation-authorization-bulk-payment.png)
 
 - If the PSU proceeds to the cancellation by selecting Confirm,
     - The payment cancellation will be submitted to the core banking back end

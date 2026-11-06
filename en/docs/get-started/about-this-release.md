@@ -1,3 +1,6 @@
+---
+title: "About this Release"
+---
 NextGenPSD2 Reference Toolkit 1.0 provides the technology requirements that banks need to digitally transform and become 
 regulatory-compliant with Payment Service Directive 2 (PSD2) and the Berlin Group's NextGenPSD2 v1.3.6 specification.
 
@@ -12,7 +15,7 @@ For more information on WSO2 Open Banking Toolkit, see the [Get Started](open-ba
 
 ## What is new in this release
 
-####WSO2 Open Banking Identity Server Berlin Toolkit
+#### WSO2 Open Banking Identity Server Berlin Toolkit
 
 - Consent Management for NextGenPSD2 Accounts Flow v1.3.6
 - Consent Authorisation for NextGenPSD2 Accounts Flow (Implicit and explicit authorisation)
@@ -26,7 +29,7 @@ For more information on WSO2 Open Banking Toolkit, see the [Get Started](open-ba
 - Multi-Currency support 
 - Multi-level Strong Customer Authentication (SCA) 
 
-####WSO2 Open Banking API Manager Berlin Toolkit
+#### WSO2 Open Banking API Manager Berlin Toolkit
 
 - Manual Client Registration via API Manager Developer Portal. 
 - Idempotency validation for Payment Initiation 

@@ -1,16 +1,20 @@
+---
+title: "Configuring Users and Roles"
+---
 Now you have started the servers, let’s create the users and define their permissions and  roles.
 
 ## Sign in to the Identity Server
 
-1. Sign in to the Management Console of WSO2 Identity Server at [https://<IS_HOST>:9446/carbon](https://<IS_HOST>:9446/carbon)
+1. Sign in to the Management Console of WSO2 Identity Server at <a href="https://<IS_HOST>:9446/carbon">https://&lt;IS_HOST&gt;:9446/carbon</a>
 
 2. Use the default super admin credentials as follows:
     - Username: admin@wso2.com
     - Password: wso2123
 
-    !!!note
-        The above login credentials are for testing purposes only. It is recommended to change the login credentials in
-        a production environment.
+    :::note
+    The above login credentials are for testing purposes only. It is recommended to change the login credentials in
+    a production environment.
+    :::
 
 ## Create new user roles
 
@@ -33,7 +37,7 @@ Now you have started the servers, let’s create the users and define their perm
 
         3. Select the check box next to **Admin Permissions**.
 
-             ![select_approver_permissoions](../assets/img/get-started/quick-start-guide/select-permissions.png)
+            ![select_approver_permissoions](../assets/img/get-started/quick-start-guide/select-permissions.png)
 
         4. Scroll down and click **Finish**.
 
