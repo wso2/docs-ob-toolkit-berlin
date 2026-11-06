@@ -8,7 +8,7 @@ import {FeatureTiles, FeatureTile, SectionSummaries, SectionSummary} from '@site
 
 <div className="ob-home">
 
-<div className="ob-home__top">
+<div className="ob-home__top ob-home__top--stacked">
 
 <header className="ob-home__hero">
   <h1>Welcome to the NextGenPSD2 Reference Toolkit Documentation!</h1>
@@ -28,7 +28,7 @@ import {FeatureTiles, FeatureTile, SectionSummaries, SectionSummary} from '@site
 
 </div>
 
-<FeatureTiles>
+<FeatureTiles columns={5}>
   <FeatureTile to="/get-started/quick-start-guide/" icon="timer" title="Quick Start Guide" hint="Set up and try out in your local environment" />
   <FeatureTile to="/learn/consent-management/" icon="consent" title="Consent Management" hint="Create, view, revoke, and manage consents" />
   <FeatureTile to="/learn/tpp-onboarding/" icon="register" title="Client Registration" hint="A thorough verification before onboarding" />
@@ -38,7 +38,7 @@ import {FeatureTiles, FeatureTile, SectionSummaries, SectionSummary} from '@site
 
 <h2 className="ob-home__heading">Explore the documentation</h2>
 
-<SectionSummaries>
+<SectionSummaries columns={4}>
   <SectionSummary
     to="/get-started/wso2-open-banking-berlin-toolkit/"
     icon="book"
