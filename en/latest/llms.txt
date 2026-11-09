@@ -1,0 +1,44 @@
+# NextGenPSD2 Reference Toolkit Documentation
+
+
+## en
+
+- [Search the documentation](/search.md): Documentation for NextGenPSD2 Reference Toolkit
+- [About this Release](/get-started/about-this-release.md): NextGenPSD2 Reference Toolkit 1.0 provides the technology requirements that banks need to digitally transform and become
+- [Configure IS as Key Manager](/get-started/configure-is-as-key-manager.md): This page explains how to configure WSO2 Identity Server as the Key Manager.
+- [Configure Users and Roles](/get-started/configure-users-and-roles.md): Now you have started the servers, let’s create the users and define their permissions and  roles.
+- [Deploy NextGenPsd2XS2AFramework API](/get-started/deploy-api.md): This page provides instructions to deploy the NextGenPsd2XS2AFramework API. NextGenPSD2 Reference Toolkit
+- [Open Banking Requirements](/get-started/open-banking-requirements.md): When you implement an open banking architecture, it is not entirely about securely exposing banking APIs to
+- [Open Banking](/get-started/open-banking.md): What is Open Banking?
+- [Get Started](/get-started/quick-start-guide.md): NextGenPSD2 Reference Toolkit contains the customizations done on top of WSO2  Open Banking Accelerator to comply with
+- [Regulations and Standards](/get-started/regulations-and-standards.md): Regulations and specifications are enforced by the authorities to standardise the open banking requirements and
+- [Set up Toolkits](/get-started/set-up-toolkits.md): This section guides you to set up and prepare your servers to run NextGenPSD2 Reference Toolkit.
+- [TPP Onboarding](/get-started/tpp-onboarding.md): This page explains how to onboard the TPP applications using the WSO2 API Manager Developer Portal.
+- [Tryout Flow](/get-started/try-out-flow.md): This page provides instructions to use the NextGenPsd2XS2AFramework API to provide the Account Information
+- [NextGenPSD2 Reference Toolkit](/get-started/wso2-open-banking-berlin-toolkit.md): NextGenPSD2 Reference Toolkit is based on the WSO2 Open Banking Accelerator. The toolkit is a purpose-built solution for
+- [Configuring API Manager](/install-and-setup/configuring-api-manager-for-ob.md): NextGenPSD2 Reference Toolkit contains TOML-based configurations. All the server-level configurations of the
+- [Configuring Identity Server](/install-and-setup/configuring-identity-server-for-ob.md): NextGenPSD2 Reference Toolkit contains TOML-based configurations. All the server-level configurations of the Identity
+- [Configuring Users and Roles](/install-and-setup/configuring-users-and-roles.md): Now you have started the servers, let’s create the users and define their permissions and  roles.
+- [Prerequisites](/install-and-setup/prerequisites.md): NextGenPSD2 Reference Toolkit is a purpose-built solution for regulatory compliance that supports PSD2. Instead of
+- [Setting up databases](/install-and-setup/setting-up-databases.md): Once you have successfully prepared the environment for the deployment, you can configure the databases.
+- [Setting up servers](/install-and-setup/setting-up-servers.md): This section guides you to set up and prepare the servers to run NextGenPSD2 Reference Toolkit.
+- [Upgrading the solution](/install-and-setup/upgrading-the-solution.md): This document walks you through the process of upgrading your WSO2 Open Banking 2.0 setup to WSO2 Open Banking 3.0 (Accelerator Model).
+- [Configuration](/learn/api-security-configuration.md): Configuring MTLS Enforcement Executor
+- [API Security](/learn/api-security.md): Open Banking allows TPPs to access financial data through open APIs, which requires greater API security. Therefore,
+- [Consent Authorization](/learn/consent-authorization-intro.md): The PKCE Consent Authorization flow is as follows:
+- [Consent Management](/learn/consent-management.md): Open banking is a concept that lets third-party financial service providers access customer’s financial data and
+- [Consent Manager](/learn/consent-manager.md): After a certain period, bank customers may need to view, update, or revoke consents they have granted to API consumer
+- [Integration With Core Banking System](/learn/integration-with-bank.md): WSO2 Open Banking can be easily integrated into your current banking system.
+- [Configuration](/learn/strong-customer-authentication-configuration.md): Configuring SCA Status for NextGenPSD2
+- [Strong Customer Authentication](/learn/strong-customer-authentication.md): Strong Customer Authentication (SCA) is a mechanism used to authenticate a user that initiates a payment or accesses banking
+- [Token Authentication](/learn/token-authentication.md): When a TPP registers an application, a consumer-key and a consumer-secret is given for that application.
+- [Configuration](/learn/tpp-onboarding-configuration.md): Customize Consumer Key Validation
+- [TPP Onboarding](/learn/tpp-onboarding.md): The TPPs can create OAuth 2.0 client applications to facilitate banking services exposed via Bank APIs. WSO2 Open Banking
+- [NextGenPSD2 Reference Toolkit Documentation](/page-not-found.md): {/*
+- [Account Information Service Flow](/try-out/account-information-service-flow.md): This page provides instructions to use the NextGenPSD2XS2AFramework API to provide the Account Information
+- [Confirmation of Funds flow](/try-out/confirmation-of-funds-flow.md): This page provides instructions to use the NextGenPSD2XS2AFramework API to provide the
+- [Consent Manager](/try-out/consent-manager.md): After a certain period, bank customers/PSUs may need to view, update, or revoke consents they have granted to TPP
+- [Deploy NextGenPSD2XS2A API](/try-out/deploy-nextgenpsd2-api.md): This page provides instructions to deploy the NextGenPsd2XS2AFramework API. NextGenPSD2 Reference Toolkit
+- [Payment Initiation Service Flow](/try-out/payment-initiation-service-flow.md): This page provides instructions to use the NextGenPSD2XS2AFramework API to provide the Payment Initiation Service (PIS).
+- [TPP Onboarding](/try-out/tpp-onboarding.md): This page explains how to onboard the TPP applications using the WSO2 API Manager Developer Portal.
+- [Welcome to the NextGenPSD2 Reference Toolkit Documentation!](/index.md): Welcome to the NextGenPSD2 Reference Toolkit Documentation!
