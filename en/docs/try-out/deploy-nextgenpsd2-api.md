@@ -1,3 +1,6 @@
+---
+title: "Deploy NextGenPSD2XS2A API"
+---
 This page provides instructions to deploy the NextGenPsd2XS2AFramework API. NextGenPSD2 Reference Toolkit 
 provides the Account Information Service (AIS), Payment Initiation Service (PIS), and Confirmation on the Availability 
 of Funds Service (FCS) via the NextGenPSD2XS2AFramework API. 
@@ -63,4 +66,4 @@ of Funds Service (FCS) via the NextGenPSD2XS2AFramework API.
 29. Go to **Overview** using the left menu pane.
 
     ![select_overview](../assets/img/get-started/quick-start-guide/select-overview.png)
-30. Click **Publish**. ![publish_api](../assets/img/get-started/quick-start-guide/publish-api.png)
+    30. Click **Publish**. ![publish_api](../assets/img/get-started/quick-start-guide/publish-api.png)

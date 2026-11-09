@@ -1,4 +1,7 @@
-#TPP Onboarding
+---
+title: "Introduction"
+---
+# TPP Onboarding
 
 The TPPs can create OAuth 2.0 client applications to facilitate banking services exposed via Bank APIs. WSO2 Open Banking 
 Berlin Toolkit provides the Client Registration feature to register the applications in the bank's back end. The TPP 
@@ -14,7 +17,7 @@ application can generate a consumer key/client ID which can be used to communica
 
 The TPP Onboarding feature in the WSO2 Open Banking performs the following:
 
- - Validates if the TPP application is authorized by a competent authority
- - Validates information such as the role of the TPP, signature algorithm, authorization scopes, 
- OAuth2.0 grant types, application type, and the request issuance time
- - Allows registered TPP applications to access data via open banking APIs
+- Validates if the TPP application is authorized by a competent authority
+- Validates information such as the role of the TPP, signature algorithm, authorization scopes, 
+    OAuth2.0 grant types, application type, and the request issuance time
+- Allows registered TPP applications to access data via open banking APIs

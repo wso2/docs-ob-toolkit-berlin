@@ -1,4 +1,7 @@
-#Integration With Core Banking System
+---
+title: "Integration with Bank"
+---
+# Integration With Core Banking System
 
 WSO2 Open Banking can be easily integrated into your current banking system.
 
@@ -17,22 +20,26 @@ known as **Account-Request-Information**.
 
 The Account-Request-Information header is a signed JWT, which needs to be decoded by the core banking system.
 
-??? tip "Click here to see the fields in the header..."
-    | Field | Description |
-    |-------|-------------|
-    | clientId | The unique ID of the TPP application |
-    | currentStatus | The current status of the consent |
-    | createdTimestamp| The date and time when the consent was created |
-    | recurringIndicator | Specifies if this is a recurring transaction |
-    | authorizationResources | Contains details regarding the consent authorisation |
-    | updatedTimestamp | The last date and time the consent was updated |
-    | validityPeriod | The validity period of the consent in seconds |
-    | consentAttributes| Additional attributes related to the consent |
-    | consentId | The unique ID of the consent that is being authorised |
-    | consentMappingResources | The details of the accounts that the consent is bound to
-    | consentType | The type of the consent. For example, accounts, payments |
-    | receipt | Details of the consent, such as expiration time, permissions |
-    | consentFrequency | The maximum number of times per day that access can be granted without the involvement of a consumer |
+<details className="ob-details ob-details--tip">
+<summary>Click here to see the fields in the header...</summary>
+
+| Field | Description |
+|-------|-------------|
+| clientId | The unique ID of the TPP application |
+| currentStatus | The current status of the consent |
+| createdTimestamp| The date and time when the consent was created |
+| recurringIndicator | Specifies if this is a recurring transaction |
+| authorizationResources | Contains details regarding the consent authorisation |
+| updatedTimestamp | The last date and time the consent was updated |
+| validityPeriod | The validity period of the consent in seconds |
+| consentAttributes| Additional attributes related to the consent |
+| consentId | The unique ID of the consent that is being authorised |
+| consentMappingResources | The details of the accounts that the consent is bound to
+| consentType | The type of the consent. For example, accounts, payments |
+| receipt | Details of the consent, such as expiration time, permissions |
+| consentFrequency | The maximum number of times per day that access can be granted without the involvement of a consumer |
+
+</details>
 
 The core banking system will perform all required validations and build a response. This response needs to adhere to the
 requirements of the open banking specification.
@@ -49,7 +56,7 @@ In WSO2 Open Banking, integration of accounts flow with the core banking system 
 retrieval requests.
 
 - The URL of the API endpoints of the core banking system, which corresponds to the account's information retrieval
-  requests, should be configured in the In sequences of the Accounts API. For more information, see [Configuring Sequence files](#configuring-sequence-files).
+    requests, should be configured in the In sequences of the Accounts API. For more information, see [Configuring Sequence files](#configuring-sequence-files).
 
 In the Open Banking Accounts flow, WSO2 Open Banking manages the consent initiation and authorisation. When the TPP
 makes account information retrieval requests, the WSO2 Open Banking toolkit validates the consent request, and upon
@@ -58,7 +65,7 @@ This header is known as **Account-Request-Information**.
 
 This header is a signed JWT, which needs to be decoded by the core banking system. A sample decoded JSON is given below:
 
-``` json
+```json
 {
    "clientId":"PSDGB-OB-Unknown0015800001HQQrZAAX",
    "currentStatus":"valid",
@@ -142,61 +149,62 @@ This header is a signed JWT, which needs to be decoded by the core banking syste
 The banks need to follow these points for card-account requests:
 
 - Banks should perform all card-account request account ID (Masked PAN and PAN) validations and user validations 
-  of the account ID.
+    of the account ID.
 - For card-account requests, only a permission level validation will be performed against the consent ID from the 
-  WSO2 Open Banking solution. The banks should return the proper response or the error according to the 
-  NextGenPSD2 specification.
+    WSO2 Open Banking solution. The banks should return the proper response or the error according to the 
+    NextGenPSD2 specification.
 
-  - **When the account ID is a Primary Account Number (PAN):**
-       - The bank should decide and implement the tokenization and validation method as a custom implementation. 
-       - The bank has to configure the TOML file with PAN in the list of supported account identifiers 
-         configuration as it is not configured by default.
-       - The bank has to write a custom **retrieval step** to validate the tokenized PAN sent with the consent 
-         against their back end during the authorisation process. Upon successful validation, it is displayed on
-         the consent page. This step also needs to include proper error handling. The validated PAN should be correctly 
-         positioned in the `JSONObject`. The step must be configured after `BerlinAccountListRetrievalStep` and 
-         must modify the JSON object passed to it through the execute method.
+    - **When the account ID is a Primary Account Number (PAN):**
+        - The bank should decide and implement the tokenization and validation method as a custom implementation. 
+        - The bank has to configure the TOML file with PAN in the list of supported account identifiers 
+            configuration as it is not configured by default.
+        - The bank has to write a custom **retrieval step** to validate the tokenized PAN sent with the consent 
+            against their back end during the authorisation process. Upon successful validation, it is displayed on
+            the consent page. This step also needs to include proper error handling. The validated PAN should be correctly 
+            positioned in the `JSONObject`. The step must be configured after `BerlinAccountListRetrievalStep` and 
+            must modify the JSON object passed to it through the execute method.
 
-    !!! note 
-        - For Accounts consents:
-            - In the JSON object, the position `accountData.accountDetailsList[].accountRefObjects[]` must 
-              be replaced with the validated PAN account references.
-         
-        - For Payments and CoF consents:
-            - In the JSON object, the position `accountData.accountRefObjects[]` must be replaced with the 
-              validated PAN account references.
-            - Modify the `consentData.consentDetails[].data` path of the JSON object with the 
-              validated PAN account reference to reflect the validated PAN account reference on the consent page.
-  
-        - For all consent types (Accounts, Payments, CoF):
-            - For the authorisation flow to function properly, the details in the `accountData` object of 
-              the JSON object must be reflected in the metadata map of `ConsentData`.
+    :::note
+    - For Accounts consents:
+        - In the JSON object, the position `accountData.accountDetailsList[].accountRefObjects[]` must 
+            be replaced with the validated PAN account references.
+
+    - For Payments and CoF consents:
+        - In the JSON object, the position `accountData.accountRefObjects[]` must be replaced with the 
+            validated PAN account references.
+        - Modify the `consentData.consentDetails[].data` path of the JSON object with the 
+            validated PAN account reference to reflect the validated PAN account reference on the consent page.
+
+    - For all consent types (Accounts, Payments, CoF):
+        - For the authorisation flow to function properly, the details in the `accountData` object of 
+            the JSON object must be reflected in the metadata map of `ConsentData`.
+    :::
 
 
-     - The bank should use the same tokenization implementation to validate the account ID during the submission request.
+    - The bank should use the same tokenization implementation to validate the account ID during the submission request.
 
-  - **Account Consent validation process during submission:**
+    - **Account Consent validation process during submission:**
 
     - Validate against the consent ID:
         - If the retrieval request is of type `card-accounts`, the validation will 
-          always happen against the consent ID since the account ID validation is passed to the bank as 
-          mentioned above. 
+            always happen against the consent ID since the account ID validation is passed to the bank as 
+            mentioned above. 
         - If the request is not of type `card-accounts`, the validation will be based on the account ID 
-          validation configuration in `<IS_HOME>/repository/conf/deployment.toml`.
-     
-             ``` toml
-             [open_banking_berlin.consent.accounts]
-             single_acc_no_retrieval_validation.enable = true
-             ```
-      
+            validation configuration in `<IS_HOME>/repository/conf/deployment.toml`.
+
+            ```toml
+            [open_banking_berlin.consent.accounts]
+            single_acc_no_retrieval_validation.enable = true
+            ```
+
         - It is recommended to set this configuration to `false` if a resource ID is used as the account reference. 
-          In this case, the bank needs to do the account ID validation
-   
+            In this case, the bank needs to do the account ID validation
+
     - Validate against the account ID:
         - If the above configuration is `true`, the account ID will be validated for its permissions against the initiated 
-          consent. If the permissions are not valid, an error is returned.
+            consent. If the permissions are not valid, an error is returned.
         - If the above configuration is `false`, the consent ID will be validated against the permissions provided during 
-          the consent initiation. If the permissions are not valid, an error is returned.
+            the consent initiation. If the permissions are not valid, an error is returned.
 
 ## Payments API
 
@@ -205,7 +213,7 @@ A Swagger definition for the back end is available in the following location:
 ```<OB_APIM_TOOLKIT_HOME>/repository/resources/apis/berlin.group.org/PSD2API_1.3.6/psd2-api_1.3.6_20200327.yaml```
 
 - The URL of the API endpoints of the core banking system, which corresponds to the payment initiation requests, should
-  be configured in the In sequences of the Payments API. For more information, see [Configuring Sequence files](#configuring-sequence-files).
+    be configured in the In sequences of the Payments API. For more information, see [Configuring Sequence files](#configuring-sequence-files).
 
 ### Payments Submission
 
@@ -218,17 +226,17 @@ authorisation. The integration of the payments flow with the core banking system
 After the consent is authorised, the bank should handle the payment submission request since the 
 NextGenPSD2 specification does not specify such requests.
 
-#### Multiple- Authorisation
+#### Multiple- Authorisation \{#multiple-authorisation\}
 
 An account can have one or more owners. When there are multiple owners, each owner has to authorise the
 account (multiple-authorisation) while if it is a single owner it requires single-authorisation. Let's look at a multiple
 authorisation scenario in the Payments API:
 
- 1. The consent initiation must be an [explicit initiation](../try-out/payment-initiation-service-flow.md#explicit-authorisation-flow). 
- 2. Each owner should perform [start authorisation](../try-out/payment-initiation-service-flow.md#:~:text=TPP%20uses%20the-,startAuthorisation,-link%20to%20create) requests to create their own authorisation resources. 
- 3. Each owner should perform the authorisation of the consent.
- 4. Upon consent approval of all owners, the consent status changes to `ACCP`.
- 
+1. The consent initiation must be an [explicit initiation](../try-out/payment-initiation-service-flow.md#explicit-authorisation-flow). 
+2. Each owner should perform [start authorisation](../try-out/payment-initiation-service-flow.md#:~:text=TPP%20uses%20the-,startAuthorisation,-link%20to%20create) requests to create their own authorisation resources. 
+3. Each owner should perform the authorisation of the consent.
+4. Upon consent approval of all owners, the consent status changes to `ACCP`.
+
 #### Debtor Account Currency Validation
 
 During the authorisation process, you can perform a currency validation for the debtor account.
@@ -236,12 +244,12 @@ During the authorisation process, you can perform a currency validation for the 
 If the payment is made from a sub-account when there is not enough balance in the original debtor account:
 
 - The bank should implement a [custom authorisation retrieval step](https://ob.docs.wso2.com/en/latest/develop/consent-management-authorize/#retrieve) 
-  to check for other sub-accounts for the required balances to make the payment.
+    to check for other sub-accounts for the required balances to make the payment.
 - If the payment is made from a different debtor account and not the one provided with the consent, the bank should 
-  [customise the UI](https://ob.docs.wso2.com/en/latest/develop/customize-consent-page/) 
-  to display the account from which the payment amount was deducted.
+    [customise the UI](https://ob.docs.wso2.com/en/latest/develop/customize-consent-page/) 
+    to display the account from which the payment amount was deducted.
 - The bank needs to implement a [custom authorisation persist step](https://ob.docs.wso2.com/en/latest/develop/consent-management-authorize/#persist)
-  to amend the original consent with the account reference that was used to deduct the payment amount.
+    to amend the original consent with the account reference that was used to deduct the payment amount.
 
 ### Funds Confirmation
 
@@ -258,7 +266,7 @@ header known as **Account-Request-Information**.
 
 This header is a signed JWT, which needs to be decoded by the core banking system. A sample decoded JSON is given below:
 
-``` json
+```json
 {
    "clientId":"PSDGB-OB-Unknown0015800001HQQrZAAX",
    "currentStatus":"valid",
@@ -357,7 +365,7 @@ The back end endpoints for payable and sharable accounts retrieval can be config
 `<IS_HOME>/repository/conf/deployment.toml` file as follows.
 By default, the mock back end that is deployed in the API Manager is configured in this file.
 
-``` toml
+```toml
 [open_banking_berlin.consent]
 payable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/v130/accounts/payable”
 ```
@@ -365,14 +373,14 @@ payable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/b
 Required parameters can be passed as query parameters to those endpoints. Given below is an example of configuring the
 endpoint to retrieve payable accounts:
 
-``` toml
+```toml
 [open_banking_berlin.consent]
 payable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/v130/accounts/payable/{user}”
 ```
 
 The response from the API should be formatted as follows:
 
-``` json
+```json
 {
    "customerIdentification":{
       "customerIdentification":"JEAN123",
@@ -409,18 +417,18 @@ The Shareable Accounts API is used in the AISP flow to retrieve the account IDs 
 The account IDs are then displayed on the consent page.
 
 - In a bank offered consent scenario, the Shareable Accounts API retrieves all available accounts for the user and 
-displays them on the consent page for the user to select accounts.
+    displays them on the consent page for the user to select accounts.
 - In a scenario where account IDs are already provided in the consent, the Shareable Accounts API checks whether the 
-accounts in the consent are available in the bank backend.
+    accounts in the consent are available in the bank backend.
 
 When invoking this API, the `consentId` and `userId` (PSU ID) parameters are required to be sent in the URL as query
 parameters.
 
 The back-end endpoint for shareable accounts retrieval can be configured in
-the ` <APIM_HOME>/repository/conf/deployment.toml` file as follows.
+the `<APIM_HOME>/repository/conf/deployment.toml` file as follows.
 By default, this is connected to the mock back end in the API Manager server.
 
-``` json
+```json
 [open_banking_berlin.consent]
 shareable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/v130/accounts/shareable"
 ```
@@ -428,14 +436,14 @@ shareable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking
 Required parameters can be passed as query parameters to those endpoints. Given below is an example of configuring the
 endpoint to retrieve sharable accounts:
 
-``` xml
+```xml
 [open_banking_berlin.consent]
 shareable_account_retrieval_endpoint = "https://<APIM_HOST>:9443/api/openbanking/berlin/backend/services/v130/accounts/shareable/{user}"
 ```
 
 The response from the API should be formatted as follows:
 
-``` json
+```json
 {
    "customerIdentification":{
       "customerIdentification":"JEAN123",

@@ -1,45 +1,49 @@
+---
+title: "Consent Manager"
+---
 After a certain period, bank customers may need to view, update, or revoke consents they have granted to API consumer 
 applications to access account data. **Consent Manager** is an application in WSO2 Open Banking that supports all these
 requirements and manages consents.
 
-!!! note
-    - Bank officers with the `CustomerCareOfficerRole` role and bank customers can access the Consent Manager.  
-    - Customer Care Officers have privileges such as Advanced Search options and the ability to view the consents of all bank customers. 
-    
+:::note
+- Bank officers with the `CustomerCareOfficerRole` role and bank customers can access the Consent Manager.  
+- Customer Care Officers have privileges such as Advanced Search options and the ability to view the consents of all bank customers. 
+:::
+
 ## Configuring servers
 
 1. Open the `<IS_HOME>/repository/conf/deployment.toml` file and update access control configurations for the 
-`consentmgr` resource as follows: 
+    `consentmgr` resource as follows: 
 
-    ``` toml
+    ```toml
     [[resource.access_control]]
     context = "(.*)/consentmgr(.*)"
     secure="false"
     http_method="GET,DELETE"
     ```
-   
+
 2. Open the `<APIM_HOME>/repository/conf/deployment.toml` file and add the following gateway executor configurations for 
-the Consent flow:
-   
-    ``` toml
+    the Consent flow:
+
+    ```toml
     [[open_banking.gateway.openbanking_gateway_executors.type]]
     name = "Consent"
     [[open_banking.gateway.openbanking_gateway_executors.type.executors]]
     name = "com.wso2.openbanking.accelerator.gateway.executor.impl.selfcare.portal.UserPermissionValidationExecutor"
     priority = 1
-    ``` 
-   
+    ```
+
 3. Restart the Identity Server and API Manager servers respectively.
 
 ## Creating users and roles
 
 Follow [Configuring users and roles](../install-and-setup/configuring-users-and-roles.md) and do the following:
 
- 1. Create a user and assign the `CustomerCareOfficerRole` role.
-    
- 2. Create 2 other users and assign them only the `Internal/subscriber` role. 
+1. Create a user and assign the `CustomerCareOfficerRole` role.
 
-## Publishing Self-Care Portal API 
+2. Create 2 other users and assign them only the `Internal/subscriber` role. 
+
+## Publishing Self-Care Portal API
 
 1. Sign in to the API Publisher Portal at `https://<APIM_HOST>:9443/publisher` with `creator/publisher` privileges. 
 
@@ -55,18 +59,18 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
 
 7. Set the value for **Endpoint** as follows:
 
-    ``` 
+    ```
     https://<IS_HOST>:9446/api/openbanking/consent
     ```
-   
+
     - Replace the placeholder with the hostname of Identity Server. 
-    
+
 8. Click **Create**. 
 
 9. Go to **Portal Configurations > Subscriptions > Select Business Plan as 'Unlimited'** using the left menu pane.
 
 10. Go to **Develop -> API Configurations -> Policies** in the left menu pane. ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
- 
+
 11. Go to **Develop -> API Configurations -> Policies** in the left menu pane. ![select_policies](../assets/img/get-started/quick-start-guide/select-policies.png)
 
 12. On the **Policy List** card, click on **Add New Policy**.
@@ -74,7 +78,7 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
 13. Fill in the **Create New Policy**.
 
 14. Download the `scp-insequence.xml` file available <a href="../../assets/attachments/scp-insequence.xml" download> here </a> and use it as the Mediation Policy. 
-     
+
 15. Upload the `scp-insequence.xml` file and click **SELECT**.
 
 16. Scroll down and click **Save**. Upon successful creation of the policy, you receive an alert as shown below: ![successful](../assets/img/get-started/quick-start-guide/successful.png)
@@ -111,23 +115,27 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
 
 5. Set the **Grant Types** to **Refresh Token** and **Code**.
 
-    [ ![](../assets/img/learn/consent-manager/generate-keys.png) ](../assets/img/learn/consent-manager/generate-keys.png)
-    
-    ??? tip "If these grant types are not visible in the Developer Portal, click here to see how to configure them. "
-        Follow the steps below and configure the Grant Types for the Key Manager according to your Open Banking specification:
-        
-        1. Sign in to the Admin Portal of API Manager at `https://<APIM_HOST>:9443/admin`.
-        
-        2. Go to the `Key Managers` tab using the left menu pane.
-        
-        3. Select the **OBKM** key manager. ![obkm_keymanager](../assets/img/learn/consent-manager/keymanager-obkm.png)
-        
-        4. Enter the required grant types and press enter. ![configure_grant_types](../assets/img/learn/consent-manager/grant-types.png)
-        
-        5. Scroll down and click **Update**.
-        
-        For more information see, [Configure Identity Server as the Key Manager](../dynamic-client-registration-try-out/#step-2-configure-is-as-key-manager).
-    
+    [ ![](../assets/img/learn/consent-manager/generate-keys.png) ](pathname:///assets/img/learn/consent-manager/generate-keys.png)
+
+    <details className="ob-details ob-details--tip">
+    <summary>If these grant types are not visible in the Developer Portal, click here to see how to configure them. </summary>
+
+    Follow the steps below and configure the Grant Types for the Key Manager according to your Open Banking specification:
+
+    1. Sign in to the Admin Portal of API Manager at `https://<APIM_HOST>:9443/admin`.
+
+    2. Go to the `Key Managers` tab using the left menu pane.
+
+    3. Select the **OBKM** key manager. ![obkm_keymanager](../assets/img/learn/consent-manager/keymanager-obkm.png)
+
+    4. Enter the required grant types and press enter. ![configure_grant_types](../assets/img/learn/consent-manager/grant-types.png)
+
+    5. Scroll down and click **Update**.
+
+    For more information see, [Configure Identity Server as the Key Manager](pathname:///learn/dynamic-client-registration-try-out/#step-2-configure-is-as-key-manager).
+
+    </details>
+
 6. Set the **Callback URL** to `https://<IS_HOST>:9446/consentmgr/scp_oauth2_callback`.
 
     - Replace the placeholder with the hostname of the Identity Server.
@@ -149,24 +157,24 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
 14. If you are using **WSO2 Identity Server 6.0.0**, follow the below instructions:
 
     1. Sign in to the Management Console at `https://<IS_HOST>:9446/carbon/`.
-    
+
     2. In the **Main** tab, click **Identity -> Service Providers -> List**.
-    
+
     3. Select the Service Provider of the `consentmgr` application, and click the corresponding **Edit** icon.
-    
+
     4. Expand the **Claim Configuration** section.
-    
+
     5. Select **http://wso2.org/claims/username** from the **Subject Claim URI** list.
-    
+
     6. Click **Update** to save the configurations.
-    
+
 ## Configuring Consent Manager
 
 1. Open the `<IS_HOME>/repository/deployment/server/webapps/consentmgr/runtime-config.js` file.
 
     - Update the `SERVER_URL` parameter with a URL to the Identity Server. For example:
-    
-        ``` javascript
+
+        ```javascript
         window.env = {
             // This option can be retrieved in "src/index.js" with "window.env.API_URL".
             SERVER_URL: 'https://<IS_HOST>:9446',
@@ -175,7 +183,7 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
             VERSION: '3.0.0'
           };
         ```
-      
+
 2. Open the `<IS_HOME>/repository/deployment/server/webapps/consentmgr/WEB-INF/web.xml` file.
 
     | Configuration | Description |
@@ -184,37 +192,37 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
     | apiManagerServerUrl | The hostname of the API Manager. |
     | scpClientKey | The Consumer Key of the [application created](#subscribing-to-self-care-portal-api). |
     | scpClientSecret | The Consumer Secret of the [application created](#subscribing-to-self-care-portal-api). |
-    
+
     For example, 
-    
-    ``` xml
+
+    ```xml
     <context-param>
-    	<param-name>identityServerBaseUrl</param-name>
-    	<param-value>https://<IS_HOST>:9446</param-value>
+        <param-name>identityServerBaseUrl</param-name>
+        <param-value>https://<IS_HOST>:9446</param-value>
     </context-param>
     <context-param>
-    	<param-name>apiManagerServerUrl</param-name>
-    	<param-value>https://<APIM_HOST>:8243</param-value>
+        <param-name>apiManagerServerUrl</param-name>
+        <param-value>https://<APIM_HOST>:8243</param-value>
     </context-param>
     <context-param>
-    	<param-name>scpClientKey</param-name>
-    	<param-value>2zB5s9wGHWVwmlrvHdWa6Mwc4vsa</param-value>
+        <param-name>scpClientKey</param-name>
+        <param-value>2zB5s9wGHWVwmlrvHdWa6Mwc4vsa</param-value>
     </context-param>
     <context-param>
-    	<param-name>scpClientSecret</param-name>
-    	<param-value>cqblprasAniVfi02IXGFvp8VREAa</param-value>
+        <param-name>scpClientSecret</param-name>
+        <param-value>cqblprasAniVfi02IXGFvp8VREAa</param-value>
     </context-param>
     ```
-    
+
 ## Using Consent Manager
 
 1. Go to the Consent Manager application at
-   `https://<IS_HOST>:9446/consentmgr` 
+    `https://<IS_HOST>:9446/consentmgr` 
 
 2. Sign in with the credentials provided by the bank.
 
 3. The `consentmgr` application requests access to your profile. To grant access, click **Continue**.
-    
+
     ![consentmgr request access](../assets/img/learn/consent-manager/consentmgr-request-access.png)
 
 4. You are redirected to the homepage of the Consent Manager portal.
@@ -225,11 +233,12 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
 
 6. Under each consent type there are two tabs:
 
-   - **Active**: Lists active consents that can access your account/payment information.
-   - **Revoked**: Lists the consents that you have revoked.
+    - **Active**: Lists active consents that can access your account/payment information.
+    - **Revoked**: Lists the consents that you have revoked.
 
-!!! tip
-    Use the **Search** button to search consents. ![search consent](../assets/img/learn/consent-manager/search-button.png)
+:::tip
+Use the **Search** button to search consents. ![search consent](../assets/img/learn/consent-manager/search-button.png)
+:::
 
 ### Viewing consent details
 
@@ -238,26 +247,26 @@ Follow [Configuring users and roles](../install-and-setup/configuring-users-and-
     ![view consent](../assets/img/learn/consent-manager/view-consent.png)
 
 - You can view the details such as the associated API consumer application, consent granted date, consent expiry date, 
-account numbers, and permissions that you have granted.
+    account numbers, and permissions that you have granted.
 
     ![consent details](../assets/img/learn/consent-manager/consent-details.png)
 
 ### Revoking a consent
 
 - To revoke a consent, review the details and click **Stop Sharing**. 
-    
+
     ![consent details](../assets/img/learn/consent-manager/stop-sharing.png)
-    
+
 - Revoking a consent consists of 2 steps:
 
     - Step 1: The first step shows the impact of revoking the consent.
-    
+
         ![stop sharing step 1](../assets/img/learn/consent-manager/stop-sharing-step1.png)
-    
+
     - Step 2: Displays the information the consent has access to. 
-    
+
         ![stop sharing step 2](../assets/img/learn/consent-manager/stop-sharing-step2.png)
-  
+
     - Once you click **Stop Sharing**, the status of the consent changes to `revoked`. 
 
         ![stop sharing step 3](../assets/img/learn/consent-manager/stop-sharing-step3.png)
